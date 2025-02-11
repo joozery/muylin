@@ -1,0 +1,95 @@
+/* src/components/Sidebar.css */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap'); /* เพิ่มการนำเข้าฟอนต์ Prompt */
+
+.sidebar {
+  width: 330px;
+  background: linear-gradient(135deg, #260c35, #111111); /* สีม่วงและเงินดำเป็น gradient */
+  color: white;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5); /* เงาเล็กน้อย */
+  font-family: 'Prompt', sans-serif; /* ใช้ฟอนต์ Prompt */
+  overflow-y: auto; /* เพิ่ม Scrollbar เมื่อเนื้อหามีขนาดใหญ่กว่า Sidebar */
+  padding-bottom: 50px; /* เพิ่มพื้นที่ด้านล่างเพื่อให้ scrollbar ไม่ทับกับเนื้อหาที่อยู่ข้างล่าง */
+}
+
+/* ปรับขนาดและสีของ scrollbar */
+.sidebar::-webkit-scrollbar {
+    width: 10px; /* ปรับความกว้างของ scrollbar */
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb {
+    background: #ffeb3b00; /* ปรับสีของ thumb */
+    border-radius: 10px; /* ทำให้ scrollbar มีมุมโค้ง */
+  }
+  
+  .sidebar::-webkit-scrollbar-track {
+    background: #22222200; /* ปรับสีพื้นหลังของ track */
+    border-radius: 10px; /* ทำให้ track มีมุมโค้ง */
+  }
+.sidebar .logo img {
+  display: block; /* ทำให้โลโก้อยู่กลาง */
+  margin: 0 auto; /* จัดกลาง */
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.sidebar .menu {
+  list-style: none;
+  text-align: left;
+}
+
+.sidebar .menu li {
+  margin: 5px 0;
+}
+
+.sidebar .menu li a {
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.3s ease; /* เพิ่มการเปลี่ยนสีเมื่อ hover */
+}
+
+.sidebar .menu li a:hover {
+  color: #4e4915; /* เปลี่ยนสีเป็นสีเหลืองเมื่อ hover */
+}
+
+.sidebar .contact {
+  margin-top: 30px;
+  font-size: 15px;
+}
+
+.sidebar .contact p {
+  margin: 10px 0;
+}
+
+.sidebar .contact a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sidebar .contact a:hover {
+  color: #ffeb3b; /* เปลี่ยนสีเมื่อ hover */
+}
+
+/* src/components/Sidebar.css */
+.sidebar .contact {
+    margin-top: 120px;
+    font-size: 15px;
+    text-align: left; /* ทำให้ข้อความทั้งหมดในส่วนนี้ชิดซ้าย */
+    padding: 20px;
+
+  }
+  
+  .sidebar .contact p {
+    margin: 10px 0;
+  }
+  
+  .sidebar .contact svg {
+    margin-right: 10px; /* เพิ่มระยะห่างระหว่างไอคอนและข้อความ */
+    vertical-align: middle; /* จัดตำแหน่งไอคอนให้อยู่กลางกับข้อความ */
+  }
