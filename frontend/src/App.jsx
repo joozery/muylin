@@ -5,6 +5,7 @@ import Home from './components/Home';
 import OrderProcess from "./components/OrderProcess";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact"; // ✅ นำเข้า Contact
+import ScrollToTop from "./components/ScrollToTop";
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/contact" element={<Contact />} /> {/* ✅ กำหนด Route */}
           </Routes>
           <Footer />
+          <ScrollToTop /> {/* ✅ เพิ่มปุ่มนี้ */}
         </div>
       </div>
     </Router>
