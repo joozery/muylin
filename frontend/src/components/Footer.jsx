@@ -7,7 +7,7 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-gray-300">
                     {/* คอลัมน์ 1 - Muaykin */}
                     <div>
-                        <h3 className="text-xl font-bold text-white mb-4">Muaykin</h3>
+                        <h3 className="text-xl font-bold text-white mb-4">Muaylin</h3>
                         <p className="leading-relaxed">
                             หมวยหลิน ยินดีต้อนรับลูกค้าทุกท่านและขอบพระคุณที่ให้ความไว้วางใจในสินค้าของเรา
                         </p>
