@@ -55,7 +55,7 @@ const Sidebar = () => {
           <li><a href="#" onClick={toggleSidebar}>บริการของเรา</a></li>
           <li><Link to="/order-process" onClick={toggleSidebar}>ขั้นตอนการสั่งซื้อ</Link></li>
           <li><a href="#" onClick={toggleSidebar}>ลูกค้าของเรา</a></li>
-          <li><a href="#" onClick={toggleSidebar}>ติดต่อเบอร์หมวยหลินทะเบียน</a></li>
+          <li><Link to="/contact">ติดต่อเบอร์หมวยหลินทะเบียน</Link></li>
         </ul>
 
         {/* ข้อมูลติดต่อ */}

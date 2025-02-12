@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 import OrderProcess from "./components/OrderProcess";
 import Footer from "./components/Footer";
+import Contact from "./components/Contact"; // ✅ นำเข้า Contact
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/order-process" element={<OrderProcess />} /> {/* ✅ เพิ่ม Route สำหรับ OrderProcess */}
+            <Route path="/contact" element={<Contact />} /> {/* ✅ กำหนด Route */}
           </Routes>
           <Footer />
         </div>
