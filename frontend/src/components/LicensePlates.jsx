@@ -57,35 +57,35 @@ const licensePlates = [
           </div>
   
           {/* รายการทะเบียน */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-            {licensePlates.map((plate, index) => (
-              <div
-                key={index}
-                className="relative text-center p-6 rounded-lg bg-cover bg-center shadow-lg"
-                style={{ backgroundImage: `url(${newImage})` }}
-              >
-                {/* แสดงป้าย "จองแล้ว" ถ้ามี */}
-                {plate.status && (
-                  <div className="absolute top-0 right-0 bg-red-500 text-white py-1 px-3 text-sm rounded-tl-lg">
-                    {plate.status}
-                  </div>
-                )}
-  
-                {/* หมายเลขทะเบียน */}
-                <p className="text-4xl text-black font-semibold">{plate.name}</p>
-  
-                {/* ราคา */}
-                {plate.price && <p className="text-xl mt-2 text-black font-semibold">{plate.price}</p>}
-  
-                {/* แสดง Badge ตัวเลขจากวงเล็บ */}
-                {plate.badge && (
-                  <div className="absolute bottom-2 right-2 text-white bg-yellow-600 px-2 py-1 rounded-full text-xs">
-                    {plate.badge}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+  {licensePlates.map((plate, index) => (
+    <div
+      key={index}
+      className="relative text-center p-6 rounded-lg bg-cover bg-center shadow-lg"
+      style={{ backgroundImage: `url(${newImage})` }}
+    >
+      {/* แสดงป้าย "จองแล้ว" ถ้ามี */}
+      {plate.status && (
+        <div className="absolute top-0 right-0 bg-red-500 text-white py-1 px-3 text-sm rounded-tl-lg">
+          {plate.status}
+        </div>
+      )}
+
+      {/* หมายเลขทะเบียน */}
+      <p className="text-4xl text-black font-semibold">{plate.name}</p>
+
+      {/* ราคา */}
+      {plate.price && <p className="text-xl mt-2 text-black font-semibold">{plate.price}</p>}
+
+      {/* แสดง Badge ตัวเลขจากวงเล็บ */}
+      {plate.badge && (
+        <div className="absolute bottom-2 right-2 text-white bg-yellow-600 px-2 py-1 rounded-full text-xs">
+          {plate.badge}
+        </div>
+      )}
+    </div>
+  ))}
+</div>
         </div>
       </section>
     );

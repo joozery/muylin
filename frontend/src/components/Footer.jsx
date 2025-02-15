@@ -32,8 +32,8 @@ export default function Footer() {
 
                     {/* คอลัมน์ 3 - ติดต่อพี่เบอร์เทพ */}
                     <div>
-                        <h3 className="text-xl font-bold text-white mb-4">ติดต่อพี่เบอร์เทพ</h3>
-                        <p>ลูกค้าสามารถโทรติดต่อ หรือไลน์ติดต่อ พี่เบอร์เทพ ได้ตลอดเวลา</p>
+                        <h3 className="text-xl font-bold text-white mb-4">ติดต่อหมวยหลิน</h3>
+                        <p>ลูกค้าสามารถโทรติดต่อ หรือไลน์ติดต่อ หมวยหลิน ได้ตลอดเวลา</p>
                         <div className="mt-4 space-y-3">
                             <p className="flex items-center space-x-2">
                                 <FiPhone className="text-yellow-300 text-xl" />
