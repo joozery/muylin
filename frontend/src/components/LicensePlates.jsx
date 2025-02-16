@@ -1,8 +1,8 @@
-import React from "react";
-import newImage from "../assets/หมวดใหม่.jpg"; // นำเข้าภาพ
+import React, { useState, useEffect } from "react";
+import newImage from "../assets/หมวดใหม่.jpg";
 
 const licensePlates = [
-    { name: "4กผ8833", status: "จองแล้ว" },
+    { name: "4กผ8833", status: "จองแล้ว", price: "59,006" },
     { name: "1ขฬ2000", price: "59,006" },
     { name: "8กก7733", price: "69,006" },
     { name: "8กก3773", price: "69,006" },
@@ -43,50 +43,61 @@ const licensePlates = [
     { name: "9กศ9999", price: "6,999,996" },
     { name: "9กส9999", price: "6,999,996" },
     { name: "9กพ9999", price: "11,999,996", badge: "54" }
-  ];
+];
 
-  export default function LicensePlates() {
+export default function LicensePlates() {
+    const [filteredPlates, setFilteredPlates] = useState(licensePlates);
+
+    useEffect(() => {
+        const updateSearch = () => {
+            const { keyword, sumOption } = window.searchParams || {};
+            setFilteredPlates(
+                licensePlates.filter(plate =>
+                    (!keyword || plate.name.includes(keyword)) &&
+                    (sumOption === "ทุกผลรวม" || plate.badge === sumOption)
+                )
+            );
+        };
+
+        window.addEventListener("searchUpdate", updateSearch);
+        return () => window.removeEventListener("searchUpdate", updateSearch);
+    }, []);
+
     return (
-      <section className="bg-gradient-to-b  to-[#111111] text-white py-12 font-prompt">
-        <div className="container mx-auto px-6 lg:px-20">
-          {/* หัวข้อ */}
-          <div className="text-left max-w-3xl mx-0 pl-10">
-            <div className="text-yellow-400 text-lg mb-2">★★★★★</div>
-            <p className="text-yellow-500 tracking-wide uppercase text-sm">muaylintabien.co</p>
-            <h2 className="text-3xl md:text-4xl font-bold italic mt-2">ทะเบียนสวย หมวดใหม่</h2>
-          </div>
-  
-          {/* รายการทะเบียน */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-  {licensePlates.map((plate, index) => (
-    <div
-      key={index}
-      className="relative text-center p-6 rounded-lg bg-cover bg-center shadow-lg"
-      style={{ backgroundImage: `url(${newImage})` }}
-    >
-      {/* แสดงป้าย "จองแล้ว" ถ้ามี */}
-      {plate.status && (
-        <div className="absolute top-0 right-0 bg-red-500 text-white py-1 px-3 text-sm rounded-tl-lg">
-          {plate.status}
-        </div>
-      )}
+        <section className="bg-gradient-to-b to-[#111111] text-white py-12 font-prompt">
+            <div className="container mx-auto px-6 lg:px-20">
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+                    {filteredPlates.length > 0 ? (
+                        filteredPlates.map((plate, index) => (
+                            <div key={index} className="relative text-center p-6 rounded-lg bg-cover bg-center shadow-lg"
+                                 style={{ backgroundImage: `url(${newImage})` }}>
+                                
+                                {/* แสดงป้าย "จองแล้ว" ถ้ามี */}
+                                {plate.status && (
+                                    <div className="absolute top-0 right-0 bg-red-500 text-white py-1 px-3 text-sm rounded-tl-lg">
+                                        {plate.status}
+                                    </div>
+                                )}
 
-      {/* หมายเลขทะเบียน */}
-      <p className="text-4xl text-black font-semibold">{plate.name}</p>
+                                {/* หมายเลขทะเบียน */}
+                                <p className="text-2xl text-black font-semibold">{plate.name}</p>
 
-      {/* ราคา */}
-      {plate.price && <p className="text-xl mt-2 text-black font-semibold">{plate.price}</p>}
+                                {/* ราคา */}
+                                {plate.price && <p className="text-xl mt-2 text-black font-semibold">{plate.price}</p>}
 
-      {/* แสดง Badge ตัวเลขจากวงเล็บ */}
-      {plate.badge && (
-        <div className="absolute bottom-2 right-2 text-white bg-yellow-600 px-2 py-1 rounded-full text-xs">
-          {plate.badge}
-        </div>
-      )}
-    </div>
-  ))}
-</div>
-        </div>
-      </section>
+                                {/* แสดง Badge ตัวเลขจากวงเล็บ */}
+                                {plate.badge && (
+                                    <div className="absolute bottom-2 right-2 text-white bg-yellow-600 px-2 py-1 rounded-full text-xs">
+                                        {plate.badge}
+                                    </div>
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-center text-gray-400 col-span-4">❌ ไม่พบผลลัพธ์ที่ตรงกับการค้นหา</p>
+                    )}
+                </div>
+            </div>
+        </section>
     );
-  }
+}
