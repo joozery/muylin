@@ -2,7 +2,7 @@ import { FiPhone, FiMail, FiGlobe } from "react-icons/fi"; // ✅ Import React I
 
 export default function Footer() {
     return (
-        <footer className="bg-gradient-to-br from-[#260c35] to-[#111111] text-white py-10 font-[Prompt]">
+        <footer className="bg-gradient-to-br from-[#260c35] to-[#111111] text-white py-10 font-tahoma">
             <div className="container mx-auto px-6 lg:px-20">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-gray-300">
                     {/* คอลัมน์ 1 - Muaykin */}

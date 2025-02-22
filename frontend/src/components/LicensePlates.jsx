@@ -64,7 +64,7 @@ export default function LicensePlates() {
     }, []);
 
     return (
-        <section className="bg-gradient-to-b to-[#111111] text-white py-12 font-prompt">
+        <section className="bg-gradient-to-b to-[#111111] text-white py-12 font-tahoma">
             <div className="container mx-auto px-6 lg:px-20">
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
                     {filteredPlates.length > 0 ? (

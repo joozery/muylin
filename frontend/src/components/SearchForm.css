@@ -12,8 +12,7 @@
     border-radius: 12px;
     text-align: center;
     color: white;
-    font-family: 'Prompt', sans-serif;
-
+    font-family: 'Tahoma', sans-serif;
     margin: 0 auto; /* จัดกึ่งกลาง */
     max-width: 900px; /* จำกัดความกว้างของฟอร์ม */
 }
@@ -51,7 +50,7 @@
 
 /* Style สำหรับปุ่มค้นหา */
 .search-inputs button {
-    background-color: #ff9900;
+    background-color: #4a244f;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -64,7 +63,7 @@
 }
 
 .search-inputs button:hover {
-    background-color: #ff6600;
+    background-color: #7e4c85;
 }
 
 /* ปุ่มเพิ่มเติม */
