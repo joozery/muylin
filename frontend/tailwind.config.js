@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        tahoma: ["Tahoma", "sans-serif"], // ✅ เพิ่มฟอนต์ Tahoma
         prompt: ["Prompt", "sans-serif"], // ✅ เพิ่มฟอนต์ Prompt
       },
     },
