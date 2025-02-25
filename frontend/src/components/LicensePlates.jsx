@@ -1,74 +1,65 @@
 import React, { useState, useEffect } from "react";
 import newImage from "../assets/หมวดใหม่.jpg";
+import gold from "../assets/gold.jpg";
 
-const licensePlates = [
-    { name: "4กผ8833", status: "จองแล้ว", price: "59,006" },
-    { name: "1ขฬ2000", price: "59,006" },
-    { name: "8กก7733", price: "69,006" },
-    { name: "8กก3773", price: "69,006" },
-    { name: "1กฌ7575", price: "69,006" },
-    { name: "2ขฒ9696", price: "69,006" },
-    { name: "4กธ4040", price: "79,006" },
-    { name: "8กญ9090", price: "89,006" },
-    { name: "9กค7000", price: "99,006" },
-    { name: "1กจ7117", price: "99,006", badge: "24" },
-    { name: "4กด6363", price: "99,006", badge: "24" },
-    { name: "2ขศ5995", price: "109,006" },
-    { name: "1ขอ5678", price: "119,006" },
-    { name: "8กฉ5445", price: "120,006", badge: "32" },
-    { name: "8กก5544", price: "125,006" },
-    { name: "2ขศ1234", price: "129,006" },
-    { name: "2ขศ2345", price: "129,006" },
-    { name: "2ขศ5959", price: "129,006" },
-    { name: "4กข2424", status: "จองแล้ว", badge: "19" },
-    { name: "1ขข3456", price: "250,006", badge: "23" },
-    { name: "2ขฒ4", price: "169,006" },
-    { name: "3ขฉ2", price: "179,006" },
-    { name: "3ขฌ222", price: "179,006" },
-    { name: "3ขฌ444", price: "179,006" },
-    { name: "2ขศ5", price: "249,006" },
-    { name: "2ขย5", price: "249,006" },
-    { name: "1กน4", price: "289,006" },
-    { name: "2ขฉ99", price: "299,006" },
-    { name: "2ขศ1", price: "329,006" },
-    { name: "2ขฉ888", price: "399,006" },
-    { name: "9กฬ4444", price: "399,006" },
-    { name: "2ขฬ22", price: "399,006" },
-    { name: "2ขศ2", price: "499,006" },
-    { name: "9กค11", price: "499,006" },
-    { name: "9กจ11", price: "499,006" },
-    { name: "2ขห2222", price: "899,006" },
-    { name: "2ขฬ2222", price: "899,006" },
-    { name: "3ขฉ9999", price: "899,006", badge: "46" },
-    { name: "9กศ9999", price: "6,999,996" },
-    { name: "9กส9999", price: "6,999,996" },
-    { name: "9กพ9999", price: "11,999,996", badge: "54" }
-];
+const API_URL = import.meta.env.VITE_API_URL || "https://tabian-d0c5a982b10e.herokuapp.com/api";
 
 export default function LicensePlates() {
-    const [filteredPlates, setFilteredPlates] = useState(licensePlates);
+    const [platesNew, setPlatesNew] = useState([]);
+    const [filteredPlatesNew, setFilteredPlatesNew] = useState([]);
 
+    const [platesSpecial, setPlatesSpecial] = useState([]);
+    const [filteredPlatesSpecial, setFilteredPlatesSpecial] = useState([]);
+
+    // ✅ ดึงข้อมูลป้ายประมูลหมวดใหม่
     useEffect(() => {
-        const updateSearch = () => {
-            const { keyword, sumOption } = window.searchParams || {};
-            setFilteredPlates(
-                licensePlates.filter(plate =>
-                    (!keyword || plate.name.includes(keyword)) &&
-                    (sumOption === "ทุกผลรวม" || plate.badge === sumOption)
-                )
-            );
+        const fetchPlatesNew = async () => {
+            try {
+                const response = await fetch(`${API_URL}/plates_new`);
+                if (!response.ok) throw new Error("Failed to fetch plates");
+                const data = await response.json();
+                setPlatesNew(data);
+                setFilteredPlatesNew(data);
+            } catch (error) {
+                console.error("❌ Error fetching plates:", error);
+            }
         };
+        fetchPlatesNew();
+    }, []);
 
-        window.addEventListener("searchUpdate", updateSearch);
-        return () => window.removeEventListener("searchUpdate", updateSearch);
+    // ✅ ดึงข้อมูลป้ายคิดเองลักษณะพิเศษ
+    useEffect(() => {
+        const fetchPlatesSpecial = async () => {
+            try {
+                const response = await fetch(`${API_URL}/plates_special`);
+                if (!response.ok) throw new Error("Failed to fetch plates");
+                const data = await response.json();
+                setPlatesSpecial(data);
+                setFilteredPlatesSpecial(data);
+            } catch (error) {
+                console.error("❌ Error fetching plates:", error);
+            }
+        };
+        fetchPlatesSpecial();
     }, []);
 
     return (
         <section className="bg-gradient-to-b to-[#111111] text-white py-12 font-tahoma">
             <div className="container mx-auto px-6 lg:px-20">
+                
+                {/* ⭐⭐⭐⭐⭐ MUAY.LINTABIEN.CO */}
+                <div className="text-center mb-6">
+                    <p className="text-yellow-400 text-lg">★★★★★</p>
+                    <p className="text-yellow-400 font-bold">MUAY.LINTABIEN.CO</p>
+                </div>
+
+                {/* ✅ ป้ายประมูลหมวดใหม่ */}
+                <div className="text-center mb-6">
+                    <h2 className="text-2xl font-bold italic">ป้ายประมูลหมวดใหม่</h2>
+                </div>
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-                    {filteredPlates.length > 0 ? (
-                        filteredPlates.map((plate, index) => (
+                    {filteredPlatesNew.length > 0 ? (
+                        filteredPlatesNew.map((plate, index) => (
                             <div key={index} className="relative text-center p-6 rounded-lg bg-cover bg-center shadow-lg"
                                  style={{ backgroundImage: `url(${newImage})` }}>
                                 
@@ -80,15 +71,17 @@ export default function LicensePlates() {
                                 )}
 
                                 {/* หมายเลขทะเบียน */}
-                                <p className="text-2xl text-black font-semibold">{plate.name}</p>
+                                <p className="text-2xl text-black font-semibold">{plate.plate}</p>
 
-                                {/* ราคา */}
-                                {plate.price && <p className="text-xl mt-2 text-black font-semibold">{plate.price}</p>}
+                                {/* แสดงราคา */}
+                                {plate.price && (
+                                    <p className="text-lg text-black font-semibold mt-2">{plate.price.toLocaleString()} </p>
+                                )}
 
-                                {/* แสดง Badge ตัวเลขจากวงเล็บ */}
-                                {plate.badge && (
+                                {/* แสดงเลขผลรวม */}
+                                {plate.total && (
                                     <div className="absolute bottom-2 right-2 text-white bg-yellow-600 px-2 py-1 rounded-full text-xs">
-                                        {plate.badge}
+                                        {plate.total}
                                     </div>
                                 )}
                             </div>
@@ -97,6 +90,45 @@ export default function LicensePlates() {
                         <p className="text-center text-gray-400 col-span-4">❌ ไม่พบผลลัพธ์ที่ตรงกับการค้นหา</p>
                     )}
                 </div>
+
+                {/* ✅ ป้ายคิดเองลักษณะพิเศษ */}
+                <div className="text-center mt-12 mb-6">
+                    <h2 className="text-2xl font-bold italic">ป้ายคิดเองลักษณะพิเศษ</h2>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+                    {filteredPlatesSpecial.length > 0 ? (
+                        filteredPlatesSpecial.map((plate, index) => (
+                            <div key={index} className="relative text-center p-6 rounded-lg bg-cover bg-center shadow-lg"
+                                 style={{ backgroundImage: `url(${gold})` }}>
+                                
+                                {/* แสดงป้าย "จองแล้ว" ถ้ามี */}
+                                {plate.status && (
+                                    <div className="absolute top-0 right-0 bg-red-500 text-white py-1 px-3 text-sm rounded-tl-lg">
+                                        {plate.status}
+                                    </div>
+                                )}
+
+                                {/* หมายเลขทะเบียน */}
+                                <p className="text-2xl text-black font-semibold">{plate.plate}</p>
+
+                                {/* แสดงราคา */}
+                                {plate.price && (
+                                    <p className="text-lg text-black font-semibold mt-2">{plate.price.toLocaleString()} </p>
+                                )}
+
+                                {/* แสดงเลขผลรวม */}
+                                {plate.total && (
+                                    <div className="absolute bottom-2 right-2 text-white bg-yellow-600 px-2 py-1 rounded-full text-xs">
+                                        {plate.total}
+                                    </div>
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-center text-gray-400 col-span-4">❌ ไม่พบผลลัพธ์ที่ตรงกับการค้นหา</p>
+                    )}
+                </div>
+
             </div>
         </section>
     );
