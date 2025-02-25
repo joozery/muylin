@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const API_URL = "https://muaylintabien.co/.netlify/functions";
+const API_URL = import.meta.env.VITE_API_URL || "https://tabian-d0c5a982b10e.herokuapp.com/api";
 
-// ฟังก์ชันแปลงตัวอักษรเป็นตัวเลข
 const charValueMap = {
   'ก': 1, 'ด': 1, 'ถ': 1, 'ท': 1, 'ภ': 1,
   'ข': 2, 'บ': 2, 'ป': 2, 'ง': 2, 'ช': 2,
@@ -15,17 +14,12 @@ const charValueMap = {
   'ฏ': 9, 'ฐ': 9
 };
 
-// คำนวณผลรวมของตัวเลขจากป้ายทะเบียน
 const calculateTotal = (plate) => {
-  let sum = 0;
-  plate.split('').forEach(char => {
-    if (charValueMap[char]) {
-      sum += charValueMap[char];
-    } else if (!isNaN(char)) {
-      sum += parseInt(char, 10);
-    }
-  });
-  return sum;
+  return plate.split('').reduce((sum, char) => {
+    if (charValueMap[char]) return sum + charValueMap[char];
+    if (!isNaN(char)) return sum + parseInt(char, 10);
+    return sum;
+  }, 0);
 };
 
 const NewAuction = () => {
@@ -35,13 +29,12 @@ const NewAuction = () => {
   // ✅ ดึงข้อมูลจาก API
   const fetchPlates = async () => {
     try {
-      const response = await fetch(`${API_URL}/plates`);
-      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
+      const response = await fetch(`${API_URL}/plates_new`);
+      if (!response.ok) throw new Error("Failed to fetch plates");
       const result = await response.json();
       setData(result);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("❌ Error fetching plates:", error);
     }
   };
 
@@ -49,7 +42,7 @@ const NewAuction = () => {
     fetchPlates();
   }, []);
 
-  // ✅ เพิ่มทะเบียนใหม่ไปยัง API
+  // ✅ เพิ่มทะเบียน
   const handleAddPlate = async () => {
     if (!newPlate.plate || !newPlate.price) {
       alert("กรุณากรอกหมายเลขทะเบียนและราคา");
@@ -64,7 +57,7 @@ const NewAuction = () => {
     };
 
     try {
-      const response = await fetch(`${API_URL}/plates/addPlate`, {
+      const response = await fetch(`${API_URL}/addPlate_new`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(plateData),
@@ -72,17 +65,17 @@ const NewAuction = () => {
 
       if (!response.ok) throw new Error("Error adding plate");
 
-      await fetchPlates(); // ✅ รีเฟรชข้อมูลหลังจากเพิ่มทะเบียน
+      fetchPlates();
       setNewPlate({ plate: "", price: "", status: "พร้อมขาย" });
     } catch (error) {
-      console.error("Error:", error);
+      console.error("❌ Error adding plate:", error);
     }
   };
 
-  // ✅ อัปเดตสถานะผ่าน API
+  // ✅ อัปเดตสถานะ
   const handleStatusChange = async (id, newStatus) => {
     try {
-      const response = await fetch(`${API_URL}/updateStatus/${id}`, {
+      const response = await fetch(`${API_URL}/updateStatus_new/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
@@ -90,22 +83,22 @@ const NewAuction = () => {
 
       if (!response.ok) throw new Error("Error updating status");
 
-      await fetchPlates(); // ✅ รีเฟรชข้อมูลหลังอัปเดต
+      fetchPlates();
     } catch (error) {
-      console.error("Error updating status:", error);
+      console.error("❌ Error updating status:", error);
     }
   };
 
-  // ✅ ลบทะเบียนออกจาก API
+  // ✅ ลบทะเบียน
   const handleDeletePlate = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/deletePlate/${id}`, { method: "DELETE" });
+      const response = await fetch(`${API_URL}/deletePlate_new/${id}`, { method: "DELETE" });
 
       if (!response.ok) throw new Error("Error deleting plate");
 
-      await fetchPlates(); // ✅ รีเฟรชข้อมูลหลังลบ
+      fetchPlates();
     } catch (error) {
-      console.error("Error deleting plate:", error);
+      console.error("❌ Error deleting plate:", error);
     }
   };
 
@@ -113,7 +106,6 @@ const NewAuction = () => {
     <div className="p-4 bg-white rounded shadow">
       <h2 className="text-xl font-bold mb-4 font-['Prompt']">ป้ายประมูลหมวดใหม่</h2>
 
-      {/* ✅ ฟอร์มเพิ่มทะเบียน */}
       <div className="mb-4 flex gap-2">
         <input
           type="text"
@@ -134,7 +126,6 @@ const NewAuction = () => {
         </button>
       </div>
 
-      {/* ✅ ตารางแสดงข้อมูลทะเบียน */}
       <table className="w-full table-auto">
         <thead>
           <tr className="bg-gray-200 text-left">
@@ -159,9 +150,9 @@ const NewAuction = () => {
                   value={item.status}
                   onChange={(e) => handleStatusChange(item.id, e.target.value)}
                 >
-                  <option>ขายแล้ว</option>
-                  <option>พร้อมขาย</option>
-                  <option>จองแล้ว</option>
+                  <option value="ขายแล้ว">ขายแล้ว</option>
+                  <option value="พร้อมขาย">พร้อมขาย</option>
+                  <option value="จองแล้ว">จองแล้ว</option>
                 </select>
               </td>
               <td className="p-2">
