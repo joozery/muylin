@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
+const API_URL = "https://muaylintabien.co/.netlify/functions";
+
+// ฟังก์ชันแปลงตัวอักษรเป็นตัวเลข
 const charValueMap = {
   'ก': 1, 'ด': 1, 'ถ': 1, 'ท': 1, 'ภ': 1,
   'ข': 2, 'บ': 2, 'ป': 2, 'ง': 2, 'ช': 2,
@@ -25,29 +28,52 @@ const calculateTotal = (plate) => {
 };
 
 const NewAuction = () => {
-  const initialData = [
-    { no: 1, plate: 'พร 5678', total: calculateTotal('พร5678'), price: '800,000 บาท', status: 'พร้อมขาย' },
-    { no: 2, plate: 'ธก 9012', total: calculateTotal('ธก9012'), price: '750,000 บาท', status: 'พร้อมขาย' },
-  ];
-
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState([]);
   const [newPlate, setNewPlate] = useState({ plate: '', price: '', status: 'พร้อมขาย' });
 
-  const handleStatusChange = (no, newStatus) => {
-    setData(data.map(item => item.no === no ? { ...item, status: newStatus } : item));
-  };
+  // ดึงข้อมูลจาก API
+  useEffect(() => {
+    fetch(`${API_URL}/plates`)
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => console.error("Error fetching data:", error));
+  }, []);
 
+  // เพิ่มทะเบียนใหม่ไปที่ API
   const handleAddPlate = () => {
     if (newPlate.plate && newPlate.price) {
-      const nextNo = data.length + 1;
       const total = calculateTotal(newPlate.plate.replace(/\s/g, ''));
-      setData([...data, { no: nextNo, ...newPlate, total }]);
+      const newItem = { plate: newPlate.plate, total, price: newPlate.price, status: newPlate.status };
+
+      fetch(`${API_URL}/addPlate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newItem)
+      })
+        .then(response => response.json())
+        .then(addedItem => setData([...data, addedItem]))
+        .catch(error => console.error("Error adding plate:", error));
+
       setNewPlate({ plate: '', price: '', status: 'พร้อมขาย' });
     }
   };
 
+  // อัปเดตสถานะทะเบียนผ่าน API
+  const handleStatusChange = (no, newStatus) => {
+    fetch(`${API_URL}/updateStatus/${no}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus })
+    })
+      .then(() => setData(data.map(item => item.no === no ? { ...item, status: newStatus } : item)))
+      .catch(error => console.error("Error updating status:", error));
+  };
+
+  // ลบทะเบียนออกจาก API
   const handleDeletePlate = (no) => {
-    setData(data.filter(item => item.no !== no));
+    fetch(`${API_URL}/deletePlate/${no}`, { method: "DELETE" })
+      .then(() => setData(data.filter(item => item.no !== no)))
+      .catch(error => console.error("Error deleting plate:", error));
   };
 
   return (
