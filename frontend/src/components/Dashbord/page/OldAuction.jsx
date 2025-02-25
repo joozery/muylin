@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const API_URL = process.env.REACT_APP_API_URL || "https://tabian-d0c5a982b10e.herokuapp.com/api"; // เปลี่ยนเป็น API จริงของ Heroku
+const API_URL = import.meta.env.VITE_API_URL || "https://tabian-d0c5a982b10e.herokuapp.com/api"; // ใช้ VITE_API_URL
 
-// ฟังก์ชันแปลงตัวอักษรเป็นตัวเลข
 const charValueMap = {
   'ก': 1, 'ด': 1, 'ถ': 1, 'ท': 1, 'ภ': 1,
   'ข': 2, 'บ': 2, 'ป': 2, 'ง': 2, 'ช': 2,
@@ -31,10 +30,11 @@ const OldAuction = () => {
   const [data, setData] = useState([]);
   const [newPlate, setNewPlate] = useState({ plate: "", price: "", status: "พร้อมขาย" });
 
-  // ✅ ดึงข้อมูลทะเบียนจาก API
+  // ✅ ดึงข้อมูลจาก API
   const fetchPlates = async () => {
     try {
       const response = await fetch(`${API_URL}/plates`);
+      if (!response.ok) throw new Error("Failed to fetch plates");
       const result = await response.json();
       setData(result);
     } catch (error) {
@@ -46,7 +46,7 @@ const OldAuction = () => {
     fetchPlates();
   }, []);
 
-  // ✅ เพิ่มทะเบียนใหม่ผ่าน API
+  // ✅ เพิ่มทะเบียน
   const handleAddPlate = async () => {
     if (!newPlate.plate || !newPlate.price) {
       alert("กรุณากรอกหมายเลขทะเบียนและราคา");
@@ -69,14 +69,14 @@ const OldAuction = () => {
 
       if (!response.ok) throw new Error("Error adding plate");
 
-      fetchPlates(); // ✅ โหลดข้อมูลใหม่
+      fetchPlates();
       setNewPlate({ plate: "", price: "", status: "พร้อมขาย" });
     } catch (error) {
       console.error("❌ Error adding plate:", error);
     }
   };
 
-  // ✅ อัปเดตสถานะทะเบียน
+  // ✅ อัปเดตสถานะ
   const handleStatusChange = async (id, newStatus) => {
     try {
       await fetch(`${API_URL}/updateStatus/${id}`, {
@@ -85,7 +85,7 @@ const OldAuction = () => {
         body: JSON.stringify({ status: newStatus }),
       });
 
-      fetchPlates(); // ✅ โหลดข้อมูลใหม่
+      fetchPlates();
     } catch (error) {
       console.error("❌ Error updating status:", error);
     }
@@ -96,7 +96,7 @@ const OldAuction = () => {
     try {
       await fetch(`${API_URL}/deletePlate/${id}`, { method: "DELETE" });
 
-      fetchPlates(); // ✅ โหลดข้อมูลใหม่
+      fetchPlates();
     } catch (error) {
       console.error("❌ Error deleting plate:", error);
     }
@@ -106,7 +106,6 @@ const OldAuction = () => {
     <div className="p-4 bg-white rounded shadow">
       <h2 className="text-xl font-bold mb-4 font-['Prompt']">ป้ายประมูลหมวดเก่า</h2>
 
-      {/* ✅ ฟอร์มเพิ่มทะเบียน */}
       <div className="mb-4 flex gap-2">
         <input
           type="text"
@@ -127,7 +126,6 @@ const OldAuction = () => {
         </button>
       </div>
 
-      {/* ✅ ตารางทะเบียน */}
       <table className="w-full table-auto">
         <thead>
           <tr className="bg-gray-200 text-left">
@@ -147,14 +145,10 @@ const OldAuction = () => {
               <td className="p-2">{item.total}</td>
               <td className="p-2">{item.price}</td>
               <td className="p-2">
-                <select
-                  className="border rounded px-2 py-1"
-                  value={item.status}
-                  onChange={(e) => handleStatusChange(item.id, e.target.value)}
-                >
-                  <option value="ขายแล้ว">ขายแล้ว</option>
-                  <option value="พร้อมขาย">พร้อมขาย</option>
-                  <option value="จองแล้ว">จองแล้ว</option>
+                <select className="border rounded px-2 py-1" value={item.status} onChange={(e) => handleStatusChange(item.id, e.target.value)}>
+                  <option>ขายแล้ว</option>
+                  <option>พร้อมขาย</option>
+                  <option>จองแล้ว</option>
                 </select>
               </td>
               <td className="p-2">
