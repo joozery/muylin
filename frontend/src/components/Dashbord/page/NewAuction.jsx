@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const API_URL = "https://muaylintabien.co/.netlify/functions";
 
@@ -15,6 +15,7 @@ const charValueMap = {
   'ฏ': 9, 'ฐ': 9
 };
 
+// คำนวณผลรวมของตัวเลขจากป้ายทะเบียน
 const calculateTotal = (plate) => {
   let sum = 0;
   plate.split('').forEach(char => {
@@ -29,57 +30,90 @@ const calculateTotal = (plate) => {
 
 const NewAuction = () => {
   const [data, setData] = useState([]);
-  const [newPlate, setNewPlate] = useState({ plate: '', price: '', status: 'พร้อมขาย' });
+  const [newPlate, setNewPlate] = useState({ plate: "", price: "", status: "พร้อมขาย" });
 
-  // ดึงข้อมูลจาก API
-  useEffect(() => {
-    fetch(`${API_URL}/plates`)
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error("Error fetching data:", error));
-  }, []);
+  // ✅ ดึงข้อมูลจาก API
+  const fetchPlates = async () => {
+    try {
+      const response = await fetch(`${API_URL}/plates`);
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-  // เพิ่มทะเบียนใหม่ไปที่ API
-  const handleAddPlate = () => {
-    if (newPlate.plate && newPlate.price) {
-      const total = calculateTotal(newPlate.plate.replace(/\s/g, ''));
-      const newItem = { plate: newPlate.plate, total, price: newPlate.price, status: newPlate.status };
-
-      fetch(`${API_URL}/addPlate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newItem)
-      })
-        .then(response => response.json())
-        .then(addedItem => setData([...data, addedItem]))
-        .catch(error => console.error("Error adding plate:", error));
-
-      setNewPlate({ plate: '', price: '', status: 'พร้อมขาย' });
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   };
 
-  // อัปเดตสถานะทะเบียนผ่าน API
-  const handleStatusChange = (no, newStatus) => {
-    fetch(`${API_URL}/updateStatus/${no}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: newStatus })
-    })
-      .then(() => setData(data.map(item => item.no === no ? { ...item, status: newStatus } : item)))
-      .catch(error => console.error("Error updating status:", error));
+  useEffect(() => {
+    fetchPlates();
+  }, []);
+
+  // ✅ เพิ่มทะเบียนใหม่ไปยัง API
+  const handleAddPlate = async () => {
+    if (!newPlate.plate || !newPlate.price) {
+      alert("กรุณากรอกหมายเลขทะเบียนและราคา");
+      return;
+    }
+
+    const plateData = {
+      plate: newPlate.plate,
+      total: calculateTotal(newPlate.plate.replace(/\s/g, "")),
+      price: newPlate.price,
+      status: newPlate.status,
+    };
+
+    try {
+      const response = await fetch(`${API_URL}/plates/addPlate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(plateData),
+      });
+
+      if (!response.ok) throw new Error("Error adding plate");
+
+      await fetchPlates(); // ✅ รีเฟรชข้อมูลหลังจากเพิ่มทะเบียน
+      setNewPlate({ plate: "", price: "", status: "พร้อมขาย" });
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  // ลบทะเบียนออกจาก API
-  const handleDeletePlate = (no) => {
-    fetch(`${API_URL}/deletePlate/${no}`, { method: "DELETE" })
-      .then(() => setData(data.filter(item => item.no !== no)))
-      .catch(error => console.error("Error deleting plate:", error));
+  // ✅ อัปเดตสถานะผ่าน API
+  const handleStatusChange = async (id, newStatus) => {
+    try {
+      const response = await fetch(`${API_URL}/updateStatus/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (!response.ok) throw new Error("Error updating status");
+
+      await fetchPlates(); // ✅ รีเฟรชข้อมูลหลังอัปเดต
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
+
+  // ✅ ลบทะเบียนออกจาก API
+  const handleDeletePlate = async (id) => {
+    try {
+      const response = await fetch(`${API_URL}/deletePlate/${id}`, { method: "DELETE" });
+
+      if (!response.ok) throw new Error("Error deleting plate");
+
+      await fetchPlates(); // ✅ รีเฟรชข้อมูลหลังลบ
+    } catch (error) {
+      console.error("Error deleting plate:", error);
+    }
   };
 
   return (
     <div className="p-4 bg-white rounded shadow">
-      <h2 className="text-xl font-bold mb-4 font-['Prompt'] ">ป้ายประมูลหมวดใหม่</h2>
+      <h2 className="text-xl font-bold mb-4 font-['Prompt']">ป้ายประมูลหมวดใหม่</h2>
 
+      {/* ✅ ฟอร์มเพิ่มทะเบียน */}
       <div className="mb-4 flex gap-2">
         <input
           type="text"
@@ -95,14 +129,12 @@ const NewAuction = () => {
           value={newPlate.price}
           onChange={(e) => setNewPlate({ ...newPlate, price: e.target.value })}
         />
-        <button
-          className="bg-blue-600 text-white px-4 py-1 rounded"
-          onClick={handleAddPlate}
-        >
+        <button className="bg-blue-600 text-white px-4 py-1 rounded" onClick={handleAddPlate}>
           เพิ่มทะเบียน
         </button>
       </div>
 
+      {/* ✅ ตารางแสดงข้อมูลทะเบียน */}
       <table className="w-full table-auto">
         <thead>
           <tr className="bg-gray-200 text-left">
@@ -110,14 +142,14 @@ const NewAuction = () => {
             <th className="p-2">หมายเลขทะเบียน</th>
             <th className="p-2">เลขผลรวม</th>
             <th className="p-2">ราคา</th>
-            <th className="p-2">สถานะจองแล้ว</th>
-            <th className="p-2">ลบ</th>
+            <th className="p-2">สถานะ</th>
+            <th className="p-2">จัดการ</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr key={item.no} className="border-b">
-              <td className="p-2">{item.no}</td>
+          {data.map((item, index) => (
+            <tr key={item.id} className="border-b">
+              <td className="p-2">{index + 1}</td>
               <td className="p-2">{item.plate}</td>
               <td className="p-2">{item.total}</td>
               <td className="p-2">{item.price}</td>
@@ -125,7 +157,7 @@ const NewAuction = () => {
                 <select
                   className="border rounded px-2 py-1"
                   value={item.status}
-                  onChange={(e) => handleStatusChange(item.no, e.target.value)}
+                  onChange={(e) => handleStatusChange(item.id, e.target.value)}
                 >
                   <option>ขายแล้ว</option>
                   <option>พร้อมขาย</option>
@@ -133,10 +165,7 @@ const NewAuction = () => {
                 </select>
               </td>
               <td className="p-2">
-                <button
-                  className="bg-red-600 text-white px-2 py-1 rounded"
-                  onClick={() => handleDeletePlate(item.no)}
-                >
+                <button className="bg-red-600 text-white px-2 py-1 rounded" onClick={() => handleDeletePlate(item.id)}>
                   ลบ
                 </button>
               </td>
