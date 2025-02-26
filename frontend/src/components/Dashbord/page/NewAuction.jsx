@@ -56,6 +56,9 @@ const NewAuction = () => {
       status: newPlate.status,
     };
 
+    console.log(plateData);
+    return
+
     try {
       const response = await fetch(`${API_URL}/addPlate_new`, {
         method: "POST",
