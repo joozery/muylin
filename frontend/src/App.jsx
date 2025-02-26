@@ -7,6 +7,9 @@ import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 import Dashbord from './components/Dashbord/Dashbord';
+import BeautifulPhone from "./components/BeautifulPhone"; // ✅ นำเข้าหน้าเบอร์สวย
+import OurServices from "./components/OurServices"; // ✅ ให้ตรงกับไฟล์จริง
+
 
 // Import เมนู Dashboard
 import OldAuction from './components/Dashbord/page/OldAuction';
@@ -75,6 +78,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/order-process" element={<OrderProcess />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/beautiful-phone" element={<BeautifulPhone />} /> {/* ✅ เพิ่มหน้าเบอร์สวย */}
+                <Route path="/our-service" element={<OurServices />} />
               </Routes>
             </Layout>
           }

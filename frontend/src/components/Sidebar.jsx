@@ -35,24 +35,25 @@ const Sidebar = () => {
             <a href="#" onClick={toggleDropdown}>ทะเบียนตามหมวดหมู่</a>
             {isDropdownOpen && (
               <ul className="dropdown">
-                <li><a href="#">ทะเบียน รถมอเตอร์ไซด์ Vip</a></li>
-                <li><a href="#">ป้ายเขียว รถกระบะ Vip</a></li>
-                <li><a href="#">รถตู้ VIP ป้ายฟ้า</a></li>
-                <li><a href="#">เลขศาสตร์ เลขสวย เลขมงคล</a></li>
-                <li><a href="#">ทะเบียนสวย Vip ลักษณะพิเศษ</a></li>
-                <li><a href="#">ป้ายประมูล XYXY XXYY</a></li>
-                <li><a href="#">ทะเบียน Vip เลขตัวเดียว</a></li>
-                <li><a href="#">ทะเบียน Vip เลขคู่</a></li>
-                <li><a href="#">ทะเบียน Vip เลขตอง เลข 3 ตัว</a></li>
-                <li><a href="#">ทะเบียน Vip เลขโฟร์ XXXX</a></li>
-                <li><a href="#">ป้ายทะเบียน Vip หมวดเลขนำ</a></li>
-                <li><a href="#">ป้ายสวย หมวดเก่า ไม่ประมูล</a></li>
-                <li><a href="#">ทะเบียน Vip ต่างจังหวัด</a></li>
+                <li><a href="#">ทะเบียนรถมอเตอร์ไซด์</a></li>
+                <li><a href="#">ทะเบียนรถกะบะป้ายเขียว</a></li>
+                <li><a href="#">ทะเบียนรถตู้ป้ายฟ้า</a></li>
+                <li><a href="#">ทะเบียนรถตู้กราฟฟิค</a></li>
+                <li><a href="#">ทะเบียนรถคิดเอง (ลักษณะพิเศษ)</a></li>
+                <li><a href="#">ทะเบียนรถเลขตัวเดียว</a></li>
+                <li><a href="#">ทะเบียนรถเลขคู่</a></li>
+                <li><a href="#">ทะเบียนเลขตอง</a></li>
+                <li><a href="#">ทะเบียนเลขโฟร์</a></li>
+                <li><a href="#">ทะเบียนรถขาวดำหมวดใหม่</a></li>
+                <li><a href="#">ทะเบียนรถประมูลหมวดใหม่</a></li>
+                <li><a href="#">ทะเบียนรถขาวดำหมวดเก่า</a></li>
+                <li><a href="#">ทะเบียนรถประมูลหมวดเก่า</a></li>
+                <li><a href="#">ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)</a></li>
               </ul>
             )}
           </li>
-          <li><a href="#" onClick={toggleSidebar}>เบอร์สวย</a></li>
-          <li><a href="#" onClick={toggleSidebar}>บริการของเรา</a></li>
+          <li><Link to="/beautiful-phone">เบอร์สวย</Link></li>
+          <li><Link to="/our-service" onClick={toggleSidebar}> บริการของเรา</Link></li>
           <li><Link to="/order-process" onClick={toggleSidebar}>ขั้นตอนการสั่งซื้อ</Link></li>
           <li><a href="#" onClick={toggleSidebar}>ลูกค้าของเรา</a></li>
           <li><Link to="/contact">ติดต่อเบอร์หมวยหลินทะเบียน</Link></li>

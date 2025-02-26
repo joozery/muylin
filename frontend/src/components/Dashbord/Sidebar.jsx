@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Layers, Award, ClipboardList, Sparkles, BusFront, Bike, Truck, Car, Star, Circle, Grid, CheckCircle, Key, Medal } from 'lucide-react'; // ✅ ใช้ Medal แทน Gold
+import { Layers, Award, ClipboardList, Sparkles, BusFront, Bike, Truck, Car, Star, Circle, Grid, CheckCircle, Key, Medal, Phone } from 'lucide-react'; // ✅ ใช้ Medal แทน Gold และเพิ่ม Phone
 
 const Sidebar = () => {
   const activeLink = "bg-gray-200 rounded-lg";
@@ -123,6 +123,16 @@ const Sidebar = () => {
             <NavLink to="/dashboard/gold-graphic-plate" className={({ isActive }) => `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ''}`}>
               <Medal className="mr-2 mt-1 flex-shrink-0" /> {/* ✅ เปลี่ยนเป็น Medal */}
               ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)
+            </NavLink>
+          </li>
+
+          {/* ✅ เบอร์โทรศัพท์สวย */}
+          <li>
+            <NavLink to="/dashboard/phone-number" className={({ isActive }) =>
+              `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ""}`
+              }>
+        <Phone className="mr-2 mt-1 flex-shrink-0" />
+        เบอร์โทรศัพท์สวย
             </NavLink>
           </li>
 

@@ -16,6 +16,8 @@ import QuadrupleDigitPlate from './page/QuadrupleDigitPlate';
 import NewNonAuctionPlate from './page/NewNonAuctionPlate';
 import OldNonAuctionPlate from './page/OldNonAuctionPlate';
 import GoldGraphicPlate from './page/GoldGraphicPlate';
+import PhoneNumber from './page/PhoneNumber'; // ✅ เพิ่มหน้าเบอร์โทรศัพท์สวย
+
 
 const Maincontent = () => {
   const location = useLocation();
@@ -52,6 +54,7 @@ const Maincontent = () => {
       {/* ทะเบียนรถขาวดำหมวดเก่า */}
       {currentPath === '/dashboard/gold-graphic-plate' && <GoldGraphicPlate />} 
       {/* ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง) */}
+      {currentPath === '/dashboard/phone-number' && <PhoneNumber />}
       
       {currentPath === '/dashboard' && (
         <>
