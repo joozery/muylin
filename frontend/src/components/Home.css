@@ -17,6 +17,8 @@
     overflow: hidden; /* ป้องกันการเกินขอบ */
 }
 
+
+
 .hero-overlay {
     position: absolute;
     top: 0;

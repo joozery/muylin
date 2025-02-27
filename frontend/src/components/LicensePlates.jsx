@@ -15,7 +15,7 @@ export default function LicensePlates() {
                 {/* ⭐⭐⭐⭐⭐ MUAY.LINTABIEN.CO */}
                 <div className="text-center mb-6">
                     <p className="text-yellow-400 text-lg">★★★★★</p>
-                    <p className="text-yellow-400 font-bold">MUAY.LINTABIEN.CO</p>
+                    <p className="text-yellow-400 font-bold">MUAYLINTABIEN.CO</p>
                 </div>
 
                 {/* ✅ ป้ายประมูลหมวดใหม่ */}

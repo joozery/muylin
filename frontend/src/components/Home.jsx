@@ -6,7 +6,7 @@ import slide3 from '../assets/slide3.webp';
 import logo from '../assets/logo.png';
 import SearchForm from './SearchForm';
 import LicensePlates from "./LicensePlates"; // นำเข้า LicensePlates
-
+import WelcomeSection from "../components/WelcomeSection"; // ✅ นำเข้า WelcomeSection
 
 const Home = () => {
   // State สำหรับการแสดงภาพ Slider
@@ -42,6 +42,13 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ✅ Section: Welcome */}
+      <section className="welcome-section">
+        <div className="container">
+          <WelcomeSection />
+        </div>
+      </section>
+
       {/* Section: Search Form */}
       <section className="search-section">
         <div className="container">
@@ -49,14 +56,12 @@ const Home = () => {
         </div>
       </section>
 
-       {/* Section: License Plates */}
-       <section className="license-plates-section py-12 bg-[#111111]">
+      {/* Section: License Plates */}
+      <section className="license-plates-section py-12 bg-[#111111]">
         <div className="container mx-auto px-6 lg:px-20">
           <LicensePlates />
         </div>
       </section>
-
-
     </main>
   );
 };
