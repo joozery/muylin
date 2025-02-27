@@ -21,7 +21,10 @@ const BeautifulPhone = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black" style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+    <div
+      className="min-h-screen bg-black"
+      style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center" }}
+    >
       {/* 🔹 Header Section */}
       <BeautifulPhoneHeader />
 
@@ -31,26 +34,32 @@ const BeautifulPhone = () => {
         <div className="mb-6">
           <p className="text-yellow-400 text-xl">★★★★★</p>
           <p className="text-yellow-400 uppercase text-sm font-bold tracking-widest">www.muaylintabien.co</p>
-          <h2 className="text-4xl font-bold italic mt-2">เบอร์สวย </h2>
+          <h2 className="text-4xl font-bold italic mt-2">เบอร์สวย</h2>
         </div>
 
-        {/* 🔹 เบอร์สวย Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {/* 🔹 เบอร์สวย Grid (2 คอลัมน์ในมือถือ, 3 คอลัมน์ในหน้าจอใหญ่) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {phoneNumbers.map((phone) => (
-            <div key={phone.id} className="border-4 border-[#FFD700] p-8 rounded-lg bg-white text-black shadow-lg relative">
+            <div key={phone.id} className="border-4 border-[#FFD700] p-6 rounded-lg bg-white text-black shadow-lg relative">
               {/* Tag สถานะ */}
-              <span className={`absolute top-2 right-2 px-3 py-1 text-sm rounded-lg text-white ${
-                phone.status === "มาใหม่" ? "bg-blue-600" :
-                phone.status === "ขายแล้ว" ? "bg-red-600" :
-                "bg-gray-500"
-              }`}>
+              <span
+                className={`absolute top-2 right-2 px-3 py-1 text-sm rounded-lg text-white ${
+                  phone.status === "มาใหม่" ? "bg-blue-600" :
+                  phone.status === "ขายแล้ว" ? "bg-red-600" :
+                  "bg-gray-500"
+                }`}
+              >
                 {phone.status}
               </span>
 
               {/* ข้อมูลเบอร์ */}
-              <h2 className="text-3xl font-bold">{phone.phone_number}</h2>
-              <p className="text-sm text-gray-500">{phone.brand} {phone.total && `(${phone.total})`}</p>
-              <p className="text-xl text-red-500 font-bold">{Number(phone.price).toLocaleString()} บาท</p>
+              <h2 className="text-2xl font-bold">{phone.phone_number}</h2>
+              <p className="text-sm text-gray-500">
+                {phone.brand} {phone.total && `(${phone.total})`}
+              </p>
+              <p className="text-xl text-red-500 font-bold">
+                {Number(phone.price).toLocaleString()} บาท
+              </p>
             </div>
           ))}
         </div>
