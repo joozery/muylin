@@ -1,5 +1,5 @@
 import React from "react";
-import saleImage from "../assets/slide3.webp"; // ✅ อัปโหลดรูปภาพแล้วเปลี่ยน path
+import saleImage from "../assets/tabian.webp"; // ✅ อัปโหลดรูปภาพแล้วเปลี่ยน path
 
 const PlateSaleSection = () => {
   return (

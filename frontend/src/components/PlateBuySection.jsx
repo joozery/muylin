@@ -1,5 +1,5 @@
 import React from "react";
-import buyImage from "../assets/slide3.webp"; // ✅ เปลี่ยนเป็น path รูปที่ใช้จริง
+import buyImage from "../assets/pexels-photo-3764984.jpeg"; // ✅ เปลี่ยนเป็น path รูปที่ใช้จริง
 
 const PlateBuySection = () => {
   return (

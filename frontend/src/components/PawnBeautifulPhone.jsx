@@ -1,5 +1,5 @@
 import React from "react";
-import pawnPhoneImage from "../assets/slide3.webp"; // ✅ เปลี่ยนเป็น path รูปจริง
+import pawnPhoneImage from "../assets/Average Weight Of A Car.webp"; // ✅ เปลี่ยนเป็น path รูปจริง
 
 const PawnBeautifulPhone = () => {
   return (

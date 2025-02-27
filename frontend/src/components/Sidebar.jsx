@@ -55,7 +55,7 @@ const Sidebar = () => {
           <li><Link to="/beautiful-phone">เบอร์สวย</Link></li>
           <li><Link to="/our-service" onClick={toggleSidebar}> บริการของเรา</Link></li>
           <li><Link to="/order-process" onClick={toggleSidebar}>ขั้นตอนการสั่งซื้อ</Link></li>
-          <li><a href="#" onClick={toggleSidebar}>ลูกค้าของเรา</a></li>
+          <li><Link to="/customers" onClick={toggleSidebar}>ลูกค้าของเรา</Link></li>
           <li><Link to="/contact">ติดต่อเบอร์หมวยหลินทะเบียน</Link></li>
         </ul>
 

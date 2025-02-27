@@ -9,6 +9,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Dashbord from './components/Dashbord/Dashbord';
 import BeautifulPhone from "./components/BeautifulPhone"; // ✅ นำเข้าหน้าเบอร์สวย
 import OurServices from "./components/OurServices"; // ✅ ให้ตรงกับไฟล์จริง
+import Customers from "./components/Customers"; // ✅ ให้ตรงกับไฟล์จริง
 
 
 // Import เมนู Dashboard
@@ -80,6 +81,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/beautiful-phone" element={<BeautifulPhone />} /> {/* ✅ เพิ่มหน้าเบอร์สวย */}
                 <Route path="/our-service" element={<OurServices />} />
+                <Route path="/customers" element={<Customers />} />
               </Routes>
             </Layout>
           }

@@ -1,5 +1,5 @@
 import React from "react";
-import sellPhoneImage from "../assets/slide3.webp"; // ✅ เปลี่ยนเป็น path รูปที่ใช้จริง
+import sellPhoneImage from "../assets/bmw.jpg"; // ✅ เปลี่ยนเป็น path รูปที่ใช้จริง
 
 const SellBeautifulPhone = () => {
   return (
