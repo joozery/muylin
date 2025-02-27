@@ -35,20 +35,19 @@ const Sidebar = () => {
             <a href="#" onClick={toggleDropdown}>ทะเบียนตามหมวดหมู่</a>
             {isDropdownOpen && (
               <ul className="dropdown">
-                <li><a href="#">ทะเบียนรถมอเตอร์ไซด์</a></li>
-                <li><a href="#">ทะเบียนรถกะบะป้ายเขียว</a></li>
-                <li><a href="#">ทะเบียนรถตู้ป้ายฟ้า</a></li>
-                <li><a href="#">ทะเบียนรถตู้กราฟฟิค</a></li>
-                <li><a href="#">ทะเบียนรถคิดเอง (ลักษณะพิเศษ)</a></li>
-                <li><a href="#">ทะเบียนรถเลขตัวเดียว</a></li>
-                <li><a href="#">ทะเบียนรถเลขคู่</a></li>
-                <li><a href="#">ทะเบียนเลขตอง</a></li>
-                <li><a href="#">ทะเบียนเลขโฟร์</a></li>
-                <li><a href="#">ทะเบียนรถขาวดำหมวดใหม่</a></li>
-                <li><a href="#">ทะเบียนรถประมูลหมวดใหม่</a></li>
-                <li><a href="#">ทะเบียนรถขาวดำหมวดเก่า</a></li>
-                <li><a href="#">ทะเบียนรถประมูลหมวดเก่า</a></li>
-                <li><a href="#">ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)</a></li>
+             <li><a href="/plates-motorcycle">ทะเบียนรถมอเตอร์ไซด์</a></li>
+            <li><a href="/plates-green">ทะเบียนรถกะบะป้ายเขียว</a></li>
+             <li><a href="/plates-graphic-van">ทะเบียนรถตู้กราฟฟิค</a></li>
+               <li><a href="/plates-special">ทะเบียนรถคิดเอง (ลักษณะพิเศษ)</a></li>
+               <li><a href="/plates-single-digit">ทะเบียนรถเลขตัวเดียว</a></li>
+             <li><a href="/plates-double-digit">ทะเบียนรถเลขคู่</a></li>
+           <li><a href="/plates-triple-digit">ทะเบียนเลขตอง</a></li>
+          <li><a href="/plates-quadruple-digit">ทะเบียนเลขโฟร์</a></li>
+           <li><a href="/plates-new">ทะเบียนรถประมูลหมวดใหม่</a></li>
+           <li><a href="/plates-new-non-auction">ทะเบียนรถขาวดำหมวดใหม่</a></li>
+            <li><a href="/plates-old">ทะเบียนรถประมูลหมวดเก่า</a></li>
+            <li><a href="/plates-old-non-auction">ทะเบียนรถขาวดำหมวดเก่า</a></li>
+            <li><a href="/plates-gold-graphic">ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)</a></li>
               </ul>
             )}
           </li>

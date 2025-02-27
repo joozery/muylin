@@ -29,6 +29,21 @@ import NewNonAuctionPlate from './components/Dashbord/page/NewNonAuctionPlate';
 import OldNonAuctionPlate from './components/Dashbord/page/OldNonAuctionPlate';
 import GoldGraphicPlate from './components/Dashbord/page/GoldGraphicPlate';
 
+// ✅ Import ไฟล์ทะเบียนรถแต่ละหมวดจาก Pages
+import PagesPlatesGraphicVan from "./components/Pages/PagesPlatesGraphicVan";
+import PagesPlatesGreen from "./components/Pages/PagesPlatesGreen";
+import PagesPlatesMotorcycle from "./components/Pages/PagesPlatesMotorcycle";
+import PagesPlatesNew from "./components/Pages/PagesPlatesNew";
+import PagesPlatesNewNonAuction from "./components/Pages/PagesPlatesNewNonAuction";
+import PagesPlatesOld from "./components/Pages/PagesPlatesOld";
+import PagesPlatesOldNonAuction from "./components/Pages/PagesPlatesOldNonAuction";
+import PagesPlatesQuadrupleDigit from "./components/Pages/PagesPlatesQuadrupleDigit";
+import PagesPlatesSingleDigit from "./components/Pages/PagesPlatesSingleDigit";
+import PagesPlatesSpecial from "./components/Pages/PagesPlatesSpecial";
+import PagesPlatesTripleDigit from "./components/Pages/PagesPlatesTripleDigit";
+import PagesPlatesDoubleDigit from "./components/Pages/PagesPlatesDoubleDigit";
+import PagesPlatesGoldGraphic from "./components/Pages/PagesPlatesGoldGraphic";
+
 import './App.css';
 
 const Layout = ({ children }) => {
@@ -82,6 +97,21 @@ function App() {
                 <Route path="/beautiful-phone" element={<BeautifulPhone />} /> {/* ✅ เพิ่มหน้าเบอร์สวย */}
                 <Route path="/our-service" element={<OurServices />} />
                 <Route path="/customers" element={<Customers />} />
+
+                {/* ✅ เส้นทางทะเบียนรถ */}
+                <Route path="/plates-graphic-van" element={<PagesPlatesGraphicVan />} />
+                <Route path="/plates-green" element={<PagesPlatesGreen />} />
+                <Route path="/plates-motorcycle" element={<PagesPlatesMotorcycle />} />
+                <Route path="/plates-new" element={<PagesPlatesNew />} />
+                <Route path="/plates-new-non-auction" element={<PagesPlatesNewNonAuction />} />
+                <Route path="/plates-old" element={<PagesPlatesOld />} />
+                <Route path="/plates-old-non-auction" element={<PagesPlatesOldNonAuction />} />
+                <Route path="/plates-single-digit" element={<PagesPlatesSingleDigit />} />
+                <Route path="/plates-double-digit" element={<PagesPlatesDoubleDigit />} />
+                <Route path="/plates-triple-digit" element={<PagesPlatesTripleDigit />} />
+                <Route path="/plates-quadruple-digit" element={<PagesPlatesQuadrupleDigit />} />
+                <Route path="/plates-special" element={<PagesPlatesSpecial />} />
+                <Route path="/plates-gold-graphic" element={<PagesPlatesGoldGraphic />} />
               </Routes>
             </Layout>
           }
