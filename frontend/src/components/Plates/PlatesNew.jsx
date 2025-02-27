@@ -28,12 +28,12 @@ const PlatesNew = ({cover , url}) => {
           platesNew.map((plate, index) => (
             <div
               key={index}
-              className="relative text-center p-6 rounded-lg bg-cover bg-center shadow-lg"
+              className="relative text-center p-6 rounded-md bg-cover bg-center shadow-lg"
               style={{ backgroundImage: `url(${cover})` }}
             >
               {/* แสดงป้าย "จองแล้ว" ถ้ามี */}
               {plate.status && (
-                <div className="absolute top-2 right-0 bg-red-500 text-white py-1 px-3 text-sm rounded-s-md">
+                <div className="absolute top-[5px] right-0 bg-red-500 text-white py-1 px-3 text-sm rounded-s-md">
                   {plate.status}
                 </div>
               )}

@@ -44,9 +44,7 @@ const Home = () => {
 
       {/* ✅ Section: Welcome */}
       <section className="welcome-section">
-        <div className="container">
           <WelcomeSection />
-        </div>
       </section>
 
       {/* Section: Search Form */}

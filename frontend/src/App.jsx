@@ -55,7 +55,7 @@ function App() {
         <Route path="/dashboard/*" element={<Dashbord />}>
           <Route path="old-auction" element={<OldAuction />} />
           <Route path="new-auction" element={<NewAuction />} />
-          <Route path="non-auction" element={<NonAuction />} />
+          {/* <Route path="non-auction" element={<NonAuction />} /> */}
           <Route path="special-plate" element={<SpecialPlate />} />
           <Route path="van-plate" element={<VanPlate />} />
           <Route path="motorcycle-plate" element={<MotorcyclePlate />} />

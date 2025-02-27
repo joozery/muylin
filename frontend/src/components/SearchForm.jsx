@@ -30,6 +30,7 @@ function SearchForm() {
 
     // ✅ ฟังก์ชันกดค้นหา (ส่งค่าผ่าน window)
     const handleSearch = () => {
+        console.log(keyword, number, sumOption, priceRange, category);
         window.searchParams = { keyword, number, sumOption, priceRange, category };
         window.dispatchEvent(new Event("searchUpdate")); // แจ้งเตือน `LicensePlates.jsx`
     };
@@ -52,10 +53,10 @@ function SearchForm() {
             <div className="search-inputs">
                 <input
                     type="text"
-                    placeholder="ใส่ตัวเลข หรือ อักษร เช่น 1กข หรือ มท"
+                    placeholder="ใส่ตัวอักษร เช่น กก"
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
-                    onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+                    // onKeyPress={(e) => e.key === "Enter" && handleSearch()}
                 />
                 
                 <input
@@ -63,7 +64,7 @@ function SearchForm() {
                     placeholder="ใส่ตัวเลข เช่น 8, 88, 888, 8888"
                     value={number}
                     onChange={(e) => setNumber(e.target.value)}
-                    onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+                    // onKeyPress={(e) => e.key === "Enter" && handleSearch()}
                 />
 
                 <select value={sumOption} onChange={(e) => setSumOption(e.target.value)}>
@@ -92,8 +93,9 @@ function SearchForm() {
             </div>
 
             <div className="additional-buttons">
-                <button>ดูดวงทะเบียนรถ</button>
-                <button>เบอร์โทรเลขสวย</button>
+                {/* <button>ดูดวงทะเบียนรถ</button> */}
+                <button>ดูเบอร์ทั้งหมด</button>
+                <button>ดูทะเบียนทั้งหมด</button>
             </div>
         </div>
     );
