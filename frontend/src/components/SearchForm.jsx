@@ -116,10 +116,6 @@ function SearchForm() {
     }
   };
 
-  useEffect(() => {
-    console.log(allPlateData);
-  }, [allPlateData]);
-
   // ทำการ filter แบบ client-side เมื่อค่าใน platesNew เปลี่ยนแปลง
   const filterPlates = () => {
     let filtered = allPlateData;
@@ -163,9 +159,16 @@ function SearchForm() {
     }));
     setFilteredPlateData(filtered);
   };
+
   useEffect(() => {
     console.log(filteredPlateData);
   }, [filteredPlateData]);
+
+  useEffect(() => {
+    filterPlates();
+  }, [allPlateData]);
+
+  
 
   useEffect(() => {
     fetchPlatesNew();
@@ -266,7 +269,7 @@ function SearchForm() {
 
       <section className="license-plates-section py-12 bg-[#111111]">
         <div className="container mx-auto px-6 lg:px-20">
-          <LicensePlates data={filteredPlateData}/>
+          <LicensePlates data={filteredPlateData} loading={loading}/>
         </div>
       </section>
       {/* <div>

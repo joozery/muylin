@@ -13,12 +13,11 @@ import oldNonAuctionImage from "../assets/ขาวดำเก่า.jpg"; // �
 import oldImage from "../assets/ขาวดำเก่า.jpg"; // ✅ รูปพื้นหลังของทะเบียนขาวดำหมวดเก่า
 import goldGraphicImage from "../assets/gold.jpg"; // ✅ รูปพื้นหลังของทะเบียนระฆังทอง (กราฟฟิคสีทอง)
 import PlatesComponent from "./Plates/PlatesSearchComponent";
+import {BeatLoader , GridLoader} from "react-spinners";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export default function LicensePlates({ data }) {
-  const [loading, setLoading] = useState(true); // เพิ่ม loading state
-
+export default function LicensePlates({ data, loading }) {
   const componentMap = {
     plates_new: { cover: newImage, text: "ป้ายประมูลหมวดใหม่" },
     plates_special: { cover: gold, text: "ป้ายคิดเองลักษณะพิเศษ" },
@@ -64,11 +63,9 @@ export default function LicensePlates({ data }) {
 
   if (loading) {
     return (
-      <section className="bg-gradient-to-b to-[#111111] text-white py-12 font-tahoma">
-        <div className="container mx-auto px-6 lg:px-20">
-          <p className="text-center">กำลังโหลดข้อมูล...</p>
-        </div>
-      </section>
+      <div className="flex justify-center items-center min-h-[200px]">
+        <GridLoader className="mx-auto" color="#591282" size={20} />
+      </div>
     );
   }
 
@@ -80,7 +77,24 @@ export default function LicensePlates({ data }) {
           <p className="text-yellow-400 text-lg">★★★★★</p>
           <p className="text-yellow-400 font-bold">MUAYLINTABIEN.CO</p>
         </div>
+        {/* แสดงผล Component ตามผลลัพธ์การค้นหา*/}
+        {data &&
+          data.map((result, index) => {
+            const { type, data: plateData } = result;
+            const componentConfig = componentMap[type];
 
+            if (componentConfig && plateData && plateData.length > 0) {
+              return (
+                <PlatesComponent
+                  key={index}
+                  cover={componentConfig.cover}
+                  text={`${componentConfig.text} (${plateData.length} รายการ)`}
+                  data={plateData}
+                />
+              );
+            }
+            return null;
+          })}
         {/* แสดงผล Component ตามผลลัพธ์การค้นหา
         {data &&
           data.map((result, index) => {
@@ -207,25 +221,6 @@ export default function LicensePlates({ data }) {
                 return null;
             }
           })} */}
-          
-        {/* แสดงผล Component ตามผลลัพธ์การค้นหา*/}
-        {data &&
-          data.map((result, index) => {
-            const { type, data: plateData } = result;
-            const componentConfig = componentMap[type];
-
-            if (componentConfig) {
-              return (
-                <PlatesComponent
-                  key={index}
-                  cover={componentConfig.cover}
-                  text={`${componentConfig.text} (${plateData.length} รายการ)`}
-                  data={plateData}
-                />
-              );
-            }
-            return null;
-          })}
       </div>
     </section>
   );
