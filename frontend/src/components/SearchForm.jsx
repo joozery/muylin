@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 import PlatesSearch from "./Plates/SeacrchPlatesAll";
 import ClipLoader from "react-spinners/ClipLoader";
+import LicensePlates from "./LicensePlates";
+import { use } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
 function SearchForm() {
   const [keyword, setKeyword] = useState("");
@@ -69,6 +71,17 @@ function SearchForm() {
   });
   // ✅ ดึงข้อมูลป้ายประมูลหมวดใหม่
 
+  const groupSearchResults = (results) => {
+    const grouped = {};
+    results.forEach((result) => {
+      if (!grouped[result.type]) {
+        grouped[result.type] = [];
+      }
+      grouped[result.type].push(result.data); // แก้ไขตรงนี้
+    });
+    return Object.entries(grouped).map(([type, data]) => ({ type, data }));
+  };
+
   const fetchPlatesNew = async () => {
     setLoading(true);
     const plateData = {
@@ -89,8 +102,13 @@ function SearchForm() {
       if (!response.ok) throw new Error("Failed to fetch plates");
       const data = await response.json();
       //   setPlateData(data);
-      setAllPlateData(data);
-      setFilteredPlateData(data);
+      const formattedData = data.map((item) => ({
+        type: item.type,
+        data: item,
+      }));
+      const groupedData = groupSearchResults(formattedData);
+      setAllPlateData(groupedData);
+      // setFilteredPlateData(data);
     } catch (error) {
       console.error("❌ Error fetching plates:", error);
     } finally {
@@ -98,57 +116,56 @@ function SearchForm() {
     }
   };
 
+  useEffect(() => {
+    console.log(allPlateData);
+  }, [allPlateData]);
+
   // ทำการ filter แบบ client-side เมื่อค่าใน platesNew เปลี่ยนแปลง
   const filterPlates = () => {
     let filtered = allPlateData;
     const { text, number, sum_number, price, type } = platesNew;
   
-    if (text) {
-      filtered = filtered.filter((item) =>
-        item.plate.toLowerCase().includes(text.toLowerCase())
-      );
-    }
-    if (number) {
-      filtered = filtered.filter((item) =>
-        item.plate.match(/\d+/)?.[0]?.includes(number)
-      );
-    }
-    if (sum_number) {
-      filtered = filtered.filter((item) =>
-        String(item.total).includes(sum_number)
-      );
-    }
-    if (price && price !== "all") {
-      switch (price) {
-        case "<=1000":
-          filtered = filtered.filter((item) => Number(item.price) <= 1000);
-          break;
-        case "1000-10000":
-          filtered = filtered.filter(
-            (item) =>
-              Number(item.price) >= 1000 && Number(item.price) <= 10000
-          );
-          break;
-        case ">=10000":
-          filtered = filtered.filter((item) => Number(item.price) >= 10000);
-          break;
-        default:
-          break;
-      }
-    }
-    if (type) {
-      filtered = filtered.filter((item) =>
-        item.type && item.type.toLowerCase().includes(type.toLowerCase())
-      );
-    }
+    filtered = filtered.map((item) => ({
+      ...item,
+      data: item.data.filter((plate) => {
+        let match = true; // เริ่มต้นด้วย match = true
+  
+        if (text) {
+          match = match && plate.plate.toLowerCase().includes(text.toLowerCase());
+        }
+        if (number) {
+          match = match && plate.plate.match(/\d+/)?.[0]?.includes(number);
+        }
+        if (sum_number) {
+          match = match && String(plate.total).includes(sum_number);
+        }
+        if (price && price !== "all") {
+          switch (price) {
+            case "<=1000":
+              match = match && Number(plate.price) <= 1000;
+              break;
+            case "1000-10000":
+              match = match && Number(plate.price) >= 1000 && Number(plate.price) <= 10000;
+              break;
+            case ">=10000":
+              match = match && Number(plate.price) >= 10000;
+              break;
+            default:
+              break;
+          }
+        }
+        if (type) {
+          match = match && item.type.toLowerCase().includes(type.toLowerCase());
+        }
+  
+        return match; // return true ถ้าผ่านเงื่อนไขทั้งหมด
+      }),
+    }));
     setFilteredPlateData(filtered);
   };
-  
-
-  // ใช้ useEffect เพื่อทำ filter ทุกครั้งที่ platesNew เปลี่ยนแปลง
-//   useEffect(() => {
-//     filterPlates();
-//   }, [platesNew, allPlateData]);
+  useEffect(() => {
+    console.log(filteredPlateData);
+  }, [filteredPlateData]);
 
   useEffect(() => {
     fetchPlatesNew();
@@ -171,7 +188,8 @@ function SearchForm() {
 
   return (
     <>
-      <div className="search-form">
+    <div className="p-10">
+      <div className="search-form bg-white p-4 shadow-md">
         <h2>ค้นหาเลขทะเบียน</h2>
         <div className="search-inputs">
           <input
@@ -244,7 +262,14 @@ function SearchForm() {
           <button>ดูทะเบียนทั้งหมด</button>
         </div>
       </div>
-      <div>
+    </div>
+
+      <section className="license-plates-section py-12 bg-[#111111]">
+        <div className="container mx-auto px-6 lg:px-20">
+          <LicensePlates data={filteredPlateData}/>
+        </div>
+      </section>
+      {/* <div>
         {loading ? (
           <div className="flex justify-center items-center mt-10">
             <ClipLoader color="#36d7b7" size={50} />
@@ -252,7 +277,7 @@ function SearchForm() {
         ) : (
           <PlatesSearch plates={filteredPlateData} />
         )}
-      </div>
+      </div> */}
     </>
   );
 }

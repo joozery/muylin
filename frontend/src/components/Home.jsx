@@ -60,18 +60,14 @@ const Home = () => {
       </section>
 
       {/* Section: Search Form */}
-      <section className="search-section">
-        <div className="container">
+      <section className="w-full bg-[#f4edf6">
+        <div className="">
           <SearchForm />
         </div>
       </section>
 
       {/* Section: License Plates */}
-      <section className="license-plates-section py-12 bg-[#111111]">
-        <div className="container mx-auto px-6 lg:px-20">
-          <LicensePlates />
-        </div>
-      </section>
+      
     </main>
   );
 };

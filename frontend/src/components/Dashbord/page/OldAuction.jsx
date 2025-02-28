@@ -178,7 +178,7 @@ const OldAuction = () => {
   return (
     <div className="p-4 bg-white rounded shadow">
       <h2 className="text-xl font-bold mb-4 font-['Prompt']">
-      ทะเบียนรถประมูลหมวดใหม่
+      ทะเบียนรถป้ายขาวดำหมวดเก่า
       </h2>
 
       <div className="mb-4 flex gap-2">

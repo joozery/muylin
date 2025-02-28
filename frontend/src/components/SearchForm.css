@@ -1,13 +1,13 @@
 /* Container หลักของฟอร์ม */
 .search-section {
     margin-top: 0; /* ลบระยะห่างด้านบนของ Search Section */
-    padding: 40px 0; /* ตั้งค่าระยะห่างด้านใน */
+    /* padding: 40px 0; ตั้งค่าระยะห่างด้านใน */
     background-color: #f4edf6; /* สีพื้นหลังสำหรับ Search Section */
     width: 100%; /* ขยายเต็มหน้าจอ */
 }
 
 .search-form {
-    background-color: rgba(245, 221, 248, 0.1); /* สีพื้นหลังโปร่งใส */
+    /* background-color: rgba(245, 221, 248, 0.1); สีพื้นหลังโปร่งใส */
     padding: 20px 30px;
     border-radius: 12px;
     text-align: center;
