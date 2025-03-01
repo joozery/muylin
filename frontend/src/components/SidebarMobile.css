@@ -1,0 +1,54 @@
+/* Sidebar มือถือ */
+.sidebar-mobile {
+    position: fixed;
+    top: 0;
+    left: -100%; /* ซ่อน Sidebar เริ่มต้น */
+    width: 280px;
+    height: 100%;
+    background: linear-gradient(135deg, #260c35, #111111);
+    color: white;
+    transition: left 0.3s ease-in-out;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* แสดง Sidebar เมื่อเปิด */
+  .sidebar-mobile.open {
+    left: 0;
+  }
+  
+  /* ปุ่มปิด */
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  /* เมนู */
+  .sidebar-mobile .menu {
+    list-style: none;
+    padding-top: 50px;
+  }
+  
+  .sidebar-mobile .menu li {
+    margin-bottom: 15px;
+  }
+  
+  .sidebar-mobile .menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px 0;
+    transition: color 0.3s ease;
+  }
+  
+  .sidebar-mobile .menu li a:hover {
+    color: #ffeb3b;
+  }

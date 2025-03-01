@@ -97,7 +97,7 @@
 
 /* ปุ่มสีเหลือง */
 .btn-yellow {
-    background-color: #51328d !important; /* ✅ สีเหลือง */
+    background-color: #E2BE76!important; /* ✅ สีเหลือง */
     color: rgb(255, 255, 255) !important;
     font-weight: bold;
     padding: 12px 25px;

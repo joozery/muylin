@@ -1,7 +1,7 @@
 /* === ✅ โครงสร้างหลักของ App === */
 .App {
   display: flex;
-  min-height: 100vh;
+  min-height: 80vh;
 }
 
 /* === ✅ เนื้อหา (Content) ปรับให้รองรับ Sidebar และ Mobile === */

@@ -1,4 +1,5 @@
 import { FiPhone, FiMail, FiGlobe } from "react-icons/fi"; // ✅ Import React Icons
+import { Link } from "react-router-dom"; // ✅ นำเข้า Link
 
 export default function Footer() {
     return (
@@ -18,17 +19,18 @@ export default function Footer() {
                     </div>
 
                     {/* คอลัมน์ 2 - ลิงค์แนะนำ */}
-                    <div>
-                        <h3 className="text-xl font-bold text-white mb-4">ลิงค์แนะนำ</h3>
-                        <ul className="space-y-2">
-                            <li><a href="#" className="text-white no-underline hover:text-yellow-300 transition duration-300">ทะเบียนสวย</a></li>
-                            <li><a href="#" className="text-white no-underline hover:text-yellow-300 transition duration-300">เบอร์สวย</a></li>
-                            <li><a href="#" className="text-white no-underline hover:text-yellow-300 transition duration-300">บริการของเรา</a></li>
-                            <li><a href="#" className="text-white no-underline hover:text-yellow-300 transition duration-300">ขั้นตอนการสั่งซื้อ</a></li>
-                            <li><a href="#" className="text-white no-underline hover:text-yellow-300 transition duration-300">ลูกค้าของเรา</a></li>
-                            <li><a href="#" className="text-white no-underline hover:text-yellow-300 transition duration-300">ติดต่อพี่เบอร์เทพ</a></li>
-                        </ul>
-                    </div>
+                    {/* คอลัมน์ 2 - ลิงค์แนะนำ */}
+<div>
+    
+    <ul className="space-y-2">
+        <li><Link to="/" className="text-white no-underline hover:text-yellow-300 transition duration-300">ทะเบียนสวย</Link></li>
+        <li><Link to="/beautiful-phone" className="text-white no-underline hover:text-yellow-300 transition duration-300">เบอร์สวย</Link></li>
+        <li><Link to="/our-service" className="text-white no-underline hover:text-yellow-300 transition duration-300">บริการของเรา</Link></li>
+        <li><Link to="/order-process" className="text-white no-underline hover:text-yellow-300 transition duration-300">ขั้นตอนการสั่งซื้อ</Link></li>
+        <li><Link to="/customers" className="text-white no-underline hover:text-yellow-300 transition duration-300">ลูกค้าของเรา</Link></li>
+        <li><Link to="/contact" className="text-white no-underline hover:text-yellow-300 transition duration-300">ติดต่อหมวยหลิน</Link></li>
+    </ul>
+</div>
 
                     {/* คอลัมน์ 3 - ติดต่อพี่เบอร์เทพ */}
                     <div>
@@ -41,7 +43,7 @@ export default function Footer() {
                             </p>
                             <p className="flex items-center space-x-2">
                                 <FiMail className="text-yellow-300 text-xl" />
-                                <span className="text-lg">@muaydata</span>
+                                <span className="text-lg">muaydata</span>
                             </p>
                             <p className="flex items-center space-x-2">
                                 <FiGlobe className="text-yellow-300 text-xl" />
