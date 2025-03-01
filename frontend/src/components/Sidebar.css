@@ -15,6 +15,7 @@
   overflow-y: auto;
   padding-bottom: 50px;
   transition: transform 0.3s ease-in-out;
+  z-index: 1100; /* ✅ ทำให้ Sidebar อยู่ด้านบนสุด */
 }
 
 /* === ✅ Sidebar ปิดอยู่บนมือถือ === */
@@ -122,11 +123,49 @@
   border: none;
   color: white;
   cursor: pointer;
-  z-index: 50;
+  z-index: 1200; /* ✅ ให้อยู่ด้านหน้าทุกอย่าง */
   font-size: 24px;
+  display: block; /* ✅ ให้แน่ใจว่าแสดงในมือถือ */
 }
 
-/* === ✅ Overlay เมื่อ Sidebar เปิด === */
+/* ✅ ซ่อน Hamburger บน Desktop */
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+/* === ✅ Sidebar (Desktop View) === */
+.sidebar {
+  width: 330px;
+  background: linear-gradient(135deg, #260c35, #111111);
+  color: white;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+  font-family: 'Tahoma', sans-serif;
+  overflow-y: auto;
+  padding-bottom: 50px;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1100; /* ✅ ทำให้ Sidebar อยู่ด้านหน้า */
+}
+
+/* === ✅ Sidebar ปิดอยู่บนมือถือ === */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 280px;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+/* ✅ Overlay เมื่อ Sidebar เปิด */
 .sidebar-overlay {
   position: fixed;
   top: 0;
@@ -134,7 +173,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 49;
+  z-index: 1100; /* ✅ ต้องสูงกว่า Hero */
   display: none;
 }
 
