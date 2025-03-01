@@ -2,7 +2,7 @@
 
 .hero {
     position: relative;
-    height: 100vh; /* ปรับให้เต็มจอ */
+    height: 80vh; /* ปรับให้เต็มจอ */
     width: 100%;
     background-size: cover;
     background-position: center;

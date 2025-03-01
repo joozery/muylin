@@ -69,7 +69,7 @@ const Sidebar = () => {
         {/* ✅ ข้อมูลติดต่อ */}
         <div className="contact">
           <p><FaPhoneAlt /> โทร: 096-396-2888</p>
-          <p><FaRegCommentDots /> Line ID: @muaydata</p>
+          <p><FaRegCommentDots /> Line ID: muaydata</p>
           <p>ลูกค้าสามารถติดต่อสอบถาม หมวยหลิน ได้ตลอด 24 ชั่วโมง</p>
         </div>
       </div>
