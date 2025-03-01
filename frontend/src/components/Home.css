@@ -13,6 +13,7 @@
     color: white;
     font-family: 'Tahoma', sans-serif;
     overflow: hidden;
+    z-index: 0; /* ✅ ป้องกัน Hero ทับ Sidebar */
 }
 
 .hero-overlay {
@@ -22,7 +23,7 @@
     width: 100%;
     height: 100%;
     background: rgba(38, 12, 53, 0.7); /* สีม่วงเข้ม */
-    z-index: 1;
+    z-index: -1; /* ✅ ลด z-index เพื่อไม่ให้ทับ Sidebar */
     backdrop-filter: blur(5px);
 }
 

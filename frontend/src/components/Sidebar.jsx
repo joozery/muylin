@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaPhoneAlt, FaRegCommentDots, FaBars, FaTimes } from 'react-icons/fa'; // ✅ นำเข้าไอคอน
+import { FaPhoneAlt, FaRegCommentDots, FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
 import logo from '../assets/logo.png';
@@ -9,24 +9,24 @@ const Sidebar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // ✅ เปิด/ปิด Dropdown
 
   const toggleSidebar = () => {
-    setIsOpen(!isOpen); // ✅ สลับสถานะเปิด/ปิด Sidebar
+    setIsOpen(!isOpen);
   };
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen); // ✅ สลับสถานะเปิด/ปิด Dropdown
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
     <>
-      {/* Hamburger Icon (เฉพาะบนมือถือ) */}
+      {/* ✅ Hamburger Icon (เฉพาะบนมือถือ) */}
       <button className="hamburger md:hidden" onClick={toggleSidebar}>
-        {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />} {/* เปลี่ยนไอคอนเมื่อเปิด/ปิด */}
+        {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </button>
 
-      {/* Overlay เมื่อ Sidebar เปิด */}
+      {/* ✅ Overlay เมื่อ Sidebar เปิด */}
       {isOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
 
-      {/* Sidebar */}
+      {/* ✅ Sidebar */}
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="logo">
           <img src={logo} alt="Logo" />
@@ -66,7 +66,7 @@ const Sidebar = () => {
           <li><Link to="/contact" onClick={toggleSidebar}>ติดต่อเบอร์หมวยหลินทะเบียน</Link></li>
         </ul>
 
-        {/* ข้อมูลติดต่อ */}
+        {/* ✅ ข้อมูลติดต่อ */}
         <div className="contact">
           <p><FaPhoneAlt /> โทร: 096-396-2888</p>
           <p><FaRegCommentDots /> Line ID: @muaydata</p>

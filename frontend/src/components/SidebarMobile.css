@@ -1,25 +1,26 @@
-/* Sidebar มือถือ */
+/* ✅ Sidebar มือถือ */
 .sidebar-mobile {
     position: fixed;
     top: 0;
-    left: -100%; /* ซ่อน Sidebar เริ่มต้น */
+    left: 0;
     width: 280px;
     height: 100%;
     background: linear-gradient(135deg, #260c35, #111111);
     color: white;
-    transition: left 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     padding: 20px;
-    z-index: 1000;
+    z-index: 1100; /* ✅ ทำให้ Sidebar อยู่ด้านบนสุด */
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  /* แสดง Sidebar เมื่อเปิด */
-  .sidebar-mobile.open {
-    left: 0;
-  }
-  
-  /* ปุ่มปิด */
-  .close-btn {
+    transform: translateX(-100%); /* ✅ ปรับให้ซ่อนแบบ Smooth */
+}
+
+/* ✅ แสดง Sidebar เมื่อเปิด */
+.sidebar-mobile.open {
+    transform: translateX(0);
+}
+
+/* ✅ ปุ่มปิด */
+.close-btn {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -28,27 +29,44 @@
     color: white;
     font-size: 24px;
     cursor: pointer;
-  }
-  
-  /* เมนู */
-  .sidebar-mobile .menu {
+}
+
+/* ✅ เมนู */
+.sidebar-mobile .menu {
     list-style: none;
     padding-top: 50px;
-  }
-  
-  .sidebar-mobile .menu li {
+}
+
+.sidebar-mobile .menu li {
     margin-bottom: 15px;
-  }
-  
-  .sidebar-mobile .menu li a {
+}
+
+.sidebar-mobile .menu li a {
     color: white;
     text-decoration: none;
     font-size: 18px;
     display: block;
     padding: 10px 0;
     transition: color 0.3s ease;
-  }
-  
-  .sidebar-mobile .menu li a:hover {
+}
+
+.sidebar-mobile .menu li a:hover {
     color: #ffeb3b;
-  }
+}
+
+/* ✅ Overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6); /* ✅ สีดำโปร่งแสง */
+    z-index: 1099; /* ✅ ให้อยู่ใต้ Sidebar */
+    display: none;
+    backdrop-filter: blur(8px); /* ✅ เบลอพื้นหลัง */
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
