@@ -53,7 +53,6 @@ const Maincontent = () => {
         {currentPath === "/dashboard/old-non-auction" && <OldNonAuctionPlate />}
         {currentPath === "/dashboard/gold-graphic-plate" && <GoldGraphicPlate />}
         {currentPath === "/dashboard/phone-number" && <PhoneNumber />}
-
         {currentPath === "/dashboard" && (
           <>
             <h1 className="text-3xl font-bold">ยินดีต้อนรับสู่ Dashboard</h1>

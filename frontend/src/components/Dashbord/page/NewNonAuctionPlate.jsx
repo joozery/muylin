@@ -178,7 +178,7 @@ const NewNonAuctionPlate = () => {
   return (
     <div className="p-4 bg-white rounded shadow">
       <h2 className="text-xl font-bold mb-4 font-['Prompt']">
-      ทะเบียนรถประมูลหมวดใหม่
+      ทะเบียนรถขาวดำหมวดใหม่
       </h2>
 
       <div className="mb-4 flex gap-2">

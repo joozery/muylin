@@ -46,6 +46,14 @@ const Sidebar = () => {
             </NavLink>
           </li>
 
+          {/* ✅ ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง) */}
+          <li>
+            <NavLink to="/dashboard/gold-graphic-plate" className={({ isActive }) => `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ''}`}>
+              <Medal className="mr-2 mt-1 flex-shrink-0" /> {/* ✅ เปลี่ยนเป็น Medal */}
+              ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)
+            </NavLink>
+          </li>
+
           {/* ✅ ทะเบียนรถคิดเอง(ลักษณะพิเศษ) */}
           <li>
             <NavLink to="/dashboard/special-plate" className={({ isActive }) => `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ''}`}>
@@ -74,7 +82,7 @@ const Sidebar = () => {
           <li>
             <NavLink to="/dashboard/triple-digit-plate" className={({ isActive }) => `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ''}`}>
               <Grid className="mr-2 mt-1 flex-shrink-0" />
-              ทะเบียนเลขตอง
+              ทะเบียนเลขตอง / เลข3ตัว
             </NavLink>
           </li>
 
@@ -86,27 +94,11 @@ const Sidebar = () => {
             </NavLink>
           </li>
 
-          {/* ✅ ทะเบียนรถขาวดำหมวดใหม่ */}
-          <li>
-            <NavLink to="/dashboard/new-non-auction" className={({ isActive }) => `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ''}`}>
-              <ClipboardList className="mr-2 mt-1 flex-shrink-0" />
-              ทะเบียนรถขาวดำหมวดใหม่
-            </NavLink>
-          </li>
-
           {/* ✅ ทะเบียนรถขาวดำหมวดเก่า */}
           <li>
             <NavLink to="/dashboard/old-non-auction" className={({ isActive }) => `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ''}`}>
               <Award className="mr-2 mt-1 flex-shrink-0" />
               ทะเบียนรถขาวดำหมวดเก่า
-            </NavLink>
-          </li>
-
-          {/* ✅ ทะเบียนรถประมูลหมวดใหม่ */}
-          <li>
-            <NavLink to="/dashboard/new-auction" className={({ isActive }) => `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ''}`}>
-              <Sparkles className="mr-2 mt-1 flex-shrink-0" />
-              ทะเบียนรถประมูลหมวดใหม่
             </NavLink>
           </li>
 
@@ -118,13 +110,25 @@ const Sidebar = () => {
             </NavLink>
           </li>
 
-          {/* ✅ ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง) */}
+          {/* ✅ ทะเบียนรถขาวดำหมวดใหม่ */}
           <li>
-            <NavLink to="/dashboard/gold-graphic-plate" className={({ isActive }) => `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ''}`}>
-              <Medal className="mr-2 mt-1 flex-shrink-0" /> {/* ✅ เปลี่ยนเป็น Medal */}
-              ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)
+            <NavLink to="/dashboard/new-non-auction" className={({ isActive }) => `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ''}`}>
+              <ClipboardList className="mr-2 mt-1 flex-shrink-0" />
+              ทะเบียนรถขาวดำหมวดใหม่
             </NavLink>
           </li>
+
+          {/* ✅ ทะเบียนรถประมูลหมวดใหม่ */}
+          <li>
+            <NavLink to="/dashboard/new-auction" className={({ isActive }) => `flex items-start p-2 text-black hover:bg-gray-100 transition-colors no-underline ${isActive ? activeLink : ''}`}>
+              <Sparkles className="mr-2 mt-1 flex-shrink-0" />
+              ทะเบียนรถประมูลหมวดใหม่
+            </NavLink>
+          </li>
+
+          
+
+          
 
           {/* ✅ เบอร์โทรศัพท์สวย */}
           <li>
