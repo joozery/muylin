@@ -13,14 +13,18 @@ import oldNonAuctionImage from "../assets/ขาวดำเก่า.jpg"; // �
 import oldImage from "../assets/ขาวดำเก่า.jpg"; // ✅ รูปพื้นหลังของทะเบียนขาวดำหมวดเก่า
 import goldGraphicImage from "../assets/gold.jpg"; // ✅ รูปพื้นหลังของทะเบียนระฆังทอง (กราฟฟิคสีทอง)
 import PlatesComponent from "./Plates/PlatesSearchComponent";
-import {BeatLoader , GridLoader} from "react-spinners";
+import { BeatLoader, GridLoader } from "react-spinners";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function LicensePlates({ data, loading }) {
   const componentMap = {
     plates_new: { cover: newImage, text: "ป้ายประมูลหมวดใหม่" },
-    plates_special: { cover: gold, text: "ป้ายคิดเองลักษณะพิเศษ" },
+    plates_special: {
+      cover: quadrupleDigitImage,
+      border: `border-2 border-yellow-500`,
+      text: "ป้ายคิดเองลักษณะพิเศษ",
+    },
     plates_green: { cover: greenImage, text: "ป้ายเขียว" },
     plates_graphic_van: {
       cover: graphicVanCover,
@@ -87,6 +91,7 @@ export default function LicensePlates({ data, loading }) {
               return (
                 <PlatesComponent
                   key={index}
+                  border={componentConfig.border}
                   cover={componentConfig.cover}
                   text={`${componentConfig.text} (${plateData.length} รายการ)`}
                   data={plateData}

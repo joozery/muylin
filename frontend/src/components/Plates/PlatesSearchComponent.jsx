@@ -1,4 +1,4 @@
-const PlatesComponent = ({ cover, data, text }) => {
+const PlatesComponent = ({ cover, data, text , border }) => {
   return (
     <>
       <div className="pb-5">
@@ -13,7 +13,7 @@ const PlatesComponent = ({ cover, data, text }) => {
             data.map((plate, index) => (
               <div
                 key={index}
-                className="relative text-center p-6 rounded-md bg-cover bg-center shadow-lg"
+                className={`relative text-center p-6 rounded-md bg-cover bg-center shadow-lg ${border}`}
                 style={{ backgroundImage: `url(${cover})` }}
               >
                 {/* แสดงป้าย "จองแล้ว" ถ้ามี */}
