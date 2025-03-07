@@ -28,6 +28,10 @@ const PlatesComponent = ({ cover, data, text , border }) => {
                   {plate.plate}
                 </p>
 
+                <p className="text-2xl text-black font-semibold">
+                  กรุงเทพมหานคร
+                </p>
+
                 {/* ✅ แสดงราคาเป็น `1,000.-` แทน `1000.00` */}
                 {plate.price && (
                   <p className="text-lg text-black font-semibold mt-2  px-2 rounded-md">
