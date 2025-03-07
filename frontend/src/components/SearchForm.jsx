@@ -16,28 +16,47 @@ function SearchForm() {
   const [category, setCategory] = useState("ทุกหมวดหมู่");
 
   const categoryOptions = [
-    { label: "ทุกหมวดทะเบียน", value: "all" },
-    { label: "ทะเบียนรถมอเตอร์ไซค์", value: "plates_motorcycle" },
-    { label: "ทะเบียนรถกะบะป้ายเขียว", value: "plates_green" },
-    { label: "ทะเบียนรถตู้ป้ายฟ้า", value: "plates_electric" },
-    { label: "ทะเบียนรถตู้กราฟฟิค", value: "plates_graphic_van" },
-    { label: "ทะเบียนรถคิดเอง (ลักษณะพิเศษ)", value: "plates_special" },
-    { label: "ทะเบียนรถเลขตัวเดียว", value: "plates_single_digit" },
-    { label: "ทะเบียนรถเลขคู่", value: "plates_double_digit" },
-    { label: "ทะเบียนเลขตอง", value: "plates_triple_digit" },
-    { label: "ทะเบียนเลขโฟร์", value: "plates_quadruple_digit" },
-    {
-      label: "ทะเบียนรถขาวดำหมวดใหม่ (ไม่ประมูล)",
-      value: "plates_new_non_auction",
-    },
-    { label: "ทะเบียนรถประมูลหมวดใหม่", value: "plates_new" },
-    {
-      label: "ทะเบียนรถขาวดำหมวดเก่า (ไม่ประมูล)",
-      value: "plates_old_non_auction",
-    },
-    { label: "ทะเบียนรถประมูลหมวดเก่า", value: "plates" },
-    { label: "ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)", value: "plates_gold_graphic" },
-  ];
+    { id: 1, label: "ทุกหมวดทะเบียน", value: "" },
+    { id: 2, label: "ทะเบียนรถมอเตอร์ไซค์", value: "plates_motorcycle" },
+    { id: 3, label: "ทะเบียนรถกะบะป้ายเขียว", value: "plates_green" },
+    { id: 4, label: "ทะเบียนรถตู้ป้ายฟ้า", value: "plates_electric" },
+    { id: 5, label: "ทะเบียนรถตู้กราฟฟิค", value: "plates_graphic_van" },
+    { id: 6, label: "ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)", value: "plates_gold_graphic" },
+    { id: 7, label: "ทะเบียนรถคิดเอง (ลักษณะพิเศษ) ⭐", value: "plates_special" },
+    { id: 8, label: "ทะเบียนรถเลขตัวเดียว", value: "plates_single_digit" },
+    { id: 9, label: "ทะเบียนรถเลขคู่", value: "plates_double_digit" },
+    { id: 10, label: "ทะเบียนเลขตอง / เลข 3 ตัว", value: "plates_triple_digit" },
+    { id: 11, label: "ทะเบียนรถเลขโฟร์", value: "plates_quadruple_digit" },
+    { id: 12, label: "ทะเบียนรถขาวดำหมวดเก่า ⭐", value: "plates_old_non_auction" },
+    { id: 13, label: "ทะเบียนรถประมูลหมวดเก่า ⭐", value: "plates_old" },
+    { id: 14, label: "ทะเบียนรถขาวดำหมวดใหม่ ⭐", value: "plates_new_non_auction" },
+    { id: 15, label: "ทะเบียนรถประมูลหมวดใหม่ ⭐", value: "plates_new" }
+];
+
+
+  // const categoryOptions = [
+  //   { label: "ทุกหมวดทะเบียน", value: "all" },
+  //   { label: "ทะเบียนรถมอเตอร์ไซค์", value: "plates_motorcycle" },
+  //   { label: "ทะเบียนรถกะบะป้ายเขียว", value: "plates_green" },
+  //   { label: "ทะเบียนรถตู้ป้ายฟ้า", value: "plates_electric" },
+  //   { label: "ทะเบียนรถตู้กราฟฟิค", value: "plates_graphic_van" },
+  //   { label: "ทะเบียนรถคิดเอง (ลักษณะพิเศษ)", value: "plates_special" },
+  //   { label: "ทะเบียนรถเลขตัวเดียว", value: "plates_single_digit" },
+  //   { label: "ทะเบียนรถเลขคู่", value: "plates_double_digit" },
+  //   { label: "ทะเบียนเลขตอง", value: "plates_triple_digit" },
+  //   { label: "ทะเบียนเลขโฟร์", value: "plates_quadruple_digit" },
+  //   {
+  //     label: "ทะเบียนรถขาวดำหมวดใหม่ (ไม่ประมูล)",
+  //     value: "plates_new_non_auction",
+  //   },
+  //   { label: "ทะเบียนรถประมูลหมวดใหม่", value: "plates_new" },
+  //   {
+  //     label: "ทะเบียนรถขาวดำหมวดเก่า (ไม่ประมูล)",
+  //     value: "plates_old_non_auction",
+  //   },
+  //   { label: "ทะเบียนรถประมูลหมวดเก่า", value: "plates" },
+  //   { label: "ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)", value: "plates_gold_graphic" },
+  // ];
 
   // const sumOptions = [
   //   "ทุกผลรวม",
