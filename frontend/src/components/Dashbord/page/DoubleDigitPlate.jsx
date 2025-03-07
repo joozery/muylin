@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import _AlertPopUp from "../../../helper/alertpopup";
+import ModalEdit from "../../Modal/inde";
 const API_URL = import.meta.env.VITE_API_URL;
 const charValueMap = {
   ก: 1,
@@ -174,6 +175,59 @@ const DoubleDigitPlate = () => {
       }
     }
   };
+  //ModalEdit
+  const [formModal, setFormModal] = useState({}); // ข้อมูลใน modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = (plate) => {
+    console.log(plate);
+    setFormModal(plate);
+    setIsModalOpen(true);
+  };
+
+  const onCloseModal = () => {
+    setFormModal({});
+    setIsModalOpen(false);
+  };
+
+  // อัปเดตข้อมูล
+  const handleEdit = async (formModal) => {
+    if (formModal.plate === "" || formModal.price === "") {
+      alert("กรุณากรอกข้อมูลให้ครบ");
+      return;
+    }
+
+    const bodyData = {
+      plate: formModal.plate,
+      total: String(calculateTotal(formModal.plate.replace(/\s/g, ""))),
+      price: formModal.price,
+      status: formModal.status,
+    };
+
+    try {
+      const response = await fetch(
+        `${API_URL}/updatePlate/plates_double_digit/${formModal.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(bodyData),
+        }
+      );
+      const result = await response.json(); // อ่าน response body
+      console.log(result);
+      // return;
+      if (response.ok) {
+        // alert(result.message);
+        alert("แก้ไขข้อมูลสำเร็จ");
+        fetchPlates(); // โหลดข้อมูลใหม่
+        setIsModalOpen(false); // ✅ ปิด Modal เมื่อสำเร็จ
+      } else {
+        alert("แก้ไขข้อมูลไม่สำเร็จ");
+      }
+      if (!response.ok) throw new Error("Error updating status");
+    } catch (error) {
+      console.error("❌ Error updating status:", error);
+    }
+  };
 
   return (
     <div className="p-4 bg-white rounded shadow">
@@ -261,7 +315,13 @@ const DoubleDigitPlate = () => {
                     </select>
                   )}
                 </td>
-                <td className="p-2">
+                <td className="p-2 text-start space-x-1">
+                  <button
+                    className="bg-blue-600 text-white px-2 py-1 rounded"
+                    onClick={() => handleOpenModal(item)}
+                  >
+                    แก้ไข
+                  </button>
                   {deleteStatus === item.id ? (
                     <div className="flex justify-start pl-2 items-center">
                       <ClipLoader size={20} color="#000" />
@@ -279,6 +339,16 @@ const DoubleDigitPlate = () => {
             ))}
           </tbody>
         </table>
+      )}
+      {isModalOpen && (
+        <ModalEdit
+          isOpen={isModalOpen}
+          onClose={onCloseModal}
+          onSubmit={() => handleEdit(formModal)}
+          formModal={formModal}
+          // plate={plate}
+          setFormModal={setFormModal}
+        />
       )}
     </div>
   );
