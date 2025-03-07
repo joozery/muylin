@@ -238,7 +238,7 @@ const VanPlate = () => {
                 <td className="p-2">{index + 1}</td>
                 <td className="p-2">{item.plate}</td>
                 <td className="p-2">{item.total}</td>
-                <td className="p-2">{item.price}</td>
+                <td className="p-2">{parseFloat(item.price).toLocaleString()}</td>
                 <td className="p-2">
                   {updatingStatus === item.id ? (
                     <div className="flex justify-start pl-2 items-center">

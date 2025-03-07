@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import _AlertPopUp from "../../../helper/alertpopup";
-import ModalEdit from "../../Modal/inde";
+import ModalEdit from "../../Modal";
 const API_URL = import.meta.env.VITE_API_URL;
 const charValueMap = {
   ก: 1,
@@ -296,7 +296,7 @@ const MotorcyclePlate = () => {
                 <td className="p-2">{index + 1}</td>
                 <td className="p-2">{item.plate}</td>
                 <td className="p-2">{item.total}</td>
-                <td className="p-2">{item.price}</td>
+                <td className="p-2">{parseFloat(item.price).toLocaleString()}</td>
                 <td className="p-2">
                   {updatingStatus === item.id ? (
                     <div className="flex justify-start pl-2 items-center">
