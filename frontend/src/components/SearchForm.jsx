@@ -22,15 +22,15 @@ function SearchForm() {
     { id: 4, label: "ทะเบียนรถตู้ป้ายฟ้า", value: "plates_electric" },
     { id: 5, label: "ทะเบียนรถตู้กราฟฟิค", value: "plates_graphic_van" },
     { id: 6, label: "ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)", value: "plates_gold_graphic" },
-    { id: 7, label: "ทะเบียนรถคิดเอง (ลักษณะพิเศษ) ⭐", value: "plates_special" },
+    { id: 7, label: "ทะเบียนรถคิดเอง (ลักษณะพิเศษ)", value: "plates_special" },
     { id: 8, label: "ทะเบียนรถเลขตัวเดียว", value: "plates_single_digit" },
     { id: 9, label: "ทะเบียนรถเลขคู่", value: "plates_double_digit" },
     { id: 10, label: "ทะเบียนเลขตอง / เลข 3 ตัว", value: "plates_triple_digit" },
     { id: 11, label: "ทะเบียนรถเลขโฟร์", value: "plates_quadruple_digit" },
-    { id: 12, label: "ทะเบียนรถขาวดำหมวดเก่า ⭐", value: "plates_old_non_auction" },
-    { id: 13, label: "ทะเบียนรถประมูลหมวดเก่า ⭐", value: "plates_old" },
-    { id: 14, label: "ทะเบียนรถขาวดำหมวดใหม่ ⭐", value: "plates_new_non_auction" },
-    { id: 15, label: "ทะเบียนรถประมูลหมวดใหม่ ⭐", value: "plates_new" }
+    { id: 12, label: "ทะเบียนรถขาวดำหมวดเก่า", value: "plates_old_non_auction" },
+    { id: 13, label: "ทะเบียนรถประมูลหมวดเก่า", value: "plates_old" },
+    { id: 14, label: "ทะเบียนรถขาวดำหมวดใหม่", value: "plates_new_non_auction" },
+    { id: 15, label: "ทะเบียนรถประมูลหมวดใหม่", value: "plates_new" }
 ];
 
 
