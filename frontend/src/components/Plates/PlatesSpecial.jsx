@@ -24,7 +24,7 @@ const PlatesSpecial = ({cover , url}) => {
       <div className="text-center mt-12 mb-6">
         <h2 className="text-2xl font-bold italic">ป้ายคิดเองลักษณะพิเศษ</h2>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         {platesSpecial.length > 0 ? (
           platesSpecial.map((plate, index) => (
             <div

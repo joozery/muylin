@@ -26,7 +26,7 @@ const PlatesMotorcycle = ({ cover, url }) => {
       </div>
 
       {/* ✅ แสดงข้อมูลทะเบียนรถมอเตอร์ไซค์ */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         {platesMotorcycle.length > 0 ? (
           platesMotorcycle.map((plate, index) => (
             <div

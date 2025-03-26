@@ -26,7 +26,7 @@ const PlatesNewNonAuction = ({ cover, url }) => {
       </div>
 
       {/* ✅ แสดงข้อมูลทะเบียนรถหมวดใหม่ที่ไม่ใช่ป้ายประมูล */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         {platesNewNonAuction.length > 0 ? (
           platesNewNonAuction.map((plate, index) => (
             <div

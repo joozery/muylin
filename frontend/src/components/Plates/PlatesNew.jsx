@@ -23,7 +23,7 @@ const PlatesNew = ({cover , url}) => {
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold italic">ป้ายประมูลหมวดใหม่</h2>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         {platesNew.length > 0 ? (
           platesNew.map((plate, index) => (
             <div

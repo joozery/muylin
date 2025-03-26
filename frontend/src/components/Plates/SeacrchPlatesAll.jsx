@@ -7,7 +7,7 @@ const PlatesSearch = ({plates}) => {
       <div className="text-center mb-2 mt-4">
         <h2 className="text-2xl font-bold italic">ผลการค้นหา</h2>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         {plates.length > 0 ? (
           plates.map((plate, index) => (
             <div

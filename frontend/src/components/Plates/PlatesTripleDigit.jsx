@@ -26,7 +26,7 @@ const PlatesTripleDigit = ({ cover, url }) => {
       </div>
 
       {/* ✅ แสดงข้อมูลทะเบียนรถเลขตอง */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         {platesTripleDigit.length > 0 ? (
           platesTripleDigit.map((plate, index) => (
             <div

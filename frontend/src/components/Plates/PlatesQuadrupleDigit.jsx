@@ -26,7 +26,7 @@ const PlatesQuadrupleDigit = ({ cover, url }) => {
       </div>
 
       {/* ✅ แสดงข้อมูลทะเบียนรถเลขโฟร์ */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         {platesQuadrupleDigit.length > 0 ? (
           platesQuadrupleDigit.map((plate, index) => (
             <div

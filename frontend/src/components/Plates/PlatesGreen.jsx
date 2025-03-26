@@ -26,7 +26,7 @@ const PlatesGreen = ({ cover, url }) => {
       </div>
 
       {/* ✅ แสดงข้อมูลป้ายเขียว */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         {platesGreen.length > 0 ? (
           platesGreen.map((plate, index) => (
             <div

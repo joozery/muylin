@@ -26,7 +26,7 @@ const PlatesSingleDigit = ({ cover, url }) => {
       </div>
 
       {/* ✅ แสดงข้อมูลทะเบียนรถเลขตัวเดียว */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         {platesSingleDigit.length > 0 ? (
           platesSingleDigit.map((plate, index) => (
             <div
