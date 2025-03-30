@@ -29,7 +29,7 @@ const WelcomeSection = () => {
       </div>
 
       {/* ✅ รูปภาพด้านขวา */}
-      <div className="lg:w-1/2 flex justify-start gap-4">
+      <div className="lg:w-1/2 flex justify-center gap-3">
         <img src={welcomeImage1} alt="ทะเบียนสวย" className="rounded-lg shadow-lg w-1/2 max-w-sm" />
         <img src={welcomeImage2} alt="ทะเบียนรถหรู" className="rounded-lg shadow-lg w-1/2 max-w-sm" />
       </div>
