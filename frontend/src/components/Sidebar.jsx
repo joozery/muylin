@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FaPhoneAlt, FaRegCommentDots, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaPhoneAlt,
+  FaRegCommentDots,
+  FaBars,
+  FaTimes,
+  FaLine,
+} from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import "./Sidebar.css";
 import logo from "../assets/logo.png";
@@ -35,13 +41,19 @@ const Sidebar = () => {
       )}
 
       {/* ✅ Sidebar */}
-      <div className={`sidebar ${isOpen ? "open" : ""}`}>
-        <div className="logo flex items-center justify-center mt-16">
+      <div className={`sidebar ${isOpen ? "open" : ""} `}>
+        <div className="logo flex items-center justify-center">
           {/* <img src={logo} alt="Logo" /> */}
-          <p className="text-3xl font-bold">MUAYLINTABIEN</p>
+          <Link to="/" className="text-white no-underline text-3xl font-bold" onClick={toggleSidebar}>MUAYLINTABIEN</Link>
+          {/* <p className="text-3xl font-bold">MUAYLINTABIEN</p> */}
         </div>
 
-        <ul className="menu mt-5">
+        <ul className="menu font-semibold ps-3 space-y-8">
+          <li>
+            <Link to="/beautiful-phone" onClick={toggleSidebar}>
+              เบอร์สวย
+            </Link>
+          </li>
           <li>
             <Link to="/" onClick={toggleSidebar}>
               ทะเบียนสวย
@@ -125,11 +137,6 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to="/beautiful-phone" onClick={toggleSidebar}>
-              เบอร์สวย
-            </Link>
-          </li>
-          <li>
             <Link to="/our-service" onClick={toggleSidebar}>
               บริการของเรา
             </Link>
@@ -146,20 +153,59 @@ const Sidebar = () => {
           </li>
           <li>
             <Link to="/contact" onClick={toggleSidebar}>
-              ติดต่อเบอร์หมวยหลินทะเบียน
+              ติดต่อหมวยหลิน
             </Link>
           </li>
         </ul>
 
         {/* ✅ ข้อมูลติดต่อ */}
-        <div className="contact">
+        {/* <div className="contact">
           <p>
-            <FaPhoneAlt /> โทร: 096-396-2888
+            <FaPhoneAlt /> CALL: 096-396-2888
           </p>
           <p>
-            <FaRegCommentDots /> Line ID: muaydata
+            <FaLine /> LINE: muaydata
           </p>
-          <p>ลูกค้าสามารถติดต่อสอบถาม หมวยหลิน ได้ตลอด 24 ชั่วโมง</p>
+          <p className="justify-center text-center">
+            (ไลน์มีบัญชีเดียวเท่านั้น)
+          </p>
+          <p className="justify-center text-center">
+            ลูกค้าสามารถติดต่อ
+            <br /> สอบถามข้อมูลเพิ่มเติมได้
+            <br /> (ตลอด24ชั่วโมง)
+          </p>
+        </div> */}
+
+        <div className="flex flex-col justify-center items-center gap-3 px-3">
+          <div className="w-full flex items-center gap-3">
+            <FaPhoneAlt size={30} />
+            <div className="flex flex-col justify-center items-start">
+              <span className="font-normal text-base">CALL</span>
+              <a href="tel:0963962888" className="no-underline text-white">
+                <span className="text-xl">096 396 2888</span>
+              </a>
+            </div>
+          </div>
+          <div className="w-full flex items-center gap-3">
+            <FaLine size={30} />
+            <div className="flex flex-col justify-center items-start">
+              <span className="font-normal text-base">LINE</span>
+              <a href="#" className="no-underline text-white">
+                <span className="text-xl">muaydata</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <p className="justify-center text-lg text-center pb-3">
+              (ไลน์มีบัญชีเดียวเท่านั้น)
+            </p>
+            <p className="justify-center text-base text-center">
+              ลูกค้าสามารถติดต่อ
+              <br /> สอบถามข้อมูลเพิ่มเติมได้
+              <br /> <span className="text-lg">(ตลอด24ชั่วโมง)</span>
+            </p>
+          </div>
         </div>
       </div>
     </>

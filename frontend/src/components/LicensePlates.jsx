@@ -77,10 +77,10 @@ export default function LicensePlates({ data, loading }) {
     <section className="bg-gradient-to-b to-[#111111] text-white py-12 font-tahoma">
       <div className="container mx-auto px-6 lg:px-20">
         {/* ⭐⭐⭐⭐⭐ MUAY.LINTABIEN.CO */}
-        <div className="text-center mb-6">
+        {/* <div className="text-center mb-6">
           <p className="text-yellow-400 text-lg">★★★★★</p>
           <p className="text-yellow-400 font-bold">MUAYLINTABIEN.CO</p>
-        </div>
+        </div> */}
         {/* แสดงผล Component ตามผลลัพธ์การค้นหา*/}
         {data &&
           data.map((result, index) => {

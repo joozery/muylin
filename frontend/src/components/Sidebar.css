@@ -1,23 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap');
 
-/* === ✅ Sidebar (Desktop View) === */
-.sidebar {
-  width: 330px;
-  background: linear-gradient(135deg, #260c35, #111111);
-  color: white;
-  padding: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
-  font-family: 'Tahoma', sans-serif;
-  overflow-y: auto;
-  padding-bottom: 50px;
-  transition: transform 0.3s ease-in-out;
-  z-index: 1100; /* ✅ ทำให้ Sidebar อยู่ด้านบนสุด */
-}
-
 /* === ✅ Sidebar ปิดอยู่บนมือถือ === */
 @media (max-width: 768px) {
   .sidebar {
@@ -140,15 +122,18 @@
   width: 330px;
   background: linear-gradient(135deg, #260c35, #111111);
   color: white;
-  padding: 20px;
+  padding: 50px 20px;
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   top: 0;
   left: 0;
   height: 100%;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
   font-family: 'Tahoma', sans-serif;
-  overflow-y: auto;
-  padding-bottom: 50px;
+  overflow-y: auto;;
+  /* padding-bottom: 50px; */
   transition: transform 0.3s ease-in-out;
   z-index: 1100; /* ✅ ทำให้ Sidebar อยู่ด้านหน้า */
 }

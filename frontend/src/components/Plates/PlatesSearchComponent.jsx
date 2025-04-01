@@ -4,7 +4,7 @@ const PlatesComponent = ({ cover, data, text , border }) => {
       <div className="pb-5">
         {/* ✅ หัวข้อ */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold italic">{text}</h2>
+          <h2 className="text-2xl font-bold text-center">{text}</h2>
         </div>
 
         {/* ✅ แสดงข้อมูลป้ายเขียว */}
@@ -40,7 +40,7 @@ const PlatesComponent = ({ cover, data, text , border }) => {
                       ? "ติดต่อ"
                       : Number(plate.price.replace(/,/g, "")).toLocaleString()}
                     {/* {Number(plate.price).toLocaleString()} */}
-                    <span className="text-sm">.- บาท</span>
+                    <span className="text-sm"> บาท</span>
                   </p>
                 )}
 

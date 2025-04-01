@@ -50,7 +50,8 @@
 
 /* Style สำหรับปุ่มค้นหา */
 .search-inputs button {
-    background-color: #4a244f;
+    /* background-color: #4a244f; */
+    background-color: #0d0909;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -63,7 +64,8 @@
 }
 
 .search-inputs button:hover {
-    background-color: #7e4c85;
+    /* background-color: #7e4c85; */
+    background-color: black;
 }
 
 /* ปุ่มเพิ่มเติม */
@@ -74,7 +76,8 @@
 }
 
 .additional-buttons button {
-    background-color: #4a244f;
+    /* background-color: #4a244f; */
+    background-color: #0d0909;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -86,7 +89,8 @@
 }
 
 .additional-buttons button:hover {
-    background-color: #5c2a61;
+    /* background-color: #5c2a61; */
+    background-color: #0d0909;
 }
 
 /* Responsive สำหรับหน้าจอเล็ก */
