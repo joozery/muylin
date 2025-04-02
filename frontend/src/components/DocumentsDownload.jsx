@@ -16,11 +16,11 @@ const documents = [
 export default function DocumentsDownload() {
     return (
         <section className="bg-[#111111] text-white py-4 md:py-12 font-prompt">
-            <div className="container mx-auto px-6 lg:px-20">
+            <div className="container mx-auto px-6 lg:px-20 p-3">
                 {/* หัวข้อ */}
                 <div className="text-left max-w-3xl mx-0 pl-3">
-                    <div className="text-yellow-400 text-lg mb-2">★★★★★</div>
-                    <p className="text-yellow-500 tracking-wide uppercase text-sm">MUAYLINTABIEN.CO</p>
+                    {/* <div className="text-yellow-400 text-lg mb-2">★★★★★</div>
+                    <p className="text-yellow-500 tracking-wide uppercase text-sm">MUAYLINTABIEN.CO</p> */}
                     <h2 className="text-3xl md:text-4xl font-bold mt-2">เอกสารและแบบฟอร์ม</h2>
                     <p className="text-gray-400 mt-2">
                         เอกสารและแบบฟอร์มที่ใช้ในการ โอน-สับเปลี่ยน และการจดทะเบียน  

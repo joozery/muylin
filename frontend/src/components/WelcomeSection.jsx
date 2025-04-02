@@ -52,10 +52,10 @@ const WelcomeSection = () => {
         />
       </div>
 
-      <div className="flex flex-col items-center">
+      {/* <div className="flex flex-col items-center">
         <span className="text-2xl font-bold">MUAYLINTABIEN</span>
         <span>CALL: 096-396-2888 | LINE: MUAYDATA</span>
-      </div>
+      </div> */}
     </section>
   );
 };

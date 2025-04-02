@@ -10,8 +10,8 @@ const steps = [
 
 export default function OrderSteps() {
     return (
-        <section className="bg-[#111111] text-white py-12 font-prompt"> {/* ✅ ใช้ฟอนต์ Prompt */}
-            <div className="container mx-auto px-6 lg:px-20">
+        <section className="bg-[#111111] text-white py-4 md:py-12 font-prompt"> {/* ✅ ใช้ฟอนต์ Prompt */}
+            <div className="container mx-auto px-6 lg:px-20 p-3">
                 {/* หัวข้อ */}
                 <div className="max-w-5xl md:mx-0 mx-auto">
                     {/* <div className="text-yellow-400 text-lg mb-2">★★★★★</div>

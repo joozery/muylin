@@ -8,7 +8,7 @@ const PlatesComponent = ({ cover, data, text , border }) => {
         </div>
 
         {/* ✅ แสดงข้อมูลป้ายเขียว */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 mt-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-8">
           {data.length > 0 ? (
             data.map((plate, index) => (
               <div

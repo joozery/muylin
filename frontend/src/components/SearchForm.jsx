@@ -23,18 +23,33 @@ function SearchForm() {
     { id: 3, label: "ทะเบียนรถกะบะป้ายเขียว", value: "plates_green" },
     { id: 4, label: "ทะเบียนรถตู้ป้ายฟ้า", value: "plates_electric" },
     { id: 5, label: "ทะเบียนรถตู้กราฟฟิค", value: "plates_graphic_van" },
-    { id: 6, label: "ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)", value: "plates_gold_graphic" },
+    {
+      id: 6,
+      label: "ทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)",
+      value: "plates_gold_graphic",
+    },
     { id: 7, label: "ทะเบียนรถคิดเอง (ลักษณะพิเศษ)", value: "plates_special" },
     { id: 8, label: "ทะเบียนรถเลขตัวเดียว", value: "plates_single_digit" },
     { id: 9, label: "ทะเบียนรถเลขคู่", value: "plates_double_digit" },
-    { id: 10, label: "ทะเบียนเลขตอง / เลข 3 ตัว", value: "plates_triple_digit" },
+    {
+      id: 10,
+      label: "ทะเบียนเลขตอง / เลข 3 ตัว",
+      value: "plates_triple_digit",
+    },
     { id: 11, label: "ทะเบียนรถเลขโฟร์", value: "plates_quadruple_digit" },
-    { id: 12, label: "ทะเบียนรถขาวดำหมวดเก่า", value: "plates_old_non_auction" },
+    {
+      id: 12,
+      label: "ทะเบียนรถขาวดำหมวดเก่า",
+      value: "plates_old_non_auction",
+    },
     { id: 13, label: "ทะเบียนรถประมูลหมวดเก่า", value: "plates_old" },
-    { id: 14, label: "ทะเบียนรถขาวดำหมวดใหม่", value: "plates_new_non_auction" },
-    { id: 15, label: "ทะเบียนรถประมูลหมวดใหม่", value: "plates_new" }
-];
-
+    {
+      id: 14,
+      label: "ทะเบียนรถขาวดำหมวดใหม่",
+      value: "plates_new_non_auction",
+    },
+    { id: 15, label: "ทะเบียนรถประมูลหมวดใหม่", value: "plates_new" },
+  ];
 
   // const categoryOptions = [
   //   { label: "ทุกหมวดทะเบียน", value: "all" },
@@ -270,7 +285,12 @@ function SearchForm() {
 
   return (
     <>
-      <div className="p-2 py-5 md:p-10 h-full">
+      <div className="p-2 py-3 md:p-10 h-screen flex flex-col justify-center">
+        <div className="flex flex-col items-center text-black mb-5">
+          <span className="text-3xl font-bold mb-1">MUAYLINTABIEN</span>
+          <span>CALL: 096-396-2888 | LINE: MUAYDATA</span>
+        </div>
+
         <div className="search-form bg-white md:shadow-md">
           <h2>ค้นหาเลขทะเบียน</h2>
           <div className="search-inputs">
@@ -379,13 +399,20 @@ function SearchForm() {
 
           <div className="additional-buttons">
             {/* <button>ดูดวงทะเบียนรถ</button> */}
-            <button onClick={() => navigate("/beautiful-phone")}>ดูเบอร์ทั้งหมด</button>
-            <button onClick={() => navigate("/#search")}>ดูทะเบียนทั้งหมด</button>
+            <button onClick={() => navigate("/beautiful-phone")}>
+              ดูเบอร์ทั้งหมด
+            </button>
+            <button onClick={() => navigate("/#search")}>
+              ดูทะเบียนทั้งหมด
+            </button>
           </div>
         </div>
       </div>
 
-      <section id="search" className="license-plates-section py-4 lg:py-12 bg-[#111111]">
+      <section
+        id="search"
+        className="license-plates-section py-4 lg:py-12 bg-[#111111]"
+      >
         <div className="container mx-auto px-1 md:px-6 lg:px-20">
           <LicensePlates data={filteredPlateData} loading={loading} />
         </div>

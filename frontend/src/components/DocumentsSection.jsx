@@ -40,7 +40,7 @@ const documents = [
 export default function DocumentsSection() {
     return (
         <section className="bg-gradient-to-b from-[#1a0d22] to-[#111111] text-white py-12 font-prompt border-t border-gray-800">
-            <div className="container mx-auto px-6 lg:px-20">
+            <div className="container mx-auto px-6 lg:px-20 p-3">
                 {/* หัวข้อ */}
                 <div className="text-left max-w-xl mx-0">
                     {/* <div className="text-yellow-400 text-lg mb-2">★★★★★</div>

@@ -18,7 +18,7 @@ export default function OrderProcess() {
         <>
             <OrderHeader /> {/* ✅ Section ภาพพื้นหลัง */}
             {/* Section: ขั้นตอนการสั่งซื้อเบอร์/ทะเบียน */}
-             <div className="bg-gradient-to-br from-[#260c35] to-[#111111] h-auto text-white font-[Prompt] py-12">
+             {/* <div className="bg-gradient-to-br from-[#260c35] to-[#111111] h-auto text-white font-[Prompt] py-12">
                 <div className="container mx-auto px-6 lg:px-20">
                     <h1 className="text-3xl md:text-4xl font-bold text-center mb-8">ขั้นตอนการสั่งซื้อ</h1>
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
@@ -33,7 +33,7 @@ export default function OrderProcess() {
                         ))}
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* ✅ Section: ขั้นตอนการสั่งซื้อป้ายทะเบียน */}
             <OrderSteps />
