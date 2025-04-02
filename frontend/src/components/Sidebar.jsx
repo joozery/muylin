@@ -48,14 +48,14 @@ const Sidebar = () => {
           {/* <p className="text-3xl font-bold">MUAYLINTABIEN</p> */}
         </div>
 
-        <ul className="menu font-semibold ps-3 space-y-8">
+        <ul className="menu font-semibold ps-3 space-y-8 mt-3">
           <li>
             <Link to="/beautiful-phone" onClick={toggleSidebar}>
               เบอร์สวย
             </Link>
           </li>
           <li>
-            <Link to="/" onClick={toggleSidebar}>
+            <Link to="/#search" onClick={toggleSidebar}>
               ทะเบียนสวย
             </Link>
           </li>
@@ -178,26 +178,26 @@ const Sidebar = () => {
 
         <div className="flex flex-col justify-center items-center gap-3 px-3">
           <div className="w-full flex items-center gap-3">
-            <FaPhoneAlt size={30} />
+            <FaPhoneAlt className="text-xl md:text-2xl" />
             <div className="flex flex-col justify-center items-start">
-              <span className="font-normal text-base">CALL</span>
+              <span className="font-normal text-sm md:text-base">CALL</span>
               <a href="tel:0963962888" className="no-underline text-white">
-                <span className="text-xl">096 396 2888</span>
+                <span className="text-lg md:text-xl">096 396 2888</span>
               </a>
             </div>
           </div>
           <div className="w-full flex items-center gap-3">
-            <FaLine size={30} />
+            <FaLine className="text-xl md:text-2xl" />
             <div className="flex flex-col justify-center items-start">
-              <span className="font-normal text-base">LINE</span>
+              <span className="font-normal text-sm md:text-base">LINE</span>
               <a href="#" className="no-underline text-white">
-                <span className="text-xl">muaydata</span>
+                <span className="text-lg md:text-xl">muaydata</span>
               </a>
             </div>
           </div>
 
           <div className="mt-4">
-            <p className="justify-center text-lg text-center pb-3">
+            <p className="justify-center text-lg text-center">
               (ไลน์มีบัญชีเดียวเท่านั้น)
             </p>
             <p className="justify-center text-base text-center">

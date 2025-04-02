@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // ✅ เพิ่มการนำเข้า Link จาก react-router-dom
+import { Link, useLocation } from "react-router-dom"; // ✅ เพิ่มการนำเข้า Link จาก react-router-dom
 import "./Home.css";
 import slide1 from "../assets/slide1.webp";
 import slide2 from "../assets/slide2.jpg";
@@ -21,6 +21,17 @@ const Home = () => {
 
     return () => clearInterval(slideInterval);
   }, []);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === "#search") {
+      const element = document.getElementById("search");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
   return (
     <main>

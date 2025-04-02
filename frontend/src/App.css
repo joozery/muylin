@@ -14,7 +14,9 @@ h4,
 h5,
 h6,
 a,
-p {
+p,
+span,
+div {
   font-family: "Tahoma";
 }
 

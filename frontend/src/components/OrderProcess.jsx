@@ -21,7 +21,7 @@ export default function OrderProcess() {
              <div className="bg-gradient-to-br from-[#260c35] to-[#111111] h-auto text-white font-[Prompt] py-12">
                 <div className="container mx-auto px-6 lg:px-20">
                     <h1 className="text-3xl md:text-4xl font-bold text-center mb-8">ขั้นตอนการสั่งซื้อ</h1>
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
                         {steps.map((step, index) => (
                             <div key={index} className="flex flex-col items-center text-center">
                                 <div className="bg-yellow-400 text-[#260c35] p-4 rounded-full text-3xl">

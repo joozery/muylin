@@ -6,9 +6,11 @@ import LicensePlates from "./LicensePlates";
 import { use } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 function SearchForm() {
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const [number, setNumber] = useState("");
   const [sumOption, setSumOption] = useState("ทุกผลรวม");
@@ -268,8 +270,8 @@ function SearchForm() {
 
   return (
     <>
-      <div className="p-2 md:p-10">
-        <div className="search-form bg-white p-4 md:shadow-md">
+      <div className="p-2 py-5 md:p-10 h-full">
+        <div className="search-form bg-white md:shadow-md">
           <h2>ค้นหาเลขทะเบียน</h2>
           <div className="search-inputs">
             {/* <input
@@ -377,13 +379,13 @@ function SearchForm() {
 
           <div className="additional-buttons">
             {/* <button>ดูดวงทะเบียนรถ</button> */}
-            <button>ดูเบอร์ทั้งหมด</button>
-            <button>ดูทะเบียนทั้งหมด</button>
+            <button onClick={() => navigate("/beautiful-phone")}>ดูเบอร์ทั้งหมด</button>
+            <button onClick={() => navigate("/#search")}>ดูทะเบียนทั้งหมด</button>
           </div>
         </div>
       </div>
 
-      <section className="license-plates-section py-4 lg:py-12 bg-[#111111]">
+      <section id="search" className="license-plates-section py-4 lg:py-12 bg-[#111111]">
         <div className="container mx-auto px-1 md:px-6 lg:px-20">
           <LicensePlates data={filteredPlateData} loading={loading} />
         </div>

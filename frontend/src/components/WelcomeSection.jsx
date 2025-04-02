@@ -4,13 +4,13 @@ import welcomeImage2 from "../assets/better2.jpg"; // ✅ เปลี่ยน�
 
 const WelcomeSection = () => {
   return (
-    <section className="bg-black h-full text-white py-12 px-6 lg:px-20 flex flex-col lg:flex-row items-center gap-10">
+    <section className="bg-black h-full grid grid-cols-1 md:grid-cols-2 justify-between text-white py-12 px-6 lg:px-8 items-center gap-10">
       {/* ✅ ข้อความด้านซ้าย */}
-      <div className="lg:w-1/2 justify-center">
+      <div className="justify-center text-center">
         {/* <p className="text-yellow-500 text-sm uppercase tracking-widest flex items-center">
           ★★★★★ MUAYLINTABIEN.CO
         </p> */}
-        <p className="text-2xl sm:text-3xl md:text-5xl font-bold mt-2 mb-4">
+        <p className="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 mb-4">
           หมวยหลินเบอร์สวยทะเบียนสวย
         </p>
         <div className="flex flex-col space-y-6">
@@ -39,7 +39,7 @@ const WelcomeSection = () => {
       </div>
 
       {/* ✅ รูปภาพด้านขวา */}
-      <div className="lg:w-1/2 flex justify-center gap-3">
+      <div className="flex justify-center gap-3">
         <img
           src={welcomeImage1}
           alt="ทะเบียนสวย"

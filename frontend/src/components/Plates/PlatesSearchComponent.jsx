@@ -13,40 +13,40 @@ const PlatesComponent = ({ cover, data, text , border }) => {
             data.map((plate, index) => (
               <div
                 key={index}
-                className={`relative text-center px-2 py-1 md:p-6 rounded-md bg-cover bg-center shadow-lg ${border}`}
+                className={`relative flex flex-col gap-1 text-center px-2 py-1 md:p-6 rounded-md bg-cover bg-center shadow-lg ${border}`}
                 style={{ backgroundImage: `url(${cover})` }}
               >
                 {/* แสดงป้าย "จองแล้ว" ถ้ามี */}
                 {plate.status && (
-                  <div className="absolute top-[5px] right-0 bg-red-500 text-white px-2 py-1 md:py-1 md:px-3 text-sm rounded-s-md text-xs">
+                  <div className="absolute top-[5px] right-0 bg-red-500 text-white px-[4px] py-[2px] md:px-2 md:py-1 rounded-s-md text-[8px] sm:text-[10px] md:text-xs">
                     {plate.status}
                   </div>
                 )}
 
                 {/* หมายเลขทะเบียน */}
-                <p className="text-sm md:text-2xl text-black font-semibold">
+                <span className="text-[1.1rem] md:text-xl text-black font-bold">
                   {plate.plate}
-                </p>
+                </span>
 
-                <p className="text-sm md:text-2xl text-black font-semibold">
+                <span className="text-sm md:text-lg text-black">
                   กรุงเทพมหานคร
-                </p>
+                </span>
 
                 {/* ✅ แสดงราคาเป็น `1,000.-` แทน `1000.00` */}
                 {plate.price && (
-                  <p className="text-sm md:text-lg text-black font-semibold mt-2  px-2 rounded-md">
+                  <div className="text-sm md:text-base flex justify-center gap-1 items-center leading-relaxed tracking-wider text-black font-semibold pb-1">
                     {/* {plate.price === NaN ? 'ติดต่อ' : Number(plate.price).toLocaleString()} */}
                     {isNaN(Number(plate.price.replace(/,/g, "")))
                       ? "ติดต่อ"
                       : Number(plate.price.replace(/,/g, "")).toLocaleString()}
                     {/* {Number(plate.price).toLocaleString()} */}
                     <span className="text-sm"> บาท</span>
-                  </p>
+                  </div>
                 )}
 
                 {/* แสดงเลขผลรวม */}
                 {plate.total && (
-                  <div className="absolute bottom-2 right-2 text-white bg-yellow-600 px-2 py-1 rounded-full text-xs">
+                  <div className="absolute bottom-2 right-2 text-white bg-yellow-600 px-[4px] py-[2px] sm:px-[6px] sm:py-[4px] rounded-full text-[8px] sm:text-[10px] md:text-xs">
                     {plate.total}
                   </div>
                 )}
