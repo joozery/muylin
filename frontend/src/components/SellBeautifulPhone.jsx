@@ -3,7 +3,7 @@ import sellPhoneImage from "../assets/bmw.jpg"; // ✅ เปลี่ยนเ�
 
 const SellBeautifulPhone = () => {
   return (
-    <section className="bg-gradient-to-r from-[#0d0a0f] to-[#121212] text-white py-12 px-6 lg:px-20 flex flex-col lg:flex-row-reverse items-center gap-8">
+    <section className="bg-gradient-to-r from-[#0d0a0f] to-[#121212] text-white px-3 py-8 flex flex-col lg:flex-row-reverse items-center gap-8">
       {/* ✅ ข้อความด้านซ้าย */}
       <div className="lg:w-1/2">
         <p className="text-yellow-500 text-sm uppercase tracking-widest flex items-center">

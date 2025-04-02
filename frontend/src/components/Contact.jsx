@@ -10,7 +10,7 @@ export default function Contact() {
       <ContactHeader />
 
       {/* Main Contact Section */}
-      <section className="py-12">
+      <section className="px-2 py-8">
         <div className="container mx-auto px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* ข้อมูลติดต่อ */}
           <div className="space-y-6">

@@ -10,7 +10,7 @@ export default function Customers() {
       <CustomerHeader />
 
       {/* ✅ Section ลูกค้าของเรา */}
-      <section className="bg-[#111111] text-white py-12 px-6 lg:px-20">
+      <section className="bg-[#111111] text-white py-8 px-2">
         <div className="container mx-auto">
           {/* หัวข้อ */}
           <div className="text-left">

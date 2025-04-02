@@ -3,9 +3,9 @@ import pawnImage from "../assets/slide3.webp"; // ✅ เปลี่ยนเ�
 
 const PlatePawnSection = () => {
   return (
-    <section className="bg-[#121212] text-white py-12 px-6 lg:px-20 flex flex-col lg:flex-row items-center gap-8">
+    <section className="bg-[#121212] text-white px-3 py-8 flex flex-col lg:flex-row items-center gap-8">
       {/* ✅ ด้านซ้าย: ข้อความ */}
-      <div className="lg:w-1/2 bg-[#121212] p-8 rounded-lg ">
+      <div className="lg:w-1/2 bg-[#121212]">
         <p className="text-yellow-500 text-sm uppercase tracking-widest flex items-center">
           ★★★★★ www.muaylintabien.co
         </p>
@@ -20,9 +20,7 @@ const PlatePawnSection = () => {
 
       {/* ✅ ด้านขวา: รูปภาพ */}
       <div className="lg:w-1/2 flex justify-start">
-        <div className=" p-3 ">
           <img src={pawnImage} alt="รับจำนำทะเบียนรถ" className="rounded-lg w-full max-w-md" />
-        </div>
       </div>
     </section>
   );
