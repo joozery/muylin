@@ -4,7 +4,7 @@ import welcomeImage2 from "../assets/better2.jpg"; // ✅ เปลี่ยน�
 
 const WelcomeSection = () => {
   return (
-    <section className="bg-black h-full grid grid-cols-1 md:grid-cols-2 justify-between text-white py-12 px-6 lg:px-8 items-center gap-10">
+    <section className="bg-black h-screen grid grid-cols-1 md:grid-cols-2 justify-between text-white py-12 px-6 lg:px-8 items-center gap-10">
       {/* ✅ ข้อความด้านซ้าย */}
       <div className="justify-center text-center">
         {/* <p className="text-yellow-500 text-sm uppercase tracking-widest flex items-center">
@@ -17,7 +17,7 @@ const WelcomeSection = () => {
           <span className="text-center">
             บริกาจัด หาเบอร์สวย และทะเบียนสวย
             <br />
-            เลข VVIP เลขVIP
+            เลข VIP เลข VVIP 
             <br />
             เลขเดี่ยว เลขคู่ เลขตอง เลขโฟร์
             <br />

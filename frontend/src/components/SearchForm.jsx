@@ -285,16 +285,16 @@ function SearchForm() {
 
   return (
     <>
-      <div className="p-2 py-3 md:p-10 h-screen flex flex-col justify-center">
+      <div className="h-screen md:h-full flex flex-col justify-center md:px-3 md:py-12">
         <div className="flex flex-col items-center text-black mb-5">
           <span className="text-3xl font-bold mb-1">MUAYLINTABIEN</span>
           <span>CALL: 096-396-2888 | LINE: MUAYDATA</span>
         </div>
 
-        <div className="search-form bg-white md:shadow-md">
+        <div className="search-form bg-white ">
           <h2>ค้นหาเลขทะเบียน</h2>
           <div className="search-inputs">
-            {/* <input
+            <input
               type="text"
               placeholder="ใส่ตัวอักษร เช่น กก"
               value={platesNew.text}
@@ -302,11 +302,11 @@ function SearchForm() {
                 setPlatesNew((prev) => ({ ...prev, text: e.target.value }))
               }
               // onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-            /> */}
+            />
 
             <input
               type="text"
-              placeholder="ค้นหาเลข"
+              placeholder="ใส่ตัวเลขเช่น 8, 88, 888, 8888"
               value={platesNew.number}
               onChange={(e) =>
                 setPlatesNew((prev) => ({ ...prev, number: e.target.value }))
@@ -368,7 +368,7 @@ function SearchForm() {
               <option value=">=50000000">มากกว่า 50,000,000 บาท</option>
             </select>
 
-            {/* <select
+            <select
               value={platesNew.type}
               onChange={(e) =>
                 setPlatesNew((prev) => ({ ...prev, type: e.target.value }))
@@ -379,7 +379,7 @@ function SearchForm() {
                   {cat.label}
                 </option>
               ))}
-            </select> */}
+            </select>
 
             <div className="search-buttons flex space-x-2 mt-2">
               <button

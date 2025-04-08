@@ -38,9 +38,9 @@ const BeautifulPhone = () => {
         </div>
 
         {/* 🔹 เบอร์สวย Grid (2 คอลัมน์ในมือถือ, 3 คอลัมน์ในหน้าจอใหญ่) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-8">
           {phoneNumbers.map((phone) => (
-            <div key={phone.id} className="border-4 border-[#FFD700] p-6 rounded-lg bg-white text-black shadow-lg relative">
+            <div key={phone.id} className="border-4 border-[#FFD700] rounded-lg bg-white text-black shadow-lg relative">
               {/* Tag สถานะ */}
               <span
                 className={`absolute top-2 right-2 px-3 py-1 text-sm rounded-lg text-white ${
@@ -54,12 +54,12 @@ const BeautifulPhone = () => {
 
               {/* ข้อมูลเบอร์ */}
               <h2 className="text-2xl font-bold">{phone.phone_number}</h2>
-              <p className="text-sm text-gray-500">
+              <span className="text-sm text-gray-500">
                 {phone.brand} {phone.total && `(${phone.total})`}
-              </p>
-              <p className="text-xl text-red-500 font-bold">
+              </span>
+              <span className="text-xl text-red-500 font-bold">
                 {Number(phone.price).toLocaleString()} บาท
-              </p>
+              </span>
             </div>
           ))}
         </div>
