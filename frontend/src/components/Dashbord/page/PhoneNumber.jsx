@@ -120,6 +120,10 @@ const PhoneNumber = () => {
       toast.error("ลบเบอร์ไม่สำเร็จ!");
     }
   };
+const formatNumber = (value) => {
+    const numeric = value.replace(/,/g, "").replace(/\D/g, "");
+    return numeric.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   //ModalEdit
   const [formModal, setFormModal] = useState({}); // ข้อมูลใน modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -224,7 +228,7 @@ const PhoneNumber = () => {
             placeholder="ราคา"
             value={newPhone.price}
             onChange={(e) =>
-              setNewPhone({ ...newPhone, price: e.target.value })
+              setNewPhone({ ...newPhone, price: formatNumber(e.target.value) })
             }
             required
             className="w-full p-2 border rounded-lg"
@@ -245,7 +249,7 @@ const PhoneNumber = () => {
         {isLoading === true ? (
           <div className="flex justify-center items-center">
             <ClipLoader />
-            </div>
+          </div>
         ) : (
           <>
             <table className="w-full border-collapse border border-gray-300">

@@ -60,7 +60,7 @@ const NonAuction = () => {
   const [newPlate, setNewPlate] = useState({
     plate: "",
     price: "",
-    status: "",
+    status: "พร้อมขาย",
   });
   const [loading, setLoading] = useState(false); // Loading สำหรับ table
   const [updatingStatus, setUpdatingStatus] = useState(false);
@@ -88,11 +88,7 @@ const NonAuction = () => {
 
   // เพิ่มทะเบียน
   const handleAddPlate = async () => {
-    if (
-      newPlate.plate === "" ||
-      newPlate.price === "" ||
-      newPlate.status === ""
-    ) {
+    if (newPlate.plate === "" || newPlate.price === "") {
       alert("กรุณากรอกข้อมูลให้ครบ");
       return;
     }
@@ -100,24 +96,27 @@ const NonAuction = () => {
     const plateData = {
       plate: newPlate.plate,
       total: calculateTotal(newPlate.plate.replace(/\s/g, "")),
-      price: newPlate.price,
+      price: newPlate.price.replace(/,/g, ""),
       status: newPlate.status,
     };
 
     try {
       setAdding(true);
       console.log("📤 ส่งข้อมูลไปที่ API:", plateData);
-      const response = await fetch(`${API_URL}/addPlate/plates_old_non_auction`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(plateData),
-      });
+      const response = await fetch(
+        `${API_URL}/addPlate/plates_old_non_auction`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(plateData),
+        }
+      );
       const result = await response.json();
       console.log("📥 API ตอบกลับ:", result);
       if (response.ok) {
         setData((prevData) => [...prevData, result]);
         _AlertPopUp().Success("บันทึกข้อมูลสำเร็จ !");
-        setNewPlate({ plate: "", price: "", status: "" });
+        setNewPlate({ plate: "", price: "", status: "พร้อมขาย" });
       }
       if (!response.ok) throw new Error("Error adding plate");
     } catch (error) {
@@ -175,10 +174,68 @@ const NonAuction = () => {
     }
   };
 
+  const formatNumber = (value) => {
+      const numeric = value.replace(/,/g, "").replace(/\D/g, "");
+      return numeric.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+    //ModalEdit
+    const [formModal, setFormModal] = useState({}); // ข้อมูลใน modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleOpenModal = (plate) => {
+      console.log(plate);
+      setFormModal(plate);
+      setIsModalOpen(true);
+    };
+  
+    const onCloseModal = () => {
+      setFormModal({});
+      setIsModalOpen(false);
+    };
+  
+    // อัปเดตข้อมูล
+    const handleEdit = async (formModal) => {
+      if (formModal.plate === "" || formModal.price === "") {
+        alert("กรุณากรอกข้อมูลให้ครบ");
+        return;
+      }
+  
+      const bodyData = {
+        plate: formModal.plate,
+        total: String(calculateTotal(formModal.plate.replace(/\s/g, ""))),
+        price: formModal.price,
+        status: formModal.status,
+      };
+  
+      try {
+        const response = await fetch(
+          `${API_URL}/updatePlate/plates_new_non_auction/${formModal.id}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(bodyData),
+          }
+        );
+        const result = await response.json(); // อ่าน response body
+        console.log(result);
+        // return;
+        if (response.ok) {
+          // alert(result.message);
+          alert("แก้ไขข้อมูลสำเร็จ");
+          fetchPlates(); // โหลดข้อมูลใหม่
+          setIsModalOpen(false); // ✅ ปิด Modal เมื่อสำเร็จ
+        } else {
+          alert("แก้ไขข้อมูลไม่สำเร็จ");
+        }
+        if (!response.ok) throw new Error("Error updating status");
+      } catch (error) {
+        console.error("❌ Error updating status:", error);
+      }
+    };
+
   return (
     <div className="p-4 bg-white rounded shadow">
       <h2 className="text-xl font-bold mb-4 font-['Prompt']">
-      ทะเบียนรถขาวดำหมวดใหม่
+        ทะเบียนรถขาวดำหมวดใหม่
       </h2>
 
       <div className="mb-4 flex gap-2">
@@ -194,14 +251,16 @@ const NonAuction = () => {
           placeholder="ราคา"
           className="border rounded px-2 py-1"
           value={newPlate.price}
-          onChange={(e) => setNewPlate({ ...newPlate, price: e.target.value })}
+          onChange={(e) =>
+            setNewPlate({ ...newPlate, price: formatNumber(e.target.value) })
+          }
         />
         <select
           className="border rounded px-2 py-1"
           value={newPlate.status}
           onChange={(e) => setNewPlate({ ...newPlate, status: e.target.value })}
         >
-          <option value="">เลือกประเภท</option>
+          <option value="พร้อมขาย">พร้อมขาย</option>
           <option value="มาใหม่">มาใหม่</option>
           <option value="จองแล้ว">จองแล้ว</option>
           <option value="ขายแล้ว">ขายแล้ว</option>
@@ -238,7 +297,9 @@ const NonAuction = () => {
                 <td className="p-2">{index + 1}</td>
                 <td className="p-2">{item.plate}</td>
                 <td className="p-2">{item.total}</td>
-                <td className="p-2">{parseFloat(item.price).toLocaleString()}</td>
+                <td className="p-2">
+                  {parseFloat(item.price).toLocaleString()}
+                </td>
                 <td className="p-2">
                   {updatingStatus === item.id ? (
                     <div className="flex justify-start pl-2 items-center">
@@ -252,33 +313,45 @@ const NonAuction = () => {
                         handleStatusChange(item.id, e.target.value)
                       }
                     >
-                      <option value="" disabled>
-                        เลือกสถานะ
-                      </option>
+                      <option value="พร้อมขาย">พร้อมขาย</option>
                       <option value="ขายแล้ว">ขายแล้ว</option>
                       <option value="มาใหม่">มาใหม่</option>
                       <option value="จองแล้ว">จองแล้ว</option>
                     </select>
                   )}
                 </td>
-                <td className="p-2">
-                  {deleteStatus === item.id ? (
-                    <div className="flex justify-start pl-2 items-center">
-                      <ClipLoader size={20} color="#000" />
-                    </div>
-                  ) : (
-                    <button
-                      className="bg-red-600 text-white px-2 py-1 rounded"
-                      onClick={() => handleDeletePlate(item.id, item.plate)}
-                    >
-                      ลบ
-                    </button>
-                  )}
+                <td className="p-2 text-start space-x-1">
+                  <button
+                    className="bg-blue-600 text-white px-2 py-1 rounded"
+                    onClick={() => handleOpenModal(item)}
+                  >
+                    แก้ไข
+                  </button>
+                  <button
+                    className="bg-red-600 text-white px-2 py-1 rounded"
+                    onClick={() => handleDeletePlate(item.id, item.plate)}
+                  >
+                    {deleteStatus === item.id ? (
+                      <ClipLoader size={20} color="#ffffff" />
+                    ) : (
+                      "ลบ"
+                    )}
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      )}
+      {isModalOpen && (
+        <ModalEdit
+          isOpen={isModalOpen}
+          onClose={onCloseModal}
+          onSubmit={() => handleEdit(formModal)}
+          formModal={formModal}
+          // plate={plate}
+          setFormModal={setFormModal}
+        />
       )}
     </div>
   );

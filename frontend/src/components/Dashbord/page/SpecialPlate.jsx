@@ -61,7 +61,7 @@ const SpecialPlate = () => {
   const [newPlate, setNewPlate] = useState({
     plate: "",
     price: "",
-    status: "",
+    status: "พร้อมขาย",
   });
   const [loading, setLoading] = useState(false); // Loading สำหรับ table
   const [updatingStatus, setUpdatingStatus] = useState(false);
@@ -89,11 +89,7 @@ const SpecialPlate = () => {
 
   // เพิ่มทะเบียน
   const handleAddPlate = async () => {
-    if (
-      newPlate.plate === "" ||
-      newPlate.price === "" ||
-      newPlate.status === ""
-    ) {
+    if (newPlate.plate === "" || newPlate.price === "") {
       alert("กรุณากรอกข้อมูลให้ครบ");
       return;
     }
@@ -101,7 +97,7 @@ const SpecialPlate = () => {
     const plateData = {
       plate: newPlate.plate,
       total: calculateTotal(newPlate.plate.replace(/\s/g, "")),
-      price: newPlate.price,
+      price: newPlate.price.replace(/,/g, ""),
       status: newPlate.status,
     };
 
@@ -118,7 +114,7 @@ const SpecialPlate = () => {
       if (response.ok) {
         setData((prevData) => [...prevData, result]);
         _AlertPopUp().Success("บันทึกข้อมูลสำเร็จ !");
-        setNewPlate({ plate: "", price: "", status: "" });
+        setNewPlate({ plate: "", price: "", status: "พร้อมขาย" });
       }
       if (!response.ok) throw new Error("Error adding plate");
     } catch (error) {
@@ -176,6 +172,10 @@ const SpecialPlate = () => {
     }
   };
 
+const formatNumber = (value) => {
+    const numeric = value.replace(/,/g, "").replace(/\D/g, "");
+    return numeric.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   //ModalEdit
   const [formModal, setFormModal] = useState({}); // ข้อมูลใน modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -249,14 +249,14 @@ const SpecialPlate = () => {
           placeholder="ราคา"
           className="border rounded px-2 py-1"
           value={newPlate.price}
-          onChange={(e) => setNewPlate({ ...newPlate, price: e.target.value })}
+          onChange={(e) => setNewPlate({ ...newPlate, price: formatNumber(e.target.value) })}
         />
         <select
           className="border rounded px-2 py-1"
           value={newPlate.status}
           onChange={(e) => setNewPlate({ ...newPlate, status: e.target.value })}
         >
-          <option value="">เลือกประเภท</option>
+          <option value="พร้อมขาย">พร้อมขาย</option>
           <option value="มาใหม่">มาใหม่</option>
           <option value="จองแล้ว">จองแล้ว</option>
           <option value="ขายแล้ว">ขายแล้ว</option>
@@ -293,7 +293,9 @@ const SpecialPlate = () => {
                 <td className="p-2">{index + 1}</td>
                 <td className="p-2">{item.plate}</td>
                 <td className="p-2">{item.total}</td>
-                <td className="p-2">{parseFloat(item.price).toLocaleString()}</td>
+                <td className="p-2">
+                  {parseFloat(item.price).toLocaleString()}
+                </td>
                 <td className="p-2">
                   {updatingStatus === item.id ? (
                     <div className="flex justify-start pl-2 items-center">
@@ -307,9 +309,7 @@ const SpecialPlate = () => {
                         handleStatusChange(item.id, e.target.value)
                       }
                     >
-                      <option value="" disabled>
-                        เลือกสถานะ
-                      </option>
+                      <option value="พร้อมขาย">พร้อมขาย</option>
                       <option value="ขายแล้ว">ขายแล้ว</option>
                       <option value="มาใหม่">มาใหม่</option>
                       <option value="จองแล้ว">จองแล้ว</option>
@@ -323,18 +323,16 @@ const SpecialPlate = () => {
                   >
                     แก้ไข
                   </button>
-                  {deleteStatus === item.id ? (
-                    <div className="flex justify-start pl-2 items-center">
-                      <ClipLoader size={20} color="#000" />
-                    </div>
-                  ) : (
-                    <button
-                      className="bg-red-600 text-white px-2 py-1 rounded"
-                      onClick={() => handleDeletePlate(item.id, item.plate)}
-                    >
-                      ลบ
-                    </button>
-                  )}
+                  <button
+                    className="bg-red-600 text-white px-2 py-1 rounded"
+                    onClick={() => handleDeletePlate(item.id, item.plate)}
+                  >
+                    {deleteStatus === item.id ? (
+                      <ClipLoader size={20} color="#ffffff" />
+                    ) : (
+                      "ลบ"
+                    )}
+                  </button>
                 </td>
               </tr>
             ))}

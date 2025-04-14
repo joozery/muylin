@@ -285,13 +285,13 @@ function SearchForm() {
 
   return (
     <>
-      <div className="h-screen md:h-full flex flex-col justify-center md:px-3 md:py-12">
-        <div className="flex flex-col items-center text-black mb-5">
+      <div className="h-full flex flex-col justify-center pt-4 pb-2 md:px-3 md:py-12">
+        <div className="flex flex-col items-center text-black mb-1">
           <span className="text-3xl font-bold mb-1">MUAYLINTABIEN</span>
           <span>CALL: 096-396-2888 | LINE: MUAYDATA</span>
         </div>
 
-        <div className="search-form bg-white ">
+        <div className="search-form bg-white">
           <h2>ค้นหาเลขทะเบียน</h2>
           <div className="search-inputs">
             <input
