@@ -262,6 +262,8 @@ function SearchForm() {
 
   useEffect(() => {
     filterPlates();
+
+    console.log(allPlateData);
   }, [allPlateData]);
 
   useEffect(() => {

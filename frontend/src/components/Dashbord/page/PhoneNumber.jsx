@@ -48,13 +48,23 @@ const PhoneNumber = () => {
 
   // ✅ อัปเดตผลรวมอัตโนมัติเมื่อผู้ใช้กรอกเบอร์โทร
   const handlePhoneNumberChange = (e) => {
-    const phone_number = e.target.value;
+    let phone_number = e.target.value;
+  
+    // เอาเฉพาะตัวเลขเท่านั้น
+    phone_number = phone_number.replace(/\D/g, "");
+  
+    // จำกัดความยาวไม่เกิน 10 ตัว
+    if (phone_number.length > 10) {
+      phone_number = phone_number.slice(0, 10);
+    }
+  
     setNewPhone({
       ...newPhone,
       phone_number,
       total: phone_number ? calculateTotal(phone_number) : "",
     });
   };
+  
 
   // ✅ ฟังก์ชันเพิ่มเบอร์โทร
   const handleAddPhone = async (e) => {
@@ -120,7 +130,7 @@ const PhoneNumber = () => {
       toast.error("ลบเบอร์ไม่สำเร็จ!");
     }
   };
-const formatNumber = (value) => {
+  const formatNumber = (value) => {
     const numeric = value.replace(/,/g, "").replace(/\D/g, "");
     return numeric.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -184,7 +194,7 @@ const formatNumber = (value) => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">
         📞 จัดการเบอร์โทรศัพท์
       </h1>
@@ -206,7 +216,7 @@ const formatNumber = (value) => {
             required
             className="w-full p-2 border rounded-lg"
           />
-          <input
+          {/* <input
             type="text"
             placeholder="เครือข่าย"
             value={newPhone.brand}
@@ -215,7 +225,23 @@ const formatNumber = (value) => {
             }
             required
             className="w-full p-2 border rounded-lg"
-          />
+          /> */}
+          <select
+            value={newPhone.brand}
+            onChange={(e) =>
+              setNewPhone({ ...newPhone, brand: e.target.value })
+            }
+            required
+            className="w-full p-2 border rounded-lg"
+          >
+            <option value="">เลือกเครือข่าย</option>
+            <option value="AIS">AIS</option>
+            <option value="DTAC">DTAC</option>
+            <option value="TRUE">TRUE</option>
+            <option value="NT">NT</option>
+            <option value="อื่นๆ">อื่นๆ</option>
+          </select>
+
           <input
             type="text"
             placeholder="ผลรวม"
@@ -224,7 +250,7 @@ const formatNumber = (value) => {
             className="w-full p-2 border bg-gray-200 rounded-lg"
           />
           <input
-            type="number"
+            type="text"
             placeholder="ราคา"
             value={newPhone.price}
             onChange={(e) =>

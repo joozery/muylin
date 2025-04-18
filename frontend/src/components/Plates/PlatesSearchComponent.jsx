@@ -1,4 +1,4 @@
-const PlatesComponent = ({ cover, data, text , border }) => {
+const PlatesComponent = ({ cover, data, text, border, color_text }) => {
   return (
     <>
       <div className="pb-5">
@@ -24,17 +24,25 @@ const PlatesComponent = ({ cover, data, text , border }) => {
                 )}
 
                 {/* หมายเลขทะเบียน */}
-                <span className="text-[1.1rem] md:text-xl text-black font-bold">
+                <span
+                  className={`text-[1.1rem] md:text-xl ${
+                    color_text ? color_text : "text-black"
+                  } font-bold`}
+                >
                   {plate.plate}
                 </span>
 
-                <span className="text-sm md:text-lg text-black">
+                <span
+                  className={`text-sm md:text-lg font-bold ${
+                    color_text ? color_text : "text-black"
+                  } `}
+                >
                   กรุงเทพมหานคร
                 </span>
 
                 {/* ✅ แสดงราคาเป็น `1,000.-` แทน `1000.00` */}
                 {plate.price && (
-                  <div className="text-sm md:text-base flex justify-center gap-1 items-center leading-relaxed tracking-wider text-black font-semibold pb-1">
+                  <div className="text-sm md:text-base flex justify-center gap-1 items-center leading-relaxed tracking-wider text-black font-bold pb-1">
                     {/* {plate.price === NaN ? 'ติดต่อ' : Number(plate.price).toLocaleString()} */}
                     {isNaN(Number(plate.price.replace(/,/g, "")))
                       ? "ติดต่อ"
