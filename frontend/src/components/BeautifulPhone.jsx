@@ -29,7 +29,7 @@ const BeautifulPhone = () => {
       <BeautifulPhoneHeader />
 
       {/* 🔹 Section: เบอร์สวย Super VIP */}
-      <section className="py-16 px-6 bg-black text-white text-center">
+      <section className="px-2 py-3 bg-black text-white text-center">
         {/* ⭐⭐⭐⭐⭐ Title */}
         <div className="mb-6">
           <p className="text-yellow-400 text-xl">★★★★★</p>
@@ -40,26 +40,26 @@ const BeautifulPhone = () => {
         {/* 🔹 เบอร์สวย Grid (2 คอลัมน์ในมือถือ, 3 คอลัมน์ในหน้าจอใหญ่) */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-8">
           {phoneNumbers.map((phone) => (
-            <div key={phone.id} className="border-4 border-[#FFD700] rounded-lg bg-white text-black shadow-lg relative">
+            <div key={phone.id} className="border-3 border-blue-600 py-1 rounded-lg bg-white text-black shadow-lg relative">
               {/* Tag สถานะ */}
-              <span
-                className={`absolute top-2 right-2 px-3 py-1 text-sm rounded-lg text-white ${
+              <div
+                className={`absolute top-0 right-0 px-[4px] py-[3px] text-[10px] rounded-l-md rounded-t-none text-white ${
                   phone.status === "มาใหม่" ? "bg-blue-600" :
                   phone.status === "ขายแล้ว" ? "bg-red-600" :
                   "bg-gray-500"
                 }`}
               >
                 {phone.status}
-              </span>
+              </div>
 
               {/* ข้อมูลเบอร์ */}
-              <h2 className="text-2xl font-bold">{phone.phone_number}</h2>
-              <span className="text-sm text-gray-500">
+              <div className="text-lg font-bold">{phone.phone_number}</div>
+              <div className="text-sm text-gray-500">
                 {phone.brand} {phone.total && `(${phone.total})`}
-              </span>
-              <span className="text-xl text-red-500 font-bold">
+              </div>
+              <div className="text-lg text-red-500 font-bold">
                 {Number(phone.price).toLocaleString()} บาท
-              </span>
+              </div>
             </div>
           ))}
         </div>

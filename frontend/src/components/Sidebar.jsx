@@ -48,7 +48,7 @@ const Sidebar = () => {
           {/* <p className="text-3xl font-bold">MUAYLINTABIEN</p> */}
         </div>
 
-        <ul className="menu font-semibold ps-3 space-y-8 mt-3">
+        <ul className="menu text-lg font-semibold ps-3 mt-3 space-y-14">
           <li>
             <Link to="/beautiful-phone" onClick={toggleSidebar}>
               เบอร์สวย
