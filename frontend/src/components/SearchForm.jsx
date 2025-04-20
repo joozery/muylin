@@ -182,64 +182,69 @@ function SearchForm() {
         }
         if (price && price !== "all") {
           switch (price) {
+            case "<50000":
+              match =
+                match &&
+                Number(plate.price) <= 50000 ;
+              break;
             case "50000-100000":
               match =
                 match &&
                 Number(plate.price) >= 50000 &&
                 Number(plate.price) <= 100000;
               break;
-            case "100001-200000":
+            case "100000-200000":
               match =
                 match &&
-                Number(plate.price) >= 100001 &&
+                Number(plate.price) >= 100000 &&
                 Number(plate.price) <= 200000;
               break;
-            case "200001-500000":
+            case "200000-500000":
               match =
                 match &&
                 Number(plate.price) >= 200001 &&
                 Number(plate.price) <= 500000;
               break;
-            case "500001-1000000":
+            case "500000-1000000":
               match =
                 match &&
-                Number(plate.price) >= 500001 &&
+                Number(plate.price) >= 500000 &&
                 Number(plate.price) <= 1000000;
               break;
-            case "1000001-1500000":
+            case "1000000-1500000":
               match =
                 match &&
-                Number(plate.price) >= 1000001 &&
+                Number(plate.price) >= 1000000 &&
                 Number(plate.price) <= 1500000;
               break;
-            case "1500001-2000000":
+            case "1500000-2000000":
               match =
                 match &&
-                Number(plate.price) >= 1500001 &&
+                Number(plate.price) >= 1500000 &&
                 Number(plate.price) <= 2000000;
               break;
-            case "2000001-5000000":
+            case "2000000-5000000":
               match =
                 match &&
-                Number(plate.price) >= 2000001 &&
+                Number(plate.price) >= 2000000 &&
                 Number(plate.price) <= 5000000;
               break;
-            case "5000001-10000000":
+            case "5000000-10000000":
               match =
                 match &&
-                Number(plate.price) >= 5000001 &&
+                Number(plate.price) >= 5000000 &&
                 Number(plate.price) <= 10000000;
               break;
-            case "10000001-20000000":
+            case "10000000-20000000":
               match =
                 match &&
-                Number(plate.price) >= 10000001 &&
+                Number(plate.price) >= 10000000 &&
                 Number(plate.price) <= 20000000;
               break;
-            case "20000001-50000000":
+            case "20000000-50000000":
               match =
                 match &&
-                Number(plate.price) >= 20000001 &&
+                Number(plate.price) >= 20000000 &&
                 Number(plate.price) <= 50000000;
               break;
             default:
@@ -351,14 +356,15 @@ function SearchForm() {
               }
             >
               <option value="all">ทุกช่วงราคา</option>
+              <option value="<50000">น้อยกว่า 50,000</option>
               <option value="50000-100000">50,000 - 100,000 บาท</option>
-              <option value="100001-200000">100,001 - 200,000 บาท</option>
-              <option value="200001-500000">200,001 - 500,000 บาท</option>
-              <option value="500001-1000000">500,001 - 1,000,000 บาท</option>
-              <option value="1000001-1500000">1,000,001 - 1,500,000 บาท</option>
-              <option value="1500001-2000000">1,500,001 - 2,000,000 บาท</option>
-              <option value="2000001-5000000">2,000,001 - 5,000,000 บาท</option>
-              <option value="5000001-10000000">
+              <option value="100000-200000">100,000 - 200,000 บาท</option>
+              <option value="200000-500000">200,000 - 500,000 บาท</option>
+              <option value="500000-1000000">500,000 - 1,000,000 บาท</option>
+              <option value="1000000-1500000">1,000,000 - 1,500,000 บาท</option>
+              <option value="1500000-2000000">1,500,000 - 2,000,000 บาท</option>
+              <option value="2000000-5000000">2,000,000 - 5,000,000 บาท</option>
+              <option value="5000000-10000000">
                 5,000,001 - 10,000,000 บาท
               </option>
               <option value="10000001-20000000">

@@ -18,7 +18,7 @@ const PlatesComponent = ({ cover, data, text, border, color_text }) => {
               >
                 {/* แสดงป้าย "จองแล้ว" ถ้ามี */}
                 {plate.status && (
-                  <div className="absolute top-[5px] right-0 bg-red-500 text-white px-[4px] py-[2px] md:px-2 md:py-1 rounded-s-md text-[8px] sm:text-[10px] md:text-xs">
+                  <div className={`${plate.status === "มาใหม่" ? "bg-blue-500" : plate.status === "จองแล้ว" ? "bg-yellow-500" : plate.status === "ขายแล้ว" ? "bg-red-500" : ""} absolute top-[5px] right-0 text-white px-[4px] py-[2px] md:px-2 md:py-1 rounded-s-md text-[9px] sm:text-[10px] md:text-xs`}>
                     {plate.status}
                   </div>
                 )}

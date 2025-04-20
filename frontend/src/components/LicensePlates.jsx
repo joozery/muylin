@@ -30,7 +30,7 @@ export default function LicensePlates({ data, loading }) {
       text: "ป้ายทะเบียนรถตู้กราฟฟิค",
     },
     plates_motorcycle: {
-      cover: motorcycleImage,
+      cover: defaultPlates,
       text: "ป้ายทะเบียนรถมอเตอร์ไซค์",
     },
     plates_single_digit: {
@@ -57,7 +57,7 @@ export default function LicensePlates({ data, loading }) {
       cover: defaultPlates,
       text: "ป้ายทะเบียนรถขาวดำหมวดเก่า",
     },
-    plates_old: { cover: newImage, text: "ป้ายทะเบียนรถประมูลขาวดำหมวดเก่า" },
+    plates_old: { cover: newImage, text: "ป้ายทะเบียนรถประมูลหมวดเก่า" },
     plates_gold_graphic: {
       cover: goldGraphicImage,
       text: "ป้ายทะเบียนรถระฆังทอง (กราฟฟิคสีทอง)",
@@ -65,6 +65,8 @@ export default function LicensePlates({ data, loading }) {
     plates_electric: {
       cover: defaultPlates,
       text: "ป้ายทะเบียนรถตู้ป้ายฟ้า",
+      colorText: `text-[#023F8C]`,
+      border: `border-3 border-[#023F8C]`,
     },
   };
 

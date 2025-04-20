@@ -45,7 +45,7 @@ const ModalEdit = ({ isOpen, onClose, onSubmit, formModal, plate, setFormModal})
                             <label className="block text-sm font-medium text-gray-500 mb-2">ราคา</label>
                             <input
                                 type="number"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md [&::-webkit-inner-spin-button]:appearance-none"
                                 value={Math.floor(formModal.price)}
                                 onChange={(e) => handleInputChange("price", e.target.value)}
                             />
