@@ -57,7 +57,7 @@ const BeautifulPhone = () => {
               <div className="text-sm text-gray-500">
                 {phone.brand} {phone.total && `(${phone.total})`}
               </div>
-              <div className="text-lg text-red-500 font-bold">
+              <div className="text-lg text-black font-bold">
                 {Number(phone.price).toLocaleString()} บาท
               </div>
             </div>
