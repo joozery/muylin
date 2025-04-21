@@ -32,7 +32,7 @@ const Sidebar = () => {
     <>
       {/* ✅ Hamburger Icon (เฉพาะบนมือถือ) */}
       <button className="hamburger md:hidden" onClick={toggleSidebar}>
-        {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        {isOpen ? <FaTimes className="text-slate-200" size={24} /> : <FaBars className="text-slate-200" size={24} />}
       </button>
 
       {/* ✅ Overlay เมื่อ Sidebar เปิด */}

@@ -13,7 +13,7 @@ const PlatesComponent = ({ cover, data, text, border, color_text }) => {
             data.map((plate, index) => (
               <div
                 key={index}
-                className={`relative flex flex-col gap-1 text-center px-2 py-1 md:p-6 rounded-md bg-cover bg-center shadow-lg ${border}`}
+                className={`relative flex flex-col gap-1 text-center px-2 py-1 md:p-6 rounded-md bg-cover bg-center shadow-md ${border}`}
                 style={{ backgroundImage: `url(${cover})` }}
               >
                 {/* แสดงป้าย "จองแล้ว" ถ้ามี */}
@@ -62,7 +62,7 @@ const PlatesComponent = ({ cover, data, text, border, color_text }) => {
             ))
           ) : (
             <p className="text-center text-gray-400 col-span-4">
-              ❌ ไม่พบป้ายเขียว
+              ❌ ไม่พบข้อมูล
             </p>
           )}
         </div>

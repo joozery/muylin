@@ -5,8 +5,7 @@ import ModalTel from "../../Modal/ModalTel";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const API_URL =
-  import.meta.env.VITE_API_URL ||
-  "https://tabian-d0c5a982b10e.herokuapp.com/api";
+  import.meta.env.VITE_API_URL;
 
 const PhoneNumber = () => {
   const [phoneNumbers, setPhoneNumbers] = useState([]);
@@ -24,7 +23,7 @@ const PhoneNumber = () => {
   const fetchPhoneNumbers = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${API_URL}/phone_numbers`);
+      const response = await fetch(`${API_URL}/phones/phone_numbers`);
       const data = await response.json();
       setPhoneNumbers(data);
     } catch (error) {
@@ -70,7 +69,7 @@ const PhoneNumber = () => {
   const handleAddPhone = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/addPhoneNumber`, {
+      const response = await fetch(`${API_URL}/phones/addPhoneNumber`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newPhone),
@@ -98,7 +97,7 @@ const PhoneNumber = () => {
   // ✅ ฟังก์ชันอัปเดตสถานะเบอร์โทร
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      const response = await fetch(`${API_URL}/updatePhoneStatus/${id}`, {
+      const response = await fetch(`${API_URL}/phones/updatePhoneStatus/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
@@ -117,7 +116,7 @@ const PhoneNumber = () => {
   // ✅ ฟังก์ชันลบเบอร์โทร
   const handleDeletePhone = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/deletePhoneNumber/${id}`, {
+      const response = await fetch(`${API_URL}/phones/deletePhoneNumber/${id}`, {
         method: "DELETE",
       });
 

@@ -79,15 +79,15 @@ export default function LicensePlates({ data, loading }) {
   }
 
   return (
-    <section className="bg-gradient-to-b to-[#111111] text-white py-12 font-tahoma">
+    <section className="bg-white text-black pb-12 font-tahoma">
       <div className="container mx-auto px-6 lg:px-20">
-        {/* ⭐⭐⭐⭐⭐ MUAY.LINTABIEN.CO */}
-        {/* <div className="text-center mb-6">
-          <p className="text-yellow-400 text-lg">★★★★★</p>
-          <p className="text-yellow-400 font-bold">MUAYLINTABIEN.CO</p>
-        </div> */}
-        {/* แสดงผล Component ตามผลลัพธ์การค้นหา*/}
-        {data &&
+        {/* เช็คว่าทุกหมวดไม่มีข้อมูลเลย */}
+        {data.every((item) => !item.data || item.data.length === 0) ? (
+          <div className="text-center font-bold text-black text-lg py-12">
+            ❌ ไม่พบข้อมูลที่ค้นหา
+          </div>
+        ) : (
+          // แสดงผล Component ตามผลลัพธ์การค้นหา
           data.map((result, index) => {
             const { type, data: plateData } = result;
             const componentConfig = componentMap[type];
@@ -105,7 +105,8 @@ export default function LicensePlates({ data, loading }) {
               );
             }
             return null;
-          })}
+          })
+        )}
       </div>
     </section>
   );

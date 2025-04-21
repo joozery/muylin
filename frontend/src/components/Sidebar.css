@@ -142,6 +142,7 @@
 @media (max-width: 768px) {
   .sidebar {
     width: 280px;
+    padding: 25px 10px;
     transform: translateX(-100%);
   }
 

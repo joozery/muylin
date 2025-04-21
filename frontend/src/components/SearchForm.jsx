@@ -161,105 +161,181 @@ function SearchForm() {
   };
 
   // ทำการ filter แบบ client-side เมื่อค่าใน platesNew เปลี่ยนแปลง
+  // const filterPlates = () => {
+  //   let filtered = allPlateData;
+  //   const { text, number, sum_number, price, type } = platesNew;
+
+  //   filtered = filtered.map((item) => ({
+  //     ...item,
+  //     data: item.data.filter((plate) => {
+  //       let match = true; // เริ่มต้นด้วย match = true
+
+  //       if (text) {
+  //         match =
+  //           match && plate.plate.toLowerCase().includes(text.toLowerCase());
+  //       }
+  //       if (number) {
+  //         match = match && plate.plate.match(/\d+/)?.[0]?.includes(number);
+  //       }
+  //       if (sum_number) {
+  //         match = match && String(plate.total).includes(sum_number);
+  //       }
+  //       if (price && price !== "all") {
+  //         switch (price) {
+  //           case "<50000":
+  //             match = match && Number(plate.price) <= 50000;
+  //             break;
+  //           case "50000-100000":
+  //             match =
+  //               match &&
+  //               Number(plate.price) >= 50000 &&
+  //               Number(plate.price) <= 100000;
+  //             break;
+  //           case "100000-200000":
+  //             match =
+  //               match &&
+  //               Number(plate.price) >= 100000 &&
+  //               Number(plate.price) <= 200000;
+  //             break;
+  //           case "200000-500000":
+  //             match =
+  //               match &&
+  //               Number(plate.price) >= 200001 &&
+  //               Number(plate.price) <= 500000;
+  //             break;
+  //           case "500000-1000000":
+  //             match =
+  //               match &&
+  //               Number(plate.price) >= 500000 &&
+  //               Number(plate.price) <= 1000000;
+  //             break;
+  //           case "1000000-1500000":
+  //             match =
+  //               match &&
+  //               Number(plate.price) >= 1000000 &&
+  //               Number(plate.price) <= 1500000;
+  //             break;
+  //           case "1500000-2000000":
+  //             match =
+  //               match &&
+  //               Number(plate.price) >= 1500000 &&
+  //               Number(plate.price) <= 2000000;
+  //             break;
+  //           case "2000000-5000000":
+  //             match =
+  //               match &&
+  //               Number(plate.price) >= 2000000 &&
+  //               Number(plate.price) <= 5000000;
+  //             break;
+  //           case "5000000-10000000":
+  //             match =
+  //               match &&
+  //               Number(plate.price) >= 5000000 &&
+  //               Number(plate.price) <= 10000000;
+  //             break;
+  //           case "10000000-20000000":
+  //             match =
+  //               match &&
+  //               Number(plate.price) >= 10000000 &&
+  //               Number(plate.price) <= 20000000;
+  //             break;
+  //           case "20000000-50000000":
+  //             match =
+  //               match &&
+  //               Number(plate.price) >= 20000000 &&
+  //               Number(plate.price) <= 50000000;
+  //             break;
+  //           default:
+  //             break;
+  //         }
+  //       }
+  //       if (type) {
+  //         match = match && item.type.toLowerCase().includes(type.toLowerCase());
+  //       }
+
+  //       return match; // return true ถ้าผ่านเงื่อนไขทั้งหมด
+  //     }),
+  //   }));
+  //   setFilteredPlateData(filtered);
+  // };
   const filterPlates = () => {
     let filtered = allPlateData;
     const { text, number, sum_number, price, type } = platesNew;
-
+  
     filtered = filtered.map((item) => ({
       ...item,
       data: item.data.filter((plate) => {
-        let match = true; // เริ่มต้นด้วย match = true
-
+        let match = true;
+  
+        const plateParts = plate.plate.trim().split(/\s+/); // แยกด้วยช่องว่าง
+        const prefixPart = plateParts[0]?.toLowerCase() || ""; // เช่น "7กอ"
+        const numberPart = plateParts[1] || ""; // เช่น "9977"
+  
         if (text) {
-          match =
-            match && plate.plate.toLowerCase().includes(text.toLowerCase());
+          match = match && prefixPart.includes(text.toLowerCase());
         }
+  
         if (number) {
-          match = match && plate.plate.match(/\d+/)?.[0]?.includes(number);
+          match = match && numberPart.includes(number);
         }
+  
         if (sum_number) {
           match = match && String(plate.total).includes(sum_number);
         }
+  
         if (price && price !== "all") {
+          const priceValue = Number(plate.price);
           switch (price) {
             case "<50000":
-              match =
-                match &&
-                Number(plate.price) <= 50000 ;
+              match = match && priceValue <= 50000;
               break;
             case "50000-100000":
-              match =
-                match &&
-                Number(plate.price) >= 50000 &&
-                Number(plate.price) <= 100000;
+              match = match && priceValue >= 50000 && priceValue <= 100000;
               break;
             case "100000-200000":
-              match =
-                match &&
-                Number(plate.price) >= 100000 &&
-                Number(plate.price) <= 200000;
+              match = match && priceValue >= 100000 && priceValue <= 200000;
               break;
             case "200000-500000":
-              match =
-                match &&
-                Number(plate.price) >= 200001 &&
-                Number(plate.price) <= 500000;
+              match = match && priceValue >= 200001 && priceValue <= 500000;
               break;
             case "500000-1000000":
-              match =
-                match &&
-                Number(plate.price) >= 500000 &&
-                Number(plate.price) <= 1000000;
+              match = match && priceValue >= 500000 && priceValue <= 1000000;
               break;
             case "1000000-1500000":
-              match =
-                match &&
-                Number(plate.price) >= 1000000 &&
-                Number(plate.price) <= 1500000;
+              match = match && priceValue >= 1000000 && priceValue <= 1500000;
               break;
             case "1500000-2000000":
-              match =
-                match &&
-                Number(plate.price) >= 1500000 &&
-                Number(plate.price) <= 2000000;
+              match = match && priceValue >= 1500000 && priceValue <= 2000000;
               break;
             case "2000000-5000000":
-              match =
-                match &&
-                Number(plate.price) >= 2000000 &&
-                Number(plate.price) <= 5000000;
+              match = match && priceValue >= 2000000 && priceValue <= 5000000;
               break;
             case "5000000-10000000":
-              match =
-                match &&
-                Number(plate.price) >= 5000000 &&
-                Number(plate.price) <= 10000000;
+              match = match && priceValue >= 5000000 && priceValue <= 10000000;
               break;
             case "10000000-20000000":
-              match =
-                match &&
-                Number(plate.price) >= 10000000 &&
-                Number(plate.price) <= 20000000;
+              match = match && priceValue >= 10000000 && priceValue <= 20000000;
               break;
             case "20000000-50000000":
-              match =
-                match &&
-                Number(plate.price) >= 20000000 &&
-                Number(plate.price) <= 50000000;
+              match = match && priceValue >= 20000000 && priceValue <= 50000000;
               break;
             default:
               break;
           }
         }
+  
         if (type) {
           match = match && item.type.toLowerCase().includes(type.toLowerCase());
         }
-
-        return match; // return true ถ้าผ่านเงื่อนไขทั้งหมด
+  
+        return match;
       }),
     }));
+  
     setFilteredPlateData(filtered);
   };
+  
+  
 
   useEffect(() => {
     console.log(filteredPlateData);
@@ -286,9 +362,11 @@ function SearchForm() {
     });
   };
 
-  //   useEffect(() => {
-  //     console.log(plateData);
-  //   }, [plateData]);
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   return (
     <>
@@ -308,7 +386,7 @@ function SearchForm() {
               onChange={(e) =>
                 setPlatesNew((prev) => ({ ...prev, text: e.target.value }))
               }
-              // onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+              onKeyDown={handleKeyDown}
             />
 
             <input
@@ -318,7 +396,7 @@ function SearchForm() {
               onChange={(e) =>
                 setPlatesNew((prev) => ({ ...prev, number: e.target.value }))
               }
-              // onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+              onKeyDown={handleKeyDown}
             />
 
             {/* <select
@@ -347,6 +425,7 @@ function SearchForm() {
                   sum_number: e.target.value,
                 }))
               }
+              onKeyDown={handleKeyDown}
             />
 
             <select
@@ -417,23 +496,11 @@ function SearchForm() {
         </div>
       </div>
 
-      <section
-        id="search"
-        className="license-plates-section py-4 lg:py-12 bg-[#111111]"
-      >
+      <section id="search" className="license-plates-section py-4 lg:py-12">
         <div className="container mx-auto px-1 md:px-6 lg:px-20">
           <LicensePlates data={filteredPlateData} loading={loading} />
         </div>
       </section>
-      {/* <div>
-        {loading ? (
-          <div className="flex justify-center items-center mt-10">
-            <ClipLoader color="#36d7b7" size={50} />
-          </div>
-        ) : (
-          <PlatesSearch plates={filteredPlateData} />
-        )}
-      </div> */}
     </>
   );
 }
