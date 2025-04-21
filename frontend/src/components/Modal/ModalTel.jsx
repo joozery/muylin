@@ -1,12 +1,40 @@
 import React, { useEffect, useState } from "react";
+import { formatTel, sanitizePhoneNumber } from "../../helper/helper";
 
 const ModalTel = ({ isOpen, onClose, onSubmit, formModal, setFormModal }) => {
   if (!isOpen) return null;
   // console.log(formModal);
   const [isLoading, setIsLoading] = useState(false);
   const handleInputChange = (field, value) => {
-    setFormModal({ ...formModal, [field]: value });
+    // ตัดค่าที่เกิน 10 ตัวอักษรออก
+    if (value.length > 10) {
+      value = value.slice(0, 10);
+    }
+
+    setFormModal((prev) => ({ ...prev, [field]: value }));
   };
+  const formatNumber = (value) => {
+    if (!value) return "";
+  
+    // ลบคอมม่าเดิม + แปลงเป็น string
+    const numeric = value.toString().replace(/,/g, "");
+  
+    // แยกส่วนเต็มกับทศนิยม
+    const [intPart, decimalPart] = numeric.split(".");
+  
+    // แปลงส่วนเต็มให้ใส่ comma
+    const formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  
+    // ถ้ามีทศนิยม และไม่ใช่ "00" → แสดงทศนิยม
+    if (decimalPart && decimalPart !== "00") {
+      return `${formattedInt}.${decimalPart}`;
+    }
+  
+    // ❌ ไม่แสดง .00
+    return formattedInt;
+  };
+  
+  
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -17,6 +45,10 @@ const ModalTel = ({ isOpen, onClose, onSubmit, formModal, setFormModal }) => {
       onClose(); // ปิด Modal หลังอัพเดทเสร็จ
     }
   };
+
+  useEffect(() => {
+    console.log("formModal", formModal);
+  }, [formModal]);
 
   return (
     <div
@@ -41,9 +73,9 @@ const ModalTel = ({ isOpen, onClose, onSubmit, formModal, setFormModal }) => {
               <input
                 type="text"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                value={formModal.phone_number}
+                value={formatTel(formModal.phone_number)}
                 onChange={(e) =>
-                  handleInputChange("phone_number", e.target.value)
+                  handleInputChange("phone_number", sanitizePhoneNumber(e.target.value))
                 }
               />
             </div>
@@ -51,12 +83,6 @@ const ModalTel = ({ isOpen, onClose, onSubmit, formModal, setFormModal }) => {
               <label className="block text-sm font-medium text-gray-500 mb-2">
                 เครือข่าย
               </label>
-              {/* <input
-                                type="number"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                                value={formModal.brand}
-                                onChange={(e) => handleInputChange("brand", e.target.value)}
-                            /> */}
               <select
                 className="w-full px-4 py-2 border border-gray-300 rounded-md"
                 value={formModal.brand}
@@ -72,18 +98,55 @@ const ModalTel = ({ isOpen, onClose, onSubmit, formModal, setFormModal }) => {
               <label className="block text-sm font-medium text-gray-500 mb-2">
                 ราคา
               </label>
-              <input
-                type="number"
+              {/* <input
+                type="text"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                value={Math.floor(formModal.price)}
-                onChange={(e) => handleInputChange("price", e.target.value)}
+                value={formatNumber(formModal.price)}
+                onChange={(e) => handleInputChange("price", formatNumber(e.target.value))}
+              /> */}
+              <input
+                type="text"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                value={formatNumber(formModal.price)}
+                onChange={(e) => {
+                  const input = e.target;
+                  const raw = input.value.replace(/,/g, "").replace(/\D/g, "");
+
+                  // คำนวณ caret position
+                  const caret = input.selectionStart;
+                  const before = input.value
+                    .slice(0, caret)
+                    .replace(/,/g, "").length;
+
+                  // อัปเดต raw value
+                  handleInputChange("price", raw);
+
+                  // ใช้ setTimeout เพื่อรอให้ค่าใหม่ set แล้วค่อยเลื่อน caret
+                  setTimeout(() => {
+                    const formatted = formatNumber(raw);
+                    let newCaret = 0;
+                    let digitsSeen = 0;
+
+                    for (let i = 0; i < formatted.length; i++) {
+                      if (/\d/.test(formatted[i])) {
+                        digitsSeen++;
+                      }
+                      if (digitsSeen === before) {
+                        newCaret = i + 1;
+                        break;
+                      }
+                    }
+
+                    input.setSelectionRange(newCaret, newCaret);
+                  }, 0);
+                }}
               />
             </div>
           </div>
           <div className="flex justify-end space-x-2">
             <button
               type="button"
-              className="w-1/4 px-2 py-2 bg-red-400 hover:bg-red-500 text-white shadow-md rounded-full"
+              className="w-full px-2 py-2 bg-gray-400 hover:bg-gray-500 text-white shadow-md rounded-full"
               onClick={onClose}
               disabled={isLoading}
             >
@@ -91,7 +154,7 @@ const ModalTel = ({ isOpen, onClose, onSubmit, formModal, setFormModal }) => {
             </button>
             <button
               type="button"
-              className="w-1/4 px-2 py-2 bg-blue-400 hover:bg-blue-500 text-white shadow-md rounded-full "
+              className="w-full px-2 py-2 bg-blue-400 hover:bg-blue-500 text-white shadow-md rounded-full "
               onClick={handleSubmit}
               disabled={isLoading}
             >

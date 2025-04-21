@@ -114,6 +114,7 @@ const MotorcyclePlate = () => {
       console.log("📥 API ตอบกลับ:", result);
       if (response.ok) {
         setData((prevData) => [...prevData, result]);
+        // fetchPlates();
         _AlertPopUp().Success("บันทึกข้อมูลสำเร็จ !");
         setNewPlate({ plate: "", price: "", status: "พร้อมขาย" });
       }

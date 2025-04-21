@@ -3,9 +3,10 @@ import { Trash2, PlusCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import ModalTel from "../../Modal/ModalTel";
 import ClipLoader from "react-spinners/ClipLoader";
+import _AlertPopUp from "../../../helper/alertpopup";
+import { formatTel, sanitizePhoneNumber } from "../../../helper/helper";
 
-const API_URL =
-  import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 const PhoneNumber = () => {
   const [phoneNumbers, setPhoneNumbers] = useState([]);
@@ -16,6 +17,8 @@ const PhoneNumber = () => {
     price: "",
     status: "มาใหม่",
   });
+
+  const [isAdding, setAdding] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -47,32 +50,41 @@ const PhoneNumber = () => {
 
   // ✅ อัปเดตผลรวมอัตโนมัติเมื่อผู้ใช้กรอกเบอร์โทร
   const handlePhoneNumberChange = (e) => {
-    let phone_number = e.target.value;
-  
+    let phone_number = sanitizePhoneNumber(e.target.value);
+
     // เอาเฉพาะตัวเลขเท่านั้น
     phone_number = phone_number.replace(/\D/g, "");
-  
+
     // จำกัดความยาวไม่เกิน 10 ตัว
     if (phone_number.length > 10) {
       phone_number = phone_number.slice(0, 10);
     }
-  
+
     setNewPhone({
       ...newPhone,
       phone_number,
       total: phone_number ? calculateTotal(phone_number) : "",
     });
   };
-  
 
   // ✅ ฟังก์ชันเพิ่มเบอร์โทร
   const handleAddPhone = async (e) => {
+
     e.preventDefault();
+    const phoneData = {
+      phone_number: newPhone.phone_number,
+      brand: newPhone.brand,
+      price: newPhone.price.replace(/,/g, ""),
+      status: newPhone.status,
+    };
+    console.log(phoneData)
+    // return
+    setAdding(true);
     try {
       const response = await fetch(`${API_URL}/phones/addPhoneNumber`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPhone),
+        body: JSON.stringify(phoneData),
       });
 
       if (!response.ok) throw new Error("เพิ่มเบอร์ไม่สำเร็จ");
@@ -86,47 +98,60 @@ const PhoneNumber = () => {
         price: "",
         status: "มาใหม่",
       });
-      toast.success("เพิ่มเบอร์เรียบร้อย!");
+      // toast.success("เพิ่มเบอร์เรียบร้อย!");
+      _AlertPopUp().Success("เพิ่มเบอร์เรียบร้อย!");
       fetchPhoneNumbers();
     } catch (error) {
       console.error("❌ Error adding phone number:", error);
-      toast.error("เพิ่มเบอร์ไม่สำเร็จ!");
+      // toast.error("เพิ่มเบอร์ไม่สำเร็จ!");
+      _AlertPopUp().Error("เพิ่มเบอร์ไม่สำเร็จ!");
+    } finally {
+      setAdding(false);
     }
   };
 
   // ✅ ฟังก์ชันอัปเดตสถานะเบอร์โทร
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      const response = await fetch(`${API_URL}/phones/updatePhoneStatus/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus }),
-      });
+      const response = await fetch(
+        `${API_URL}/phones/updatePhoneStatus/${id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: newStatus }),
+        }
+      );
 
       if (!response.ok) throw new Error("Error updating status");
 
-      toast.success("อัปเดตสถานะเรียบร้อย!");
+      // toast.success("อัปเดตสถานะเรียบร้อย!");
+      _AlertPopUp().Success("อัปเดตสถานะเรียบร้อย!");
       fetchPhoneNumbers();
     } catch (error) {
       console.error("❌ Error updating status:", error);
-      toast.error("อัปเดตสถานะไม่สำเร็จ!");
+      // toast.error("อัปเดตสถานะไม่สำเร็จ!");
+      _AlertPopUp().Error("อัปเดตสถานะไม่สำเร็จ!");
     }
   };
 
   // ✅ ฟังก์ชันลบเบอร์โทร
   const handleDeletePhone = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/phones/deletePhoneNumber/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `${API_URL}/phones/deletePhoneNumber/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (!response.ok) throw new Error("Error deleting phone number");
 
-      toast.success("ลบเบอร์เรียบร้อย!");
+      // toast.success("ลบเบอร์เรียบร้อย!");
+      _AlertPopUp().Success("ลบข้อมูลสำเร็จ !");
       fetchPhoneNumbers();
     } catch (error) {
       console.error("❌ Error deleting phone number:", error);
-      toast.error("ลบเบอร์ไม่สำเร็จ!");
+      _AlertPopUp().Error("ลบเบอร์ไม่สำเร็จ!");
     }
   };
   const formatNumber = (value) => {
@@ -168,7 +193,7 @@ const PhoneNumber = () => {
 
     try {
       const response = await fetch(
-        `${API_URL}/updatePhoneNumber/${formModal.id}`,
+        `${API_URL}/phones/updatePhoneNumber/${formModal.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -180,11 +205,13 @@ const PhoneNumber = () => {
       // return;
       if (response.ok) {
         // alert(result.message);
-        alert("แก้ไขข้อมูลสำเร็จ");
+        // alert("แก้ไขข้อมูลสำเร็จ");
+        _AlertPopUp().Success("แก้ไขข้อมูลสำเร็จ!");
         fetchPhoneNumbers(); // โหลดข้อมูลใหม่
         setIsModalOpen(false); // ✅ ปิด Modal เมื่อสำเร็จ
       } else {
-        alert("แก้ไขข้อมูลไม่สำเร็จ");
+        // alert("แก้ไขข้อมูลไม่สำเร็จ");
+        _AlertPopUp().Error("แก้ไขข้อมูลไม่สำเร็จ!");
       }
       if (!response.ok) throw new Error("Error updating status");
     } catch (error) {
@@ -210,7 +237,7 @@ const PhoneNumber = () => {
           <input
             type="text"
             placeholder="เบอร์โทร"
-            value={newPhone.phone_number}
+            value={formatTel(newPhone.phone_number)}
             onChange={handlePhoneNumberChange}
             required
             className="w-full p-2 border rounded-lg"
@@ -251,6 +278,7 @@ const PhoneNumber = () => {
           <input
             type="text"
             placeholder="ราคา"
+            maxLength={10}
             value={newPhone.price}
             onChange={(e) =>
               setNewPhone({ ...newPhone, price: formatNumber(e.target.value) })
@@ -263,7 +291,8 @@ const PhoneNumber = () => {
           type="submit"
           className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center"
         >
-          <PlusCircle size={18} className="mr-2" /> เพิ่มเบอร์
+          <PlusCircle size={18} className="mr-2" />
+          {isAdding ? "กําลังเพิ่ม..." : "เพิ่มเบอร์"}
         </button>
       </form>
 
@@ -298,7 +327,7 @@ const PhoneNumber = () => {
                 ) : (
                   phoneNumbers.map((phone) => (
                     <tr key={phone.id} className="text-center border-t">
-                      <td className="border p-2">{phone.phone_number}</td>
+                      <td className="border p-2">{formatTel(phone.phone_number)}</td>
                       <td className="border p-2">{phone.brand}</td>
                       <td className="border p-2">{phone.total}</td>
                       <td className="border p-2 text-red-600 font-semibold">

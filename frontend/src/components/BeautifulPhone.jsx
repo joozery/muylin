@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import BeautifulPhoneHeader from "../components/BeautifulPhoneHeader.jsx";
 import bgImage from "../assets/ขาวดำเก่า.jpg"; // ✅ นำเข้าพื้นหลัง
 import { GridLoader } from "react-spinners";
+import { formatTel } from "../helper/helper.js";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -74,7 +75,7 @@ const BeautifulPhone = () => {
                 </div>
 
                 {/* ข้อมูลเบอร์ */}
-                <div className="text-lg font-bold">{phone.phone_number}</div>
+                <div className="text-lg font-bold">{formatTel(phone.phone_number)}</div>
                 <div className="text-sm text-gray-500">
                   {phone.brand} {phone.total && `(${phone.total})`}
                 </div>
