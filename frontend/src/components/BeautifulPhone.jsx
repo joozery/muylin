@@ -38,7 +38,7 @@ const BeautifulPhone = () => {
       <BeautifulPhoneHeader />
 
       {/* 🔹 Section: เบอร์สวย Super VIP */}
-      <section className="h-full px-2 py-3 bg-white text-black text-center">
+      <section className="h-full px-2 py-3 bg-black text-white text-center">
         {/* ⭐⭐⭐⭐⭐ Title */}
         <div className="mb-6">
           <p className="text-yellow-400 text-xl">★★★★★</p>

@@ -496,7 +496,7 @@ function SearchForm() {
         </div>
       </div>
 
-      <section id="search" className="license-plates-section py-4 lg:py-12">
+      <section id="search" className="bg-black license-plates-section py-4 lg:py-12">
         <div className="container mx-auto px-1 md:px-6 lg:px-20">
           <LicensePlates data={filteredPlateData} loading={loading} />
         </div>

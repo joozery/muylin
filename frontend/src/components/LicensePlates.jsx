@@ -79,7 +79,7 @@ export default function LicensePlates({ data, loading }) {
   }
 
   return (
-    <section className="bg-white text-black pb-12 font-tahoma">
+    <section className="bg-black text-white pb-12 font-tahoma">
       <div className="container mx-auto px-6 lg:px-20">
         {/* เช็คว่าทุกหมวดไม่มีข้อมูลเลย */}
         {data.every((item) => !item.data || item.data.length === 0) ? (
