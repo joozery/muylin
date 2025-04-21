@@ -83,7 +83,7 @@ export default function LicensePlates({ data, loading }) {
       <div className="container mx-auto px-6 lg:px-20">
         {/* เช็คว่าทุกหมวดไม่มีข้อมูลเลย */}
         {data.every((item) => !item.data || item.data.length === 0) ? (
-          <div className="text-center font-bold text-black text-lg py-12">
+          <div className="text-center font-bold text-white text-lg py-12">
             ❌ ไม่พบข้อมูลที่ค้นหา
           </div>
         ) : (
