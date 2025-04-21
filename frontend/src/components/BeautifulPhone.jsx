@@ -14,7 +14,8 @@ const BeautifulPhone = () => {
     const fetchPhoneNumbers = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`${API_URL}/phones/phone_numbers`);
+        // const response = await fetch(`${API_URL}/phones/phone_numbers`);
+        const response = await fetch(`${API_URL}/phone_numbers`);
         const data = await response.json();
         setPhoneNumbers(data);
       } catch (error) {

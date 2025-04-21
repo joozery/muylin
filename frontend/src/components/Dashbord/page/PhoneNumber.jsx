@@ -26,7 +26,8 @@ const PhoneNumber = () => {
   const fetchPhoneNumbers = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${API_URL}/phones/phone_numbers`);
+      const response = await fetch(`${API_URL}/phone_numbers`);
+      // const response = await fetch(`${API_URL}/phones/phone_numbers`);
       const data = await response.json();
       setPhoneNumbers(data);
     } catch (error) {
@@ -81,7 +82,8 @@ const PhoneNumber = () => {
     // return
     setAdding(true);
     try {
-      const response = await fetch(`${API_URL}/phones/addPhoneNumber`, {
+      // const response = await fetch(`${API_URL}/phones/addPhoneNumber`, {
+        const response = await fetch(`${API_URL}/addPhoneNumber`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(phoneData),
@@ -138,7 +140,8 @@ const PhoneNumber = () => {
   const handleDeletePhone = async (id) => {
     try {
       const response = await fetch(
-        `${API_URL}/phones/deletePhoneNumber/${id}`,
+        // `${API_URL}/phones/deletePhoneNumber/${id}`,
+        `${API_URL}/deletePhoneNumber/${id}`,
         {
           method: "DELETE",
         }
@@ -193,7 +196,8 @@ const PhoneNumber = () => {
 
     try {
       const response = await fetch(
-        `${API_URL}/phones/updatePhoneNumber/${formModal.id}`,
+        // `${API_URL}/phones/updatePhoneNumber/${formModal.id}`, 
+        `${API_URL}/updatePhoneNumber/${formModal.id}`, 
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -346,7 +350,7 @@ const PhoneNumber = () => {
                           <option value="จองแล้ว">จองแล้ว</option>
                         </select>
                       </td>
-                      <td className="flex gap-1 border p-2">
+                      <td className="flex gap-1 p-2">
                         <button
                           className="bg-blue-600 text-white px-2 py-1 rounded"
                           onClick={() => handleOpenModal(phone)}
