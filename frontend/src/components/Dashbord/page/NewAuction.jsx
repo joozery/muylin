@@ -142,6 +142,7 @@ const NewAuction = () => {
           )
         );
       }
+      _AlertPopUp().Success("อัพเดทสถานะสำเร็จ !");
       if (!response.ok) throw new Error("Error updating status");
     } catch (error) {
       console.error("❌ Error updating status:", error);
