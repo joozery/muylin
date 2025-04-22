@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import _AlertPopUp from "../../../helper/alertpopup";
 import ModalEdit from "../../Modal";
+import Swal from "sweetalert2";
 const API_URL = import.meta.env.VITE_API_URL;
 const charValueMap = {
   ก: 1,
@@ -150,8 +151,19 @@ const OldAuction = () => {
   };
 
   const handleDeletePlate = async (id, plate) => {
-    setDeleteStatus(id);
-    if (window.confirm(`คุณแน่ใจหรือไม่ที่จะลบรายการนี้ ${plate}? `)) {
+    const result = await Swal.fire({
+      title: `ลบป้ายทะเบียน ${plate}?`,
+      text: "คุณแน่ใจหรือไม่ว่าต้องการลบรายการนี้? การกระทำนี้ไม่สามารถย้อนกลับได้",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "ใช่, ลบเลย!",
+      cancelButtonText: "ยกเลิก",
+    });
+
+    if (result.isConfirmed) {
+      setDeleteStatus(id);
       try {
         const response = await fetch(
           `${API_URL}/deletePlate/plates_old/${id}`,
@@ -160,15 +172,16 @@ const OldAuction = () => {
         if (!response.ok) throw new Error("Error deleting plate");
         // อัพเดท state เพื่อลบรายการที่ถูกลบออกจากตาราง
         setData((prevData) => prevData.filter((item) => item.id !== id));
+        Swal.fire("ลบแล้ว!", `รายการ ${plate} ถูกลบเรียบร้อยแล้ว`, "success");
       } catch (error) {
         console.error("❌ Error deleting plate:", error);
-        alert("เกิดข้อผิดพลาดในการลบข้อมูล");
+        Swal.fire("ผิดพลาด!", "เกิดข้อผิดพลาดในการลบข้อมูล", "error");
       } finally {
-        setDeleteStatus(null);
+        setDeleteStatus(false);
       }
     }
   };
-const formatNumber = (value) => {
+  const formatNumber = (value) => {
     const numeric = value.replace(/,/g, "").replace(/\D/g, "");
     return numeric.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -245,7 +258,9 @@ const formatNumber = (value) => {
           placeholder="ราคา"
           className="border rounded px-2 py-1"
           value={newPlate.price}
-          onChange={(e) => setNewPlate({ ...newPlate, price: formatNumber(e.target.value) })}
+          onChange={(e) =>
+            setNewPlate({ ...newPlate, price: formatNumber(e.target.value) })
+          }
         />
         <select
           className="border rounded px-2 py-1"
