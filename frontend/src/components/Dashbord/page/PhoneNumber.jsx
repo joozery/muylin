@@ -5,6 +5,7 @@ import ModalTel from "../../Modal/ModalTel";
 import ClipLoader from "react-spinners/ClipLoader";
 import _AlertPopUp from "../../../helper/alertpopup";
 import { formatTel, sanitizePhoneNumber } from "../../../helper/helper";
+import Swal from "sweetalert2";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -122,9 +123,15 @@ const PhoneNumber = () => {
 
       if (!response.ok) throw new Error("Error updating status");
 
+      // ✅ ไม่ต้อง fetch ใหม่ แต่อัปเดตเฉพาะรายการที่เปลี่ยน
+      setPhoneNumbers((prev) =>
+        prev.map((phone) =>
+          phone.id === id ? { ...phone, status: newStatus } : phone
+        )
+      );
       // toast.success("อัปเดตสถานะเรียบร้อย!");
       _AlertPopUp().Success("อัปเดตสถานะเรียบร้อย!");
-      fetchPhoneNumbers();
+      // fetchPhoneNumbers();
     } catch (error) {
       console.error("❌ Error updating status:", error);
       // toast.error("อัปเดตสถานะไม่สำเร็จ!");
@@ -133,26 +140,58 @@ const PhoneNumber = () => {
   };
 
   // ✅ ฟังก์ชันลบเบอร์โทร
+  // const handleDeletePhone = async (id) => {
+  //   try {
+  //     const response = await fetch(
+  //       // `${API_URL}/phones/deletePhoneNumber/${id}`,
+  //       `${API_URL}/deletePhoneNumber/${id}`,
+  //       {
+  //         method: "DELETE",
+  //       }
+  //     );
+
+  //     if (!response.ok) throw new Error("Error deleting phone number");
+
+  //     // toast.success("ลบเบอร์เรียบร้อย!");
+  //     _AlertPopUp().Success("ลบข้อมูลสำเร็จ !");
+  //     fetchPhoneNumbers();
+  //   } catch (error) {
+  //     console.error("❌ Error deleting phone number:", error);
+  //     _AlertPopUp().Error("ลบเบอร์ไม่สำเร็จ!");
+  //   }
+  // };
+
   const handleDeletePhone = async (id) => {
-    try {
-      const response = await fetch(
-        // `${API_URL}/phones/deletePhoneNumber/${id}`,
-        `${API_URL}/deletePhoneNumber/${id}`,
-        {
+    const result = await Swal.fire({
+      title: "คุณแน่ใจหรือไม่?",
+      text: "การลบข้อมูลนี้จะไม่สามารถกู้คืนได้!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "ใช่, ลบเลย!",
+      cancelButtonText: "ยกเลิก",
+    });
+  
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`${API_URL}/deletePhoneNumber/${id}`, {
           method: "DELETE",
-        }
-      );
-
-      if (!response.ok) throw new Error("Error deleting phone number");
-
-      // toast.success("ลบเบอร์เรียบร้อย!");
-      _AlertPopUp().Success("ลบข้อมูลสำเร็จ !");
-      fetchPhoneNumbers();
-    } catch (error) {
-      console.error("❌ Error deleting phone number:", error);
-      _AlertPopUp().Error("ลบเบอร์ไม่สำเร็จ!");
+        });
+  
+        if (!response.ok) throw new Error("Error deleting phone number");
+  
+        // ✅ ลบออกจาก state โดยไม่ต้อง fetch ใหม่
+        setPhoneNumbers((prev) => prev.filter((phone) => phone.id !== id));
+  
+        _AlertPopUp().Success("ลบข้อมูลสำเร็จ!");
+      } catch (error) {
+        console.error("❌ Error deleting phone number:", error);
+        _AlertPopUp().Error("ลบเบอร์ไม่สำเร็จ!");
+      }
     }
   };
+
   const formatNumber = (value) => {
     const numeric = value.replace(/,/g, "").replace(/\D/g, "");
     return numeric.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
