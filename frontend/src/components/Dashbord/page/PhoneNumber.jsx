@@ -70,7 +70,6 @@ const PhoneNumber = () => {
 
   // ✅ ฟังก์ชันเพิ่มเบอร์โทร
   const handleAddPhone = async (e) => {
-
     e.preventDefault();
     const phoneData = {
       phone_number: newPhone.phone_number,
@@ -78,12 +77,12 @@ const PhoneNumber = () => {
       price: newPhone.price.replace(/,/g, ""),
       status: newPhone.status,
     };
-    console.log(phoneData)
+    console.log(phoneData);
     // return
     setAdding(true);
     try {
       // const response = await fetch(`${API_URL}/phones/addPhoneNumber`, {
-        const response = await fetch(`${API_URL}/addPhoneNumber`, {
+      const response = await fetch(`${API_URL}/addPhoneNumber`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(phoneData),
@@ -115,14 +114,11 @@ const PhoneNumber = () => {
   // ✅ ฟังก์ชันอัปเดตสถานะเบอร์โทร
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      const response = await fetch(
-        `${API_URL}/phones/updatePhoneStatus/${id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ status: newStatus }),
-        }
-      );
+      const response = await fetch(`${API_URL}/updatePhoneStatus/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
 
       if (!response.ok) throw new Error("Error updating status");
 
@@ -196,8 +192,8 @@ const PhoneNumber = () => {
 
     try {
       const response = await fetch(
-        // `${API_URL}/phones/updatePhoneNumber/${formModal.id}`, 
-        `${API_URL}/updatePhoneNumber/${formModal.id}`, 
+        // `${API_URL}/phones/updatePhoneNumber/${formModal.id}`,
+        `${API_URL}/updatePhoneNumber/${formModal.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -237,7 +233,7 @@ const PhoneNumber = () => {
         <h2 className="text-xl font-semibold mb-4 flex items-center">
           <PlusCircle className="mr-2" /> เพิ่มเบอร์ใหม่
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <input
             type="text"
             placeholder="เบอร์โทร"
@@ -271,14 +267,6 @@ const PhoneNumber = () => {
             <option value="NT">NT</option>
             <option value="อื่นๆ">อื่นๆ</option>
           </select>
-
-          <input
-            type="text"
-            placeholder="ผลรวม"
-            value={newPhone.total}
-            readOnly
-            className="w-full p-2 border bg-gray-200 rounded-lg"
-          />
           <input
             type="text"
             placeholder="ราคา"
@@ -289,6 +277,25 @@ const PhoneNumber = () => {
             }
             required
             className="w-full p-2 border rounded-lg"
+          />
+          <select
+            value={newPhone.status}
+            onChange={(e) =>
+              setNewPhone({ ...newPhone, status: e.target.value })
+            }
+            required
+            className="w-full p-2 border rounded-lg"
+          >
+            <option value="มาใหม่">มาใหม่</option>
+            <option value="ขายแล้ว">ขายแล้ว</option>
+            <option value="จองแล้ว">จองแล้ว</option>
+          </select>
+          <input
+            type="text"
+            placeholder="ผลรวม"
+            value={newPhone.total}
+            readOnly
+            className="w-full p-2 border bg-gray-200 rounded-lg"
           />
         </div>
         <button
@@ -331,7 +338,9 @@ const PhoneNumber = () => {
                 ) : (
                   phoneNumbers.map((phone) => (
                     <tr key={phone.id} className="text-center border-t">
-                      <td className="border p-2">{formatTel(phone.phone_number)}</td>
+                      <td className="border p-2">
+                        {formatTel(phone.phone_number)}
+                      </td>
                       <td className="border p-2">{phone.brand}</td>
                       <td className="border p-2">{phone.total}</td>
                       <td className="border p-2 text-red-600 font-semibold">
