@@ -15,7 +15,7 @@ export default function LicensePlates({ data, loading }) {
   const componentMap = {
     plates_new: { cover: newImage, text: "ป้ายประมูลหมวดใหม่" },
     plates_special: {
-      cover: defaultPlates,
+      cover: newImage,
       border: `border-2 border-yellow-500`,
       text: "ป้ายคิดเองลักษณะพิเศษ",
     },
